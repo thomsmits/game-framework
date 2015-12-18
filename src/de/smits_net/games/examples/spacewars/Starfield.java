@@ -12,11 +12,11 @@ import java.util.Random;
  *
  * @author Thomas Smits
  */
-public class Starfield extends Background {
+public class StarField extends Background {
 
     private Random rnd = new Random();
 
-    public Starfield(double speed, int width, int height, Color color, double load) {
+    public StarField(double speed, int width, int height, Color color, double load) {
         super(speed, width, height);
 
         Graphics g = background.getGraphics();

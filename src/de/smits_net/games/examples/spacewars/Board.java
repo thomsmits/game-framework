@@ -12,14 +12,14 @@ import java.util.Random;
 
 public class Board extends BoardBase {
 
-    private static final int ICRAFT_X = 40;
-    private static final int ICRAFT_Y = 60;
-    private static final int B_WIDTH = 800;
-    private static final int B_HEIGHT = 400;
+    private static final int INITIAL_POS_CRAFT_X = 40;
+    private static final int INITIAL_POS_CRAFT_Y = 60;
+    private static final int B_WIDTH = 1200;
+    private static final int B_HEIGHT = 800;
     private static final int DELAY = 10;
-    private Starfield starfield1 = new Starfield(-0.5, B_WIDTH, B_HEIGHT, Color.WHITE, 0.001);
-    private Starfield starfield2 = new Starfield(-0.5, B_WIDTH, B_HEIGHT, Color.GRAY, 0.001);
-    private Starfield starfield3 = new Starfield(-0.3, B_WIDTH, B_HEIGHT, Color.DARK_GRAY, 0.001);
+    private StarField starField1 = new StarField(-0.5, B_WIDTH, B_HEIGHT, Color.WHITE, 0.001);
+    private StarField starField2 = new StarField(-0.5, B_WIDTH, B_HEIGHT, Color.GRAY, 0.001);
+    private StarField starField3 = new StarField(-0.3, B_WIDTH, B_HEIGHT, Color.DARK_GRAY, 0.001);
 
     /** Space craft */
     private Craft craft;
@@ -39,7 +39,7 @@ public class Board extends BoardBase {
      * Initialize the game.
      */
     private void init() {
-        craft = new Craft(this, ICRAFT_X, ICRAFT_Y);
+        craft = new Craft(this, INITIAL_POS_CRAFT_X, INITIAL_POS_CRAFT_Y);
         addKeyListener(craft);
         addMouseListener(craft);
         Random rnd = new Random();
@@ -57,12 +57,12 @@ public class Board extends BoardBase {
 
     @Override
     protected synchronized void drawBackground(Graphics g) {
-       starfield1.draw(g, null);
-       starfield1.move();
-       starfield2.draw(g, null);
-       starfield2.move();
-       starfield3.draw(g, null);
-       starfield3.move();
+       starField1.draw(g, null);
+       starField1.move();
+       starField2.draw(g, null);
+       starField2.move();
+       starField3.draw(g, null);
+       starField3.move();
 
     }
 
