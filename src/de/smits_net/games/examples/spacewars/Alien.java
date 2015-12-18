@@ -2,7 +2,7 @@
 package de.smits_net.games.examples.spacewars;
 
 import de.smits_net.games.framework.board.BoardBase;
-import de.smits_net.games.framework.images.TiledImage;
+import de.smits_net.games.framework.images.StripedImage;
 import de.smits_net.games.framework.sprites.AnimatedSprite;
 
 public class Alien extends AnimatedSprite {
@@ -11,8 +11,8 @@ public class Alien extends AnimatedSprite {
 
     public Alien(BoardBase board, int x, int y) {
         super(board, x, y, BoundaryPolicy.NONE,
-                new TiledImage(
-                "assets/spacewars/spike_fist_move_strip5.png", 61, 47), 50);
+                new StripedImage(
+                "assets/spacewars/spike_fist_move_strip5.png", 5), 50);
         setDeltaX(ALIEN_SPEED);
     }
 

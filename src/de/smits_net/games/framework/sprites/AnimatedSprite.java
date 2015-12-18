@@ -35,6 +35,7 @@ public abstract class AnimatedSprite extends Sprite {
 
     public AnimatedSprite(BoardBase board, int x, int y, BoundaryPolicy policy, ImageStack imgs,
             int time) {
+
         super(board, x, y, policy, imgs);
 
         this.images = imgs;
