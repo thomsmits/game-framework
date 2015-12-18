@@ -121,7 +121,7 @@ public abstract class AnimatedSprite extends Sprite {
         images.draw(g, position, observer);
 
         if (Constants.DEBUG_SPRITE_OUTLINE) {
-            g.setColor(Color.RED);
+            g.setColor(isActive() ? Color.RED : Color.GREEN);
             g.drawPolygon(absoluteBorder());
         }
     }
