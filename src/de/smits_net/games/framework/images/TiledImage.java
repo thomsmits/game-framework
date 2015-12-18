@@ -28,7 +28,7 @@ public class TiledImage extends ImageStack {
     public TiledImage(BufferedImage image, int boxWidth, int boxHeight) {
         super();
         List<BufferedImage> tiles = getTiles(image, boxWidth, boxHeight);
-        tiles.forEach(img -> addImage(img));
+        tiles.forEach(this::addImage);
 
         this.width = boxWidth;
         this.height = boxHeight;
