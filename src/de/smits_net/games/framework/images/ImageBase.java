@@ -1,10 +1,7 @@
 /* (c) 2015 Thomas Smits */
 package de.smits_net.games.framework.images;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
@@ -23,6 +20,15 @@ public abstract class ImageBase {
 
     /** Cache for loaded images */
     protected static Map<String, BufferedImage> imageCache = new HashMap<>();
+
+    /** The current graphics configuration of the screen we are using */
+    private static GraphicsConfiguration gc;
+
+    static {
+        // get the graphics environment
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
+    }
 
     /**
      * Draw the image at the given position.
@@ -46,6 +52,16 @@ public abstract class ImageBase {
         if (img == null) {
             try {
                 img = ImageIO.read(file);
+                int transparency = img.getColorModel().getTransparency();
+
+                // create an image especially suitable for the graphics
+                // environment
+                BufferedImage newImage = gc.createCompatibleImage(
+                        img.getWidth(), img.getHeight(), transparency);
+
+                Graphics2D g = newImage.createGraphics();
+                g.drawImage(img, 0, 0, null);
+                g.dispose();
             }
             catch (IOException e) {
                 throw new IllegalArgumentException("File '" + file.getPath() + "' not found.");
