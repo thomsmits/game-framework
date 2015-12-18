@@ -24,10 +24,10 @@ public class SpaceWarBoard extends Board {
     private static final int INITIAL_POS_CRAFT_Y = 60;
 
     /** Width of the board */
-    private static final int BOARD_WIDTH = 1200;
+    private static final int BOARD_WIDTH = 800;
 
     /** Height of the board */
-    private static final int BOARD_HEIGHT = 800;
+    private static final int BOARD_HEIGHT = 400;
 
     /** Delay between frames in milli seconds */
     private static final int DELAY = 10;
