@@ -1,0 +1,14 @@
+ # Polygon information for the spacecraft
+ # x, y
+  9, 0
+ 20, 0
+ 26, 6
+ 40, 6
+ 48, 18
+ 48, 24
+ 40, 36
+ 26, 36
+ 20, 43
+ 9,  43
+
+

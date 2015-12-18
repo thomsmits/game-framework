@@ -1,13 +1,13 @@
 /* (c) 2015 Thomas Smits */
 package de.smits_net.games.examples.spacewars;
 
-import java.awt.event.KeyEvent;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import de.smits_net.games.framework.board.BoardBase;
 import de.smits_net.games.framework.images.ImageStack;
 import de.smits_net.games.framework.sprites.DirectionAnimatedSprite;
+
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Craft extends DirectionAnimatedSprite {
 
@@ -40,6 +40,8 @@ public class Craft extends DirectionAnimatedSprite {
                         "craft_4.png"),
                 new ImageStack("assets/spacewars", "craft_1.png"),
                 new ImageStack("assets/spacewars", "craft_1.png"));
+
+        setBorder(loadPolygonFromFile("assets/spacewars", "craft.poly"));
     }
 
 

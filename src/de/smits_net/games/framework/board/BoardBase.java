@@ -1,27 +1,17 @@
 /* (c) 2015 Thomas Smits */
 package de.smits_net.games.framework.board;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import de.smits_net.games.framework.Constants;
 
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Base class for the game board. This class starts the game thread.
  *
  * @author Thomas Smits
  */
-public abstract class BoardBase extends JPanel implements ActionListener, Runnable {
-
-    /** Debug information */
-    private static final boolean DEBUG = true;
-
-    /** Conversion factor from nano to milliseconds */
-    public static final long NANOSECONDS_PER_MILLISECOND = 1000000L;
-
-    /** Conversion factor from nano to seconds */
-    public static final long NANOSECONDS_PER_SECOND = NANOSECONDS_PER_MILLISECOND * 1000L;
+public abstract class BoardBase extends JPanel implements Runnable {
 
     /** Number of updates without sleep before a yield is triggered */
     private static final int NO_DELAYS_PER_YIELD = 16;
@@ -30,7 +20,7 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
     private static final int MAX_FRAME_SKIPS = 5;
 
     /* Time between two debug updates */
-    private static final long DEBUG_FREQUENCY = NANOSECONDS_PER_SECOND / 4;
+    private static final long DEBUG_FREQUENCY = Constants.NANOSECONDS_PER_SECOND / 4;
 
     /** Indicator that the game is still running */
     protected boolean gameRunning = true;
@@ -70,7 +60,7 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
     public BoardBase(int delay, int width, int height, Color color) {
         this.width = width;
         this.height = height;
-        this.delay = delay * NANOSECONDS_PER_MILLISECOND;
+        this.delay = delay * Constants.NANOSECONDS_PER_MILLISECOND;
         this.backgroundColor = color;
 
         setFocusable(true);
@@ -103,13 +93,6 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
     }
 
     /**
-     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public final void actionPerformed(ActionEvent e) {
-    }
-
-    /**
      * The game loop for the game logic. This method will be called
      * periodically be the framework to execute the game. All game
      * actions must be triggered from this loop.
@@ -129,7 +112,7 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
      */
     private void triggerRendering() {
 
-        // we apply double buffering. This means that we do not draw on
+        // we use double buffering. This means that we do not draw on
         // the screen directly but into an image that is eventually
         // blitted to screen in onw step. Therefore, we need an image
         // as the target of our drawing operations.
@@ -157,7 +140,7 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
             drawGameOver(g);
         }
 
-        if (DEBUG) {
+        if (Constants.DEBUG_SHOW_FPS) {
             g.setColor(Color.RED);
             g.drawString(String.format("FPS: %d", fps), 0, height - 5);
         }
@@ -286,7 +269,7 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
             }
             else {
                 try {
-                    Thread.sleep(sleepDuration / NANOSECONDS_PER_MILLISECOND);
+                    Thread.sleep(sleepDuration / Constants.NANOSECONDS_PER_MILLISECOND);
                 } catch (InterruptedException e) {
                     break;
                 }
@@ -306,12 +289,17 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
                 skips++;
             }
 
-            if (DEBUG) {
+            if (Constants.DEBUG_SHOW_FPS) {
                 if (System.nanoTime() - lastDebugUpdate > DEBUG_FREQUENCY) {
-                    fps = NANOSECONDS_PER_SECOND / (System.nanoTime() - beforeTime);
+                    fps = Constants.NANOSECONDS_PER_SECOND / (System.nanoTime() - beforeTime);
                     lastDebugUpdate = System.nanoTime();
                 }
             }
         }
+
+        // call one last time into subclass to allow rendering of
+        // game over information
+        triggerRendering();
+        paintScreen();
     }
 }
