@@ -9,18 +9,18 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * The spacecraft.
+ *
+ * @author Thomas Smits
+ */
 public class Craft extends DirectionAnimatedSprite {
 
+    /** Speed of the space craft */
     private static final int CRAFT_SPEED = 2;
 
     /** Missiles fired */
     private List<Missile> missiles = new CopyOnWriteArrayList<>();
-
-
-    @Override
-    public void mouseClicked() {
-        fire();
-    }
 
     /**
      * Create a new craft at the given position.
@@ -44,15 +44,33 @@ public class Craft extends DirectionAnimatedSprite {
         setBorder(loadPolygonFromFile("assets/spacewars", "craft.poly"));
     }
 
-
+    /**
+     * Return the missiles fired.
+     *
+     * @return the missiles
+     */
     public List<Missile> getMissiles() {
         return missiles;
     }
 
+    /**
+     * Click will fire a missile.
+     */
+    @Override
+    public void mouseClicked() {
+        fire();
+    }
+
+    /**
+     * Fire a missile.
+     */
     public void fire() {
         missiles.add(new Missile(board, position.x + dimension.width, position.y + dimension.height / 2));
     }
 
+    /**
+     * Let the spaceship explode.
+     */
     public void explode() {
         Explosion ex = new Explosion();
         this.noMovement = ex;
@@ -64,6 +82,11 @@ public class Craft extends DirectionAnimatedSprite {
         setActive(false);
     }
 
+    /**
+     * Intercept key pressing.
+     *
+     * @param e the event.
+     */
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -76,6 +99,11 @@ public class Craft extends DirectionAnimatedSprite {
         if (key == KeyEvent.VK_DOWN)  { deltaY = CRAFT_SPEED; }
     }
 
+    /**
+     * Intercept key releasing.
+     *
+     * @param e the event.
+     */
     @Override
     public void keyReleased(KeyEvent e) {
 

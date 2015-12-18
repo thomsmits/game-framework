@@ -10,16 +10,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The game board.
+ *
+ * @author Thomas Smits
+ */
 public class Board extends BoardBase {
 
+    /** Start x position of the craft */
     private static final int INITIAL_POS_CRAFT_X = 40;
+
+    /** Start y position of the craft */
     private static final int INITIAL_POS_CRAFT_Y = 60;
-    private static final int B_WIDTH = 1200;
-    private static final int B_HEIGHT = 800;
+
+    /** Width of the board */
+    private static final int BOARD_WIDTH = 1200;
+
+    /** Height of the board */
+    private static final int BOARD_HEIGHT = 800;
+
+    /** Delay between frames in milli seconds */
     private static final int DELAY = 10;
-    private StarField starField1 = new StarField(-0.5, B_WIDTH, B_HEIGHT, Color.WHITE, 0.001);
-    private StarField starField2 = new StarField(-0.5, B_WIDTH, B_HEIGHT, Color.GRAY, 0.001);
-    private StarField starField3 = new StarField(-0.3, B_WIDTH, B_HEIGHT, Color.DARK_GRAY, 0.001);
+
+    /** The background */
+    private StarField starField1 = new StarField(-0.5, BOARD_WIDTH, BOARD_HEIGHT, Color.WHITE, 0.001);
+
+    /** The background */
+    private StarField starField2 = new StarField(-0.5, BOARD_WIDTH, BOARD_HEIGHT, Color.GRAY, 0.001);
+
+    /** The background */
+    private StarField starField3 = new StarField(-0.3, BOARD_WIDTH, BOARD_HEIGHT, Color.DARK_GRAY, 0.001);
 
     /** Space craft */
     private Craft craft;
@@ -31,7 +51,7 @@ public class Board extends BoardBase {
      * Initialize the game.
      */
     public Board() {
-        super(DELAY, B_WIDTH, B_HEIGHT, Color.BLACK);
+        super(DELAY, BOARD_WIDTH, BOARD_HEIGHT, Color.BLACK);
         init();
     }
 
@@ -45,16 +65,17 @@ public class Board extends BoardBase {
         Random rnd = new Random();
 
         for (int i = 0; i < 30; i++) {
-            int x = B_WIDTH + rnd.nextInt(B_WIDTH * 5);
-            int y = rnd.nextInt(B_HEIGHT - 40);
+            int x = BOARD_WIDTH + rnd.nextInt(BOARD_WIDTH * 5);
+            int y = rnd.nextInt(BOARD_HEIGHT - 40);
             Alien alien = new Alien(this, x,  y);
             addMouseListener(alien);
             aliens.add(alien);
         }
-
     }
 
-
+    /**
+     * @see Board#drawBackground(Graphics)
+     */
     @Override
     protected synchronized void drawBackground(Graphics g) {
        starField1.draw(g, null);
@@ -63,9 +84,13 @@ public class Board extends BoardBase {
        starField2.move();
        starField3.draw(g, null);
        starField3.move();
-
     }
 
+    /**
+     * Draw the game objects.
+     *
+     * @param g graphics context
+     */
     protected void drawObjects(Graphics g) {
         aliens.forEach(a -> a.draw(g, this));
         craft.draw(g, this);
@@ -73,41 +98,63 @@ public class Board extends BoardBase {
         writeText(g, 5, 15, "Enemies left: " + aliens.size());
     }
 
+    /**
+     * @see Board#drawGameOver(Graphics)
+     */
     @Override
     protected synchronized void drawGameOver(Graphics g) {
         centerText(g, "Game Over");
     }
 
+    /**
+     * @see Board#updateGame()
+     */
     @Override
     public boolean updateGame() {
         updateCraft();
         updateMissiles();
         updateAliens();
-        checkCollisions();
+        handleCollisions();
 
         return !aliens.isEmpty() && craft.isVisible();
     }
 
+    /**
+     * @see Board#drawGame(Graphics)
+     */
+    @Override
     public void drawGame(Graphics g) {
         drawObjects(g);
     }
 
+    /**
+     * Update the craft.
+     */
     private void updateCraft() {
         craft.move();
     }
 
+    /**
+     * Update the missiles.
+     */
     private synchronized void updateMissiles() {
         List<Missile> ms = craft.getMissiles();
         ms.forEach(Sprite::move);
         ms.removeIf(m -> !m.isVisible());
     }
 
+    /**
+     * Update the aliens.
+     */
     private synchronized void updateAliens() {
         aliens.forEach(Sprite::move);
         aliens.removeIf(a -> !a.isVisible());
     }
 
-    public synchronized void checkCollisions() {
+    /**
+     * Check for collisions.
+     */
+    public synchronized void handleCollisions() {
 
         for (Alien alien : aliens) {
             if (craft.intersects(alien) && alien.isActive()) {

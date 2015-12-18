@@ -12,8 +12,16 @@ import de.smits_net.games.framework.sprites.Sprite;
  */
 public class Missile extends Sprite {
 
+    /** Speed of the missile.  */
     private final int MISSILE_SPEED = 4;
 
+    /**
+     * Create a new missile.
+     *
+     * @param board the board
+     * @param x x position
+     * @param y y position
+     */
     public Missile(BoardBase board, int x, int y) {
         super(board, x, y, BoundaryPolicy.INVISIBLE,
                 new ImageStack("assets/spacewars", "rocket.png"));
@@ -21,5 +29,3 @@ public class Missile extends Sprite {
         setDeltaX(MISSILE_SPEED);
     }
 }
-
-
