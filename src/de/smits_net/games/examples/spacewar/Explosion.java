@@ -1,5 +1,5 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.examples.spacewars;
+package de.smits_net.games.examples.spacewar;
 
 import de.smits_net.games.framework.images.StripedImage;
 
@@ -14,6 +14,6 @@ public class Explosion extends StripedImage {
      * Create a new sprite.
      */
     public Explosion() {
-        super("assets/spacewars/explosion_1.png", 43);
+        super("assets/spacewar/explosion_1.png", 43);
     }
 }

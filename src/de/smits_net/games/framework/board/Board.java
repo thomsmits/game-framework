@@ -11,7 +11,7 @@ import java.awt.*;
  *
  * @author Thomas Smits
  */
-public abstract class BoardBase extends JPanel implements Runnable {
+public abstract class Board extends JPanel implements Runnable {
 
     /** Number of updates without sleep before a yield is triggered */
     private static final int NO_DELAYS_PER_YIELD = 16;
@@ -57,7 +57,7 @@ public abstract class BoardBase extends JPanel implements Runnable {
      * @param height height of the board in pixel
      * @param color background color of the board
      */
-    public BoardBase(int delay, int width, int height, Color color) {
+    public Board(int delay, int width, int height, Color color) {
         this.width = width;
         this.height = height;
         this.delay = delay * Constants.NANOSECONDS_PER_MILLISECOND;

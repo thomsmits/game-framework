@@ -1,7 +1,7 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.examples.spacewars;
+package de.smits_net.games.examples.spacewar;
 
-import de.smits_net.games.framework.board.BoardBase;
+import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.images.ImageStack;
 import de.smits_net.games.framework.sprites.Sprite;
 
@@ -22,9 +22,9 @@ public class Missile extends Sprite {
      * @param x x position
      * @param y y position
      */
-    public Missile(BoardBase board, int x, int y) {
+    public Missile(Board board, int x, int y) {
         super(board, x, y, BoundaryPolicy.INVISIBLE,
-                new ImageStack("assets/spacewars", "rocket.png"));
+                new ImageStack("assets/spacewar", "rocket.png"));
 
         setDeltaX(MISSILE_SPEED);
     }

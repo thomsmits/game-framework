@@ -2,7 +2,7 @@
 package de.smits_net.games.framework.sprites;
 
 import de.smits_net.games.framework.Constants;
-import de.smits_net.games.framework.board.BoardBase;
+import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.images.ImageStack;
 
 import java.awt.Color;
@@ -45,12 +45,12 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
      * @param down animation for movement down
      * @param noMovement animation for no movement
      */
-    public DirectionAnimatedSprite(BoardBase board, int x, int y, BoundaryPolicy policy,
-            ImageStack noMovement,
-            ImageStack left,
-            ImageStack right,
-            ImageStack up,
-            ImageStack down) {
+    public DirectionAnimatedSprite(Board board, int x, int y, BoundaryPolicy policy,
+                                   ImageStack noMovement,
+                                   ImageStack left,
+                                   ImageStack right,
+                                   ImageStack up,
+                                   ImageStack down) {
 
         super(board, x, y, policy, noMovement, 0);
         this.left = left;

@@ -1,7 +1,7 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.examples.spacewars;
+package de.smits_net.games.examples.spacewar;
 
-import de.smits_net.games.framework.board.BoardBase;
+import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.images.StripedImage;
 import de.smits_net.games.framework.sprites.AnimatedSprite;
 
@@ -22,10 +22,10 @@ public class Alien extends AnimatedSprite {
      * @param x the x position
      * @param y the y position
      */
-    public Alien(BoardBase board, int x, int y) {
+    public Alien(Board board, int x, int y) {
         super(board, x, y, BoundaryPolicy.NONE,
                 new StripedImage(
-                "assets/spacewars/spike_fist_move_strip5.png", 5), 50);
+                "assets/spacewar/spike_fist_move_strip5.png", 5), 50);
         setDeltaX(ALIEN_SPEED);
     }
 

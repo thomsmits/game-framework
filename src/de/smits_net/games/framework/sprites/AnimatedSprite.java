@@ -2,7 +2,7 @@
 package de.smits_net.games.framework.sprites;
 
 import de.smits_net.games.framework.Constants;
-import de.smits_net.games.framework.board.BoardBase;
+import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.images.ImageStack;
 
 import java.awt.*;
@@ -34,7 +34,7 @@ public abstract class AnimatedSprite extends Sprite {
      * @param images the image
      * @param time time to sleep between two animations
      */
-    public AnimatedSprite(BoardBase board, int x, int y, ImageStack images, int time) {
+    public AnimatedSprite(Board board, int x, int y, ImageStack images, int time) {
         this(board, x, y, BoundaryPolicy.STOP, images, time);
     }
 
@@ -47,8 +47,8 @@ public abstract class AnimatedSprite extends Sprite {
      * @param imgs the image(s)
      * @param time time to sleep between two animations
      */
-    public AnimatedSprite(BoardBase board, int x, int y, BoundaryPolicy policy, ImageStack imgs,
-            int time) {
+    public AnimatedSprite(Board board, int x, int y, BoundaryPolicy policy, ImageStack imgs,
+                          int time) {
 
         super(board, x, y, policy, imgs);
 

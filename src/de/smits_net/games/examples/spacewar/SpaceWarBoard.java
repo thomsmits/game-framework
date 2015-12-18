@@ -1,7 +1,7 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.examples.spacewars;
+package de.smits_net.games.examples.spacewar;
 
-import de.smits_net.games.framework.board.BoardBase;
+import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.sprites.Sprite;
 
 import java.awt.Color;
@@ -15,7 +15,7 @@ import java.util.Random;
  *
  * @author Thomas Smits
  */
-public class Board extends BoardBase {
+public class SpaceWarBoard extends Board {
 
     /** Start x position of the craft */
     private static final int INITIAL_POS_CRAFT_X = 40;
@@ -50,7 +50,7 @@ public class Board extends BoardBase {
     /**
      * Initialize the game.
      */
-    public Board() {
+    public SpaceWarBoard() {
         super(DELAY, BOARD_WIDTH, BOARD_HEIGHT, Color.BLACK);
         init();
     }
@@ -74,7 +74,7 @@ public class Board extends BoardBase {
     }
 
     /**
-     * @see Board#drawBackground(Graphics)
+     * @see SpaceWarBoard#drawBackground(Graphics)
      */
     @Override
     protected synchronized void drawBackground(Graphics g) {
@@ -99,7 +99,7 @@ public class Board extends BoardBase {
     }
 
     /**
-     * @see Board#drawGameOver(Graphics)
+     * @see SpaceWarBoard#drawGameOver(Graphics)
      */
     @Override
     protected synchronized void drawGameOver(Graphics g) {
@@ -107,7 +107,7 @@ public class Board extends BoardBase {
     }
 
     /**
-     * @see Board#updateGame()
+     * @see SpaceWarBoard#updateGame()
      */
     @Override
     public boolean updateGame() {
@@ -120,7 +120,7 @@ public class Board extends BoardBase {
     }
 
     /**
-     * @see Board#drawGame(Graphics)
+     * @see SpaceWarBoard#drawGame(Graphics)
      */
     @Override
     public void drawGame(Graphics g) {

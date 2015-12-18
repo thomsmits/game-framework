@@ -1,7 +1,7 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.examples.spacewars;
+package de.smits_net.games.examples.spacewar;
 
-import de.smits_net.games.framework.board.BoardBase;
+import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.images.ImageStack;
 import de.smits_net.games.framework.sprites.DirectionAnimatedSprite;
 
@@ -29,19 +29,19 @@ public class Craft extends DirectionAnimatedSprite {
      * @param x x position
      * @param y y position
      */
-    public Craft(BoardBase board, int x, int y) {
+    public Craft(Board board, int x, int y) {
         super(board, x, y, BoundaryPolicy.STOP,
-                new ImageStack("assets/spacewars", "craft_1.png"),
-                new ImageStack("assets/spacewars", "craft_1.png",
+                new ImageStack("assets/spacewar", "craft_1.png"),
+                new ImageStack("assets/spacewar", "craft_1.png",
                         "craft_5.png"),
-                new ImageStack("assets/spacewars", "craft_1.png",
+                new ImageStack("assets/spacewar", "craft_1.png",
                         "craft_2.png",
                         "craft_3.png",
                         "craft_4.png"),
-                new ImageStack("assets/spacewars", "craft_1.png"),
-                new ImageStack("assets/spacewars", "craft_1.png"));
+                new ImageStack("assets/spacewar", "craft_1.png"),
+                new ImageStack("assets/spacewar", "craft_1.png"));
 
-        setBorder(loadPolygonFromFile("assets/spacewars", "craft.poly"));
+        setBorder(loadPolygonFromFile("assets/spacewar", "craft.poly"));
     }
 
     /**

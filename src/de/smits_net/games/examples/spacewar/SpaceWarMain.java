@@ -1,5 +1,5 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.examples.spacewars;
+package de.smits_net.games.examples.spacewar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +9,7 @@ import java.awt.*;
  *
  * @author Thomas Smits
  */
-public class SpaceWars {
+public class SpaceWarMain {
 
     /** The window */
     JFrame frame;
@@ -17,7 +17,7 @@ public class SpaceWars {
     /**
      * Create a new object.
      */
-    public SpaceWars() {
+    public SpaceWarMain() {
         initUI();
     }
 
@@ -26,7 +26,7 @@ public class SpaceWars {
      */
     private void initUI() {
         frame = new JFrame("Fight against the aliens");
-        frame.getContentPane().add(new Board());
+        frame.getContentPane().add(new SpaceWarBoard());
 
         frame.setResizable(false);
         frame.pack();
@@ -42,6 +42,6 @@ public class SpaceWars {
      * @param args command line arguments.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(SpaceWars::new);
+        EventQueue.invokeLater(SpaceWarMain::new);
     }
 }

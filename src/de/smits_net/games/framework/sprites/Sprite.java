@@ -2,7 +2,7 @@
 package de.smits_net.games.framework.sprites;
 
 import de.smits_net.games.framework.Constants;
-import de.smits_net.games.framework.board.BoardBase;
+import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.images.ImageBase;
 import de.smits_net.games.framework.images.ImageStack;
 
@@ -78,7 +78,7 @@ public class Sprite implements KeyListener, MouseListener {
     protected int deltaY;
 
     /** the game board */
-    protected BoardBase board;
+    protected Board board;
 
     /** Sprite takes part in collision detection */
     private boolean active = true;
@@ -92,7 +92,7 @@ public class Sprite implements KeyListener, MouseListener {
      *      of the board
      * @param image the images
      */
-    public Sprite(BoardBase board, Point position, BoundaryPolicy policy, ImageStack image) {
+    public Sprite(Board board, Point position, BoundaryPolicy policy, ImageStack image) {
         this.board = board;
         this.position = position;
         this.visible = true;
@@ -120,7 +120,7 @@ public class Sprite implements KeyListener, MouseListener {
      * @param y y position of the sprite
      * @param image the sprite's image
      */
-    public Sprite(BoardBase board, int x, int y, ImageStack image) {
+    public Sprite(Board board, int x, int y, ImageStack image) {
         this(board, new Point(x, y), BoundaryPolicy.STOP, image);
     }
 
@@ -134,7 +134,7 @@ public class Sprite implements KeyListener, MouseListener {
      *      of the board
      * @param image the sprite's image
      */
-    public Sprite(BoardBase board, int x, int y, BoundaryPolicy policy, ImageStack image) {
+    public Sprite(Board board, int x, int y, BoundaryPolicy policy, ImageStack image) {
         this(board, new Point(x, y), policy, image);
     }
 
