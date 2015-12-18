@@ -14,14 +14,23 @@ import javax.swing.JPanel;
  */
 public abstract class BoardBase extends JPanel implements ActionListener, Runnable {
 
+    /** Debug information */
+    private static final boolean DEBUG = true;
+
     /** Conversion factor from nano to milliseconds */
     public static final long NANOSECONDS_PER_MILLISECOND = 1000000L;
+
+    /** Conversion factor from nano to seconds */
+    public static final long NANOSECONDS_PER_SECOND = NANOSECONDS_PER_MILLISECOND * 1000L;
 
     /** Number of updates without sleep before a yield is triggered */
     private static final int NO_DELAYS_PER_YIELD = 16;
 
     /** Maximum number of frames skipped in the output */
     private static final int MAX_FRAME_SKIPS = 5;
+
+    /* Time between two debug updates */
+    private static final long DEBUG_FREQUENCY = NANOSECONDS_PER_SECOND / 4;
 
     /** Indicator that the game is still running */
     protected boolean gameRunning = true;
@@ -43,6 +52,12 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
 
     /** Color of the background of the board */
     private Color backgroundColor;
+
+    /** Frame per second counter (only used if debugging is on) */
+    private long fps;
+
+    /** Timestamp of the last update of the debug line */
+    private long lastDebugUpdate;
 
     /**
      * Create a new board.
@@ -109,7 +124,6 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
      */
     public abstract void drawGame(Graphics g);
 
-
     /**
      * Prepare the graphics context and then call the render methods.
      */
@@ -141,6 +155,11 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
         }
         else {
             drawGameOver(g);
+        }
+
+        if (DEBUG) {
+            g.setColor(Color.RED);
+            g.drawString(String.format("FPS: %d", fps), 0, height - 5);
         }
 
         g.dispose();
@@ -228,6 +247,7 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
         // missed sleep
         int numberOfDelays = 0;
 
+        // Time we slipped over the expected FPS
         long excess = 0L;
 
         // The approach used here is taken from the book
@@ -235,11 +255,11 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
         // O’Reilly Media, 2005
         while (gameRunning) {
 
-            // correction of sleep time
-            long sleepCorrection = 0L;
-
             // time before game actions
             long beforeTime = System.nanoTime();
+
+            // correction of sleep time
+            long sleepCorrection = 0L;
 
             // execute the game actions
             gameRunning = updateGame();
@@ -284,6 +304,13 @@ public abstract class BoardBase extends JPanel implements ActionListener, Runnab
                 excess -= delay;
                 gameRunning = updateGame();
                 skips++;
+            }
+
+            if (DEBUG) {
+                if (System.nanoTime() - lastDebugUpdate > DEBUG_FREQUENCY) {
+                    fps = NANOSECONDS_PER_SECOND / (System.nanoTime() - beforeTime);
+                    lastDebugUpdate = System.nanoTime();
+                }
             }
         }
     }
