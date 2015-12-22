@@ -34,6 +34,16 @@ public class Background {
     }
 
     /**
+     * Creates a new background image.
+     *
+     * @param speed speed of the scroll operation
+     */
+    public Background(double speed, BufferedImage image) {
+        background = image;
+        this.speed = speed;
+    }
+
+    /**
      * Move the image with the given speed.
      */
     public void move() {
