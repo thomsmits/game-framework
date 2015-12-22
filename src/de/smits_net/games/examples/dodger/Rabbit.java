@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 
 public class Rabbit extends DirectionAnimatedSprite {
 
-    private static final int CRAFT_SPEED = 5;
+    private static final int RABBIT_SPEED = 5;
 
     /**
      * Create a new craft at the given position.
@@ -51,8 +51,8 @@ public class Rabbit extends DirectionAnimatedSprite {
         int key = e.getKeyCode();
 
         //if (key == KeyEvent.VK_SPACE) { fire(); }
-        if (key == KeyEvent.VK_LEFT)  { deltaX = -CRAFT_SPEED; }
-        if (key == KeyEvent.VK_RIGHT) { deltaX = CRAFT_SPEED; }
+        if (key == KeyEvent.VK_LEFT)  { deltaX = -RABBIT_SPEED; }
+        if (key == KeyEvent.VK_RIGHT) { deltaX = RABBIT_SPEED; }
     }
 
     /**
