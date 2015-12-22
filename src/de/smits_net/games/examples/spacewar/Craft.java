@@ -4,10 +4,9 @@ package de.smits_net.games.examples.spacewar;
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.images.ImageStack;
 import de.smits_net.games.framework.sprites.DirectionAnimatedSprite;
+import de.smits_net.games.framework.sprites.SpriteCollection;
 
 import java.awt.event.KeyEvent;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * The spacecraft.
@@ -23,7 +22,7 @@ public class Craft extends DirectionAnimatedSprite {
     private static final int ANIMATION_SPEED = 10;
 
     /** Missiles fired */
-    private List<Missile> missiles = new CopyOnWriteArrayList<>();
+    private SpriteCollection<Missile> missiles = new SpriteCollection<>();
 
     /**
      * Create a new craft at the given position.
@@ -53,7 +52,7 @@ public class Craft extends DirectionAnimatedSprite {
      *
      * @return the missiles
      */
-    public List<Missile> getMissiles() {
+    public SpriteCollection<Missile> getMissiles() {
         return missiles;
     }
 
@@ -69,7 +68,7 @@ public class Craft extends DirectionAnimatedSprite {
      * Fire a missile.
      */
     public void fire() {
-        missiles.add(new Missile(board, position.x + dimension.width, position.y + dimension.height / 2));
+        missiles.add(new Missile(board, (int)positionX + dimension.width, (int)positionY + dimension.height / 2));
     }
 
     /**

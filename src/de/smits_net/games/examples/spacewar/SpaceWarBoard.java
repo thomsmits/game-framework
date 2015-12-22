@@ -3,10 +3,10 @@ package de.smits_net.games.examples.spacewar;
 
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.sprites.Sprite;
+import de.smits_net.games.framework.sprites.SpriteCollection;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -45,7 +45,7 @@ public class SpaceWarBoard extends Board {
     private Craft craft;
 
     /** Enemies */
-    private List<Alien> aliens = new ArrayList<>();
+    private SpriteCollection<Alien> aliens = new SpriteCollection<>();
 
     /**
      * Initialize the game.
@@ -92,9 +92,9 @@ public class SpaceWarBoard extends Board {
      * @param g graphics context
      */
     protected void drawObjects(Graphics g) {
-        aliens.forEach(a -> a.draw(g, this));
+        aliens.draw(g, this);
         craft.draw(g, this);
-        craft.getMissiles().forEach(m -> m.draw(g, this));
+        craft.getMissiles().draw(g, this);
         writeText(g, 5, 15, "Enemies left: " + aliens.size());
     }
 
@@ -138,9 +138,9 @@ public class SpaceWarBoard extends Board {
      * Update the missiles.
      */
     private synchronized void updateMissiles() {
-        List<Missile> ms = craft.getMissiles();
+        SpriteCollection<Missile> ms = craft.getMissiles();
         ms.forEach(Sprite::move);
-        ms.removeIf(m -> !m.isVisible());
+        ms.removeIfInvisble();
     }
 
     /**
