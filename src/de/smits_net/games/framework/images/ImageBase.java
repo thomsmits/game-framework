@@ -55,6 +55,19 @@ public abstract class ImageBase {
 
         if (img == null) {
             try {
+
+                if (!file.exists()) {
+                    file = new File(file.getPath() + ".png");
+                }
+
+                if (!file.exists()) {
+                    file = new File(file.getPath() + ".gif");
+                }
+
+                if (!file.exists()) {
+                    file = new File(file.getPath() + ".jpg");
+                }
+
                 img = ImageIO.read(file);
                 int transparency = img.getColorModel().getTransparency();
 
