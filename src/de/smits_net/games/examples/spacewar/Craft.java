@@ -19,6 +19,9 @@ public class Craft extends DirectionAnimatedSprite {
     /** Speed of the space craft */
     private static final int CRAFT_SPEED = 2;
 
+    /** Speed of the animation */
+    private static final int ANIMATION_SPEED = 10;
+
     /** Missiles fired */
     private List<Missile> missiles = new CopyOnWriteArrayList<>();
 
@@ -39,7 +42,8 @@ public class Craft extends DirectionAnimatedSprite {
                         "craft_3.png",
                         "craft_4.png"),
                 new ImageStack("assets/spacewar", "craft_1.png"),
-                new ImageStack("assets/spacewar", "craft_1.png"));
+                new ImageStack("assets/spacewar", "craft_1.png"),
+                ANIMATION_SPEED);
 
         setBorder(loadPolygonFromFile("assets/spacewar", "craft.poly"));
     }

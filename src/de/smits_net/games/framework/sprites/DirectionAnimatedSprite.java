@@ -1,11 +1,9 @@
 /* (c) 2015 Thomas Smits */
 package de.smits_net.games.framework.sprites;
 
-import de.smits_net.games.framework.Constants;
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.images.ImageStack;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 
@@ -50,7 +48,8 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
                                    ImageStack left,
                                    ImageStack right,
                                    ImageStack up,
-                                   ImageStack down) {
+                                   ImageStack down,
+                                   int time) {
 
         super(board, x, y, policy, noMovement, 0);
         this.left = left;
@@ -58,6 +57,7 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
         this.up = up;
         this.down = down;
         this.noMovement = noMovement;
+        this.time = time;
     }
 
     /**
@@ -80,21 +80,15 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
         ImageStack directionImages;
 
         if (deltaX > 0) {
-            directionImages = right;
+            images = right;
         }
         else if (deltaX < 0) {
-            directionImages = left;
+            images = left;
         }
         else {
-            directionImages = noMovement;
+            images = noMovement;
         }
 
-        directionImages.draw(g, position, observer);
-        directionImages.cycle();
-
-        if (Constants.DEBUG_SPRITE_OUTLINE) {
-            g.setColor(isActive() ? Color.RED : Color.GREEN);
-            g.drawPolygon(absoluteBorder());
-        }
+        super.draw(g, observer);
     }
 }
