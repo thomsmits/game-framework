@@ -7,6 +7,7 @@ import de.smits_net.games.framework.images.ImageStack;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.ImageObserver;
 
 /**
@@ -89,7 +90,8 @@ public abstract class AnimatedSprite extends Sprite {
         this.images = imgs;
         this.time = time;
 
-        position.translate(offsetX, offsetY);
+        positionX = positionX + offsetX;
+        positionY = positionY + offsetY;
     }
 
     /** Last change of the sprite */
@@ -119,7 +121,7 @@ public abstract class AnimatedSprite extends Sprite {
             }
         }
 
-        images.draw(g, position, observer);
+        images.draw(g, new Point((int)positionX, (int)positionY), observer);
 
         if (Constants.DEBUG_SPRITE_OUTLINE) {
             g.setColor(isActive() ? Color.RED : Color.GREEN);

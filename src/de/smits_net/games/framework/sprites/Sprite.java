@@ -50,8 +50,11 @@ public class Sprite implements KeyListener, MouseListener {
         NONE;
     }
 
-    /** position */
-    protected Point position;
+    /** position in X direction*/
+    protected double positionX;
+
+    /** position in y direction*/
+    protected double positionY;
 
     /** dimensions */
     protected Dimension dimension;
@@ -72,10 +75,10 @@ public class Sprite implements KeyListener, MouseListener {
     protected BoundaryPolicy policy;
 
     /** velocity in x direction */
-    protected int deltaX;
+    protected double deltaX;
 
     /** velocity in y direction */
-    protected int deltaY;
+    protected double deltaY;
 
     /** the game board */
     protected Board board;
@@ -94,7 +97,8 @@ public class Sprite implements KeyListener, MouseListener {
      */
     public Sprite(Board board, Point position, BoundaryPolicy policy, ImageStack image) {
         this.board = board;
-        this.position = position;
+        this.positionX = position.x;
+        this.positionY = position.y;
         this.visible = true;
         this.image = image;
         dimension = new Dimension(
@@ -159,7 +163,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @param deltaX speed in x direction
      */
-    public void setDeltaX(int deltaX) {
+    public void setDeltaX(double deltaX) {
         this.deltaX = deltaX;
     }
 
@@ -168,7 +172,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @param deltaY speed in y direction
      */
-    public void setDeltaY(int deltaY) {
+    public void setDeltaY(double deltaY) {
         this.deltaY = deltaY;
     }
 
@@ -177,7 +181,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @return speed in y direction.
      */
-    public int getDeltaY() {
+    public double getDeltaY() {
         return deltaY;
     }
 
@@ -186,7 +190,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @return speed in x direction.
      */
-    public int getDeltaX() {
+    public double getDeltaX() {
         return deltaX;
     }
 
@@ -194,8 +198,8 @@ public class Sprite implements KeyListener, MouseListener {
      * Stop the movement of the sprite.
      */
     public void stop() {
-        deltaX = 0;
-        deltaY = 0;
+        deltaX = 0.0;
+        deltaY = 0.0;
     }
 
     /**
@@ -206,7 +210,7 @@ public class Sprite implements KeyListener, MouseListener {
      */
     protected Polygon absoluteBorder() {
         Polygon p = new Polygon(border.xpoints, border.ypoints, border.npoints);
-        p.translate(position.x, position.y);
+        p.translate((int)positionX, (int)positionY);
         return p;
     }
 
@@ -222,7 +226,7 @@ public class Sprite implements KeyListener, MouseListener {
             return;
         }
 
-        image.draw(g, position, observer);
+        image.draw(g, new Point((int)positionX, (int)positionY), observer);
 
         if (Constants.DEBUG_SPRITE_OUTLINE) {
             g.setColor(isActive() ? Color.RED : Color.GREEN);
@@ -303,7 +307,7 @@ public class Sprite implements KeyListener, MouseListener {
      * @return the current position.
      */
     public Point getPosition() {
-        return position;
+        return new Point((int)positionX, (int)positionY);
     }
 
     /**
@@ -348,7 +352,7 @@ public class Sprite implements KeyListener, MouseListener {
      * @return x position
      */
     public int getX() {
-        return position.x;
+        return (int)positionX;
     }
 
     /**
@@ -357,7 +361,7 @@ public class Sprite implements KeyListener, MouseListener {
      * @return y position
      */
     public int getY() {
-        return position.y;
+        return (int)positionY;
     }
 
     /**
@@ -366,61 +370,63 @@ public class Sprite implements KeyListener, MouseListener {
      * @param dx delta in x direction
      * @param dy delta in y direction
      */
-    public void move(int dx, int dy) {
+    public void move(double dx, double dy) {
 
-        position.translate(dx, dy);
+        positionX = positionX + dx;
+        positionY = positionY + dy;
+
+        Point position = new Point((int)positionX, (int)positionY);
 
         if (policy == BoundaryPolicy.STOP) {
-            if (position.x < lowerBounds.x) {
-                position.x = lowerBounds.x;
+            if (positionX < lowerBounds.x) {
+                positionX = lowerBounds.x;
             }
 
-            if (position.y < lowerBounds.y) {
-                position.y = lowerBounds.y;
+            if (positionY < lowerBounds.y) {
+                positionY = lowerBounds.y;
             }
 
-            if (position.x > upperBounds.x - dimension.width) {
-                position.x = upperBounds.x - dimension.width;
+            if (positionX > upperBounds.x - dimension.width) {
+                positionX = upperBounds.x - dimension.width;
             }
 
-            if (position.y > upperBounds.y - dimension.height) {
-                position.y = upperBounds.y - dimension.height;
+            if (positionY > upperBounds.y - dimension.height) {
+                positionY = upperBounds.y - dimension.height;
             }
         }
         else if (policy == BoundaryPolicy.JUMP_BACK) {
-            if (position.x < lowerBounds.x) {
-                position.x = upperBounds.x;
+            if (positionX < lowerBounds.x) {
+                positionX = upperBounds.x;
             }
 
-            if (position.y < lowerBounds.y) {
-                position.y = upperBounds.y;
+            if (positionY < lowerBounds.y) {
+                positionY = upperBounds.y;
             }
 
-            if (position.x > upperBounds.x) {
-                position.x = upperBounds.x;
+            if (positionX > upperBounds.x) {
+                positionX = upperBounds.x;
             }
 
-            if (position.y > upperBounds.y) {
-                position.y = upperBounds.y;
+            if (positionY > upperBounds.y) {
+                positionY = upperBounds.y;
             }
         }
         else if (policy == BoundaryPolicy.INVISIBLE) {
-            if (position.x < lowerBounds.x) {
+            if (positionX + image.getWidth() < lowerBounds.x) {
                 visible = false;
             }
 
-            if (position.y < lowerBounds.y) {
+            if (positionY + image.getHeight() < lowerBounds.y) {
                 visible = false;
             }
 
-            if (position.x > upperBounds.x) {
+            if (positionX > upperBounds.x) {
                 visible = false;
             }
 
-            if (position.y > upperBounds.y) {
+            if (positionY > upperBounds.y) {
                 visible = false;
             }
-
         }
     }
 
