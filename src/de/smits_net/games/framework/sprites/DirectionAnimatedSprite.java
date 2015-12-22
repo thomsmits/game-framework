@@ -85,6 +85,12 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
         else if (deltaX < 0) {
             images = left;
         }
+        else if (deltaY > 0) {
+            images = down;
+        }
+        else if (deltaY < 0) {
+            images = up;
+        }
         else {
             images = noMovement;
         }
