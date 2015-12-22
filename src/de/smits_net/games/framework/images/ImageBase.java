@@ -1,15 +1,19 @@
 /* (c) 2015 Thomas Smits */
 package de.smits_net.games.framework.images;
 
-import java.awt.*;
+import javax.imageio.ImageIO;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 
 /**
  * Base class for images used in the game.

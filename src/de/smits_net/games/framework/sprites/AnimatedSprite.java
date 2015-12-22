@@ -5,7 +5,8 @@ import de.smits_net.games.framework.Constants;
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.images.ImageStack;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 
 /**

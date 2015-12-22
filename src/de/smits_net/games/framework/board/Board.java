@@ -3,8 +3,14 @@ package de.smits_net.games.framework.board;
 
 import de.smits_net.games.framework.Constants;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  * Base class for the game board. This class starts the game thread.
