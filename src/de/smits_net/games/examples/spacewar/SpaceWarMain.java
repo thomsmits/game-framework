@@ -1,39 +1,22 @@
 /* (c) 2015 Thomas Smits */
 package de.smits_net.games.examples.spacewar;
 
-import javax.swing.*;
-import java.awt.*;
+import de.smits_net.games.framework.board.MainWindow;
+
+import java.awt.EventQueue;
 
 /**
  * Main class of the game.
  *
  * @author Thomas Smits
  */
-public class SpaceWarMain {
-
-    /** The window */
-    JFrame frame;
+public class SpaceWarMain extends MainWindow {
 
     /**
      * Create a new object.
      */
     public SpaceWarMain() {
-        initUI();
-    }
-
-    /**
-     * Initialize the UI.
-     */
-    private void initUI() {
-        frame = new JFrame("Fight against the aliens");
-        frame.getContentPane().add(new SpaceWarBoard());
-
-        frame.setResizable(false);
-        frame.pack();
-
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        super("Fight against the aliens", new SpaceWarBoard());
     }
 
     /**
