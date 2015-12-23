@@ -19,11 +19,11 @@ public class Car extends Sprite {
     public void move() {
         super.move();
 
-        if ((deltaX < 0) && (positionX + image.getWidth() < 0)) {
+        if ((deltaX < 0) && (positionX + image.getDimension().width < 0)) {
             positionX = 2*board.getWidth();
         }
         else if ((deltaX > 0) && (positionX > board.getWidth())) {
-            positionX = -2*image.getWidth();
+            positionX = -2*image.getDimension().width;
         }
     }
 }

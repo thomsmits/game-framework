@@ -68,20 +68,20 @@ public class Character extends DirectionAnimatedSprite {
 
         Point newTarget = (Point)(target.clone());
 
-        if (newTarget.x < lowerBounds.x) {
-            newTarget.x = lowerBounds.x;
+        if (newTarget.x < bounds.x) {
+            newTarget.x = bounds.x;
         }
 
-        if (newTarget.y < lowerBounds.y) {
-            newTarget.y = lowerBounds.y;
+        if (newTarget.y < bounds.y) {
+            newTarget.y = bounds.y;
         }
 
-        if (newTarget.x > upperBounds.x) {
-            newTarget.x = upperBounds.x;
+        if (newTarget.x > bounds.x + bounds.width) {
+            newTarget.x = bounds.x + bounds.width;
         }
 
-        if (newTarget.y > upperBounds.y) {
-            newTarget.y = upperBounds.y;
+        if (newTarget.y > bounds.y + bounds.height) {
+            newTarget.y = bounds.y + bounds.height;
         }
 
         System.out.printf("Target: %s%n", newTarget);

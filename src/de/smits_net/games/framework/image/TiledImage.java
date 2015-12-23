@@ -1,6 +1,7 @@
 /* (c) 2015 Thomas Smits */
 package de.smits_net.games.framework.image;
 
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +13,8 @@ import java.util.List;
  */
 public class TiledImage extends ImagePack {
 
-    /** Width of the image */
-    private int width;
-
-    /** Height of the image */
-    private int height;
+    /** Dimension of the image */
+    private Dimension dimension;
 
     /**
      * Create a new image.
@@ -30,8 +28,7 @@ public class TiledImage extends ImagePack {
         List<BufferedImage> tiles = getTiles(image, boxWidth, boxHeight);
         tiles.forEach(this::addImage);
 
-        this.width = boxWidth;
-        this.height = boxHeight;
+        this.dimension = new Dimension(boxWidth, boxHeight);
     }
 
     /**
@@ -78,19 +75,8 @@ public class TiledImage extends ImagePack {
         return result;
     }
 
-    /**
-     * @see ImagePack#getWidth()
-     */
     @Override
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * @see ImagePack#getHeight()
-     */
-    @Override
-    public int getHeight() {
-        return height;
+    public Dimension getDimension() {
+        return dimension;
     }
 }

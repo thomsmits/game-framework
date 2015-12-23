@@ -1,6 +1,7 @@
 /* (c) 2015 Thomas Smits */
 package de.smits_net.games.framework.image;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
 
-    /** THe images */
+    /** The images */
     protected List<BufferedImage> imageList = new ArrayList<>();
 
     /** Image currently displayed, used for cycling through the images */
@@ -125,25 +126,12 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
         return imageList.iterator();
     }
 
-    /**
-     * @see de.smits_net.games.framework.image.ImageBase#getWidth()
-     */
     @Override
-    public int getWidth() {
-        return imageList.get(0).getWidth();
+    public Dimension getDimension() {
+        BufferedImage img = getImage();
+        return new Dimension(img.getWidth(), img.getHeight());
     }
 
-    /**
-     * @see de.smits_net.games.framework.image.ImageBase#getHeight()
-     */
-    @Override
-    public int getHeight() {
-        return imageList.get(0).getHeight();
-    }
-
-    /**
-     * @see de.smits_net.games.framework.image.ImageBase#draw(java.awt.Graphics, java.awt.Point, java.awt.image.ImageObserver)
-     */
     @Override
     public void draw(Graphics g, Point position, ImageObserver observer) {
         g.drawImage(imageList.get(currentImage), position.x, position.y, observer);

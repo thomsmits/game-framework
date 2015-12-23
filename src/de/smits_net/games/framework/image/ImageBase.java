@@ -2,6 +2,7 @@
 package de.smits_net.games.framework.image;
 
 import javax.imageio.ImageIO;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
@@ -125,16 +126,9 @@ public abstract class ImageBase {
     }
 
     /**
-     * Width of the image.
+     * Dimension of the image.
      *
-     * @return the width (in pixel)
+     * @return the dimension (in pixel)
      */
-    public abstract int getWidth();
-
-    /**
-     * Height of the image.
-     *
-     * @return the height (in pixel)
-     */
-    public abstract int getHeight();
+    public abstract Dimension getDimension();
 }

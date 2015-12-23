@@ -6,6 +6,7 @@ import de.smits_net.games.framework.character.Character;
 import de.smits_net.games.framework.image.AnimatedImage;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 public class Frog extends Character {
@@ -35,10 +36,7 @@ public class Frog extends Character {
                 new AnimatedImage(1, "assets/frogger", "frog_u1"),
                 new AnimatedImage(1, "assets/frogger", "frog_d1"));
 
-        lowerBounds.x = 0;
-        lowerBounds.y = 0;
-        upperBounds.x = board.getWidth();
-        upperBounds.y = FROG_Y + animatedImage.getHeight();
+        bounds = new Rectangle(0, 0, board.getWidth(), FROG_Y + animatedImage.getDimension().height);
     }
 
 

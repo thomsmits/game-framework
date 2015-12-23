@@ -65,8 +65,8 @@ public abstract class AnimatedSprite extends Sprite {
      */
     public void setImages(AnimatedImage animatedImage) {
 
-        int offsetX = (animatedImage.getWidth() - animatedImage.getWidth()) / 2;
-        int offsetY = (animatedImage.getHeight() - animatedImage.getHeight()) / 2;
+        int offsetX = (this.animatedImage.getDimension().width - animatedImage.getDimension().width) / 2;
+        int offsetY = (this.animatedImage.getDimension().height - animatedImage.getDimension().height) / 2;
 
         this.animatedImage = animatedImage;
 

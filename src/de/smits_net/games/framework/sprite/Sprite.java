@@ -47,10 +47,9 @@ public class Sprite implements KeyListener, MouseListener {
         NONE;
     }
 
-
     /** Border of the sprite (for collision detection) */
     private Polygon border = new Polygon();
-
+    
     /** position in X direction*/
     protected double positionX;
 
@@ -66,11 +65,8 @@ public class Sprite implements KeyListener, MouseListener {
     /** the image that is displayed */
     protected ImageBase image;
 
-    /** lower bounds of the sprite movement */
-    protected Point lowerBounds;
-
-    /** upper bounds of the sprite movement */
-    protected Point upperBounds;
+    /** The bounds of the sprite movement */
+    protected Rectangle bounds;
 
     /** what happens when the sprite hits the boundaries */
     protected BoundaryPolicy policy;
@@ -102,19 +98,15 @@ public class Sprite implements KeyListener, MouseListener {
         this.positionY = position.y;
         this.visible = true;
         this.image = image;
-        dimension = new Dimension(
-                image.getWidth(),
-                image.getHeight());
-        this.lowerBounds = new Point(0, 0);
-        this.upperBounds = new Point(board.getWidth(),
-                board.getHeight());
+        dimension = new Dimension(image.getDimension());
+        this.bounds = new Rectangle(0, 0, board.getDimension().width, board.getDimension().height);
         this.policy = policy;
 
         // assume rectangular border
         border.addPoint(0, 0);
-        border.addPoint(image.getWidth(), 0);
-        border.addPoint(image.getWidth(), image.getHeight());
-        border.addPoint(0, image.getHeight());
+        border.addPoint(image.getDimension().width, 0);
+        border.addPoint(image.getDimension().width, image.getDimension().height);
+        border.addPoint(0, image.getDimension().height);
     }
 
     /**
@@ -385,53 +377,53 @@ public class Sprite implements KeyListener, MouseListener {
     protected void ensureBoundaryPolicy() {
 
         if (policy == BoundaryPolicy.STOP) {
-            if (positionX < lowerBounds.x) {
-                positionX = lowerBounds.x;
+            if (positionX < bounds.x) {
+                positionX = bounds.x;
             }
 
-            if (positionY < lowerBounds.y) {
-                positionY = lowerBounds.y;
+            if (positionY < bounds.y) {
+                positionY = bounds.y;
             }
 
-            if (positionX > upperBounds.x - dimension.width) {
-                positionX = upperBounds.x - dimension.width;
+            if (positionX > bounds.x + bounds.width - dimension.width) {
+                positionX = bounds.x + bounds.width - dimension.width;
             }
 
-            if (positionY > upperBounds.y - dimension.height) {
-                positionY = upperBounds.y - dimension.height;
+            if (positionY > bounds.y + bounds.height - dimension.height) {
+                positionY = bounds.y + bounds.height - dimension.height;
             }
         }
         else if (policy == BoundaryPolicy.JUMP_BACK) {
-            if (positionX < lowerBounds.x) {
-                positionX = upperBounds.x;
+            if (positionX < bounds.x) {
+                positionX = bounds.x + bounds.width;
             }
 
-            if (positionY < lowerBounds.y) {
-                positionY = upperBounds.y;
+            if (positionY < bounds.y) {
+                positionY = bounds.y + bounds.height;
             }
 
-            if (positionX > upperBounds.x) {
-                positionX = upperBounds.x;
+            if (positionX > bounds.x + bounds.width) {
+                positionX = bounds.x;
             }
 
-            if (positionY > upperBounds.y) {
-                positionY = upperBounds.y;
+            if (positionY > bounds.y + bounds.height) {
+                positionY = bounds.y;
             }
         }
         else if (policy == BoundaryPolicy.INVISIBLE) {
-            if (positionX + image.getWidth() < lowerBounds.x) {
+            if (positionX + image.getDimension().width < bounds.x) {
                 visible = false;
             }
 
-            if (positionY + image.getHeight() < lowerBounds.y) {
+            if (positionY + image.getDimension().height < bounds.y) {
                 visible = false;
             }
 
-            if (positionX > upperBounds.x) {
+            if (positionX > bounds.x + bounds.width) {
                 visible = false;
             }
 
-            if (positionY > upperBounds.y) {
+            if (positionY > bounds.y + bounds.height) {
                 visible = false;
             }
         }

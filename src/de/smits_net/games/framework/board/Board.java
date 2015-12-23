@@ -31,11 +31,8 @@ public abstract class Board extends JPanel implements Runnable {
     /** Indicator that the game is still running */
     protected boolean gameRunning = true;
 
-    /** Width of the board */
-    protected int width;
-
-    /** Height of the board */
-    protected int height;
+    /** Dimension of the board */
+    protected Dimension dimension;
 
     /** Time for each iteration (frame) in nano seconds */
     protected long delay;
@@ -64,15 +61,25 @@ public abstract class Board extends JPanel implements Runnable {
      * @param color background color of the board
      */
     public Board(int delay, int width, int height, Color color) {
-        this.width = width;
-        this.height = height;
+        this(delay, new Dimension(width, height), color);
+    }
+
+    /**
+     * Create a new board.
+     *
+     * @param delay delay between two frames in milliseconds
+     * @param dimension dimension of the board
+     * @param color background color of the board
+     */
+    public Board(int delay, Dimension dimension, Color color) {
         this.delay = delay * Constants.NANOSECONDS_PER_MILLISECOND;
         this.backgroundColor = color;
+        this.dimension = dimension;
 
         setFocusable(true);
         setBackground(color);
 
-        setPreferredSize(new Dimension(width, height));
+        setPreferredSize(dimension);
     }
 
     /**
@@ -80,7 +87,7 @@ public abstract class Board extends JPanel implements Runnable {
      */
     @Override
     public int getWidth() {
-        return width;
+        return dimension.width;
     }
 
     /**
@@ -88,9 +95,17 @@ public abstract class Board extends JPanel implements Runnable {
      */
     @Override
     public int getHeight() {
-        return height;
+        return dimension.height;
     }
 
+    /**
+     * Returns the dimension of the board.
+     *
+     * @return the dimension
+     */
+    public Dimension getDimension() {
+        return dimension;
+    }
     /**
      * Stops the game.
      */
@@ -123,7 +138,7 @@ public abstract class Board extends JPanel implements Runnable {
         // blitted to screen in onw step. Therefore, we need an image
         // as the target of our drawing operations.
         if (image == null) {
-            image = createImage(width, height);
+            image = createImage(dimension.width, dimension.height);
             if (image == null) {
                 return;
             }
@@ -133,7 +148,7 @@ public abstract class Board extends JPanel implements Runnable {
 
         // clear the background
         g.setColor(backgroundColor);
-        g.fillRect(0, 0, width, height);
+        g.fillRect(0, 0, dimension.width, dimension.height);
 
         // Let subclass draw its background
         drawBackground(g);
@@ -148,7 +163,7 @@ public abstract class Board extends JPanel implements Runnable {
 
         if (Constants.DEBUG_SHOW_FPS) {
             g.setColor(Color.RED);
-            g.drawString(String.format("FPS: %d", fps), 0, height - 5);
+            g.drawString(String.format("FPS: %d", fps), 0, dimension.height - 5);
         }
 
         g.dispose();
@@ -185,8 +200,8 @@ public abstract class Board extends JPanel implements Runnable {
 
         g.setColor(Color.white);
         g.setFont(small);
-        g.drawString(msg, (width - fm.stringWidth(msg)) / 2,
-                height / 2);
+        g.drawString(msg, (dimension.width - fm.stringWidth(msg)) / 2,
+                dimension.height / 2);
     }
 
     /**
@@ -240,7 +255,7 @@ public abstract class Board extends JPanel implements Runnable {
         long excess = 0L;
 
         // The approach used here is taken from the book
-        // Killer Game Programming in JavaTM by Andrew Davison
+        // Killer Game Programming in Java by Andrew Davison
         // O’Reilly Media, 2005
         while (gameRunning) {
 

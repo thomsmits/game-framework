@@ -3,6 +3,7 @@ package de.smits_net.games.framework.image;
 
 import de.smits_net.games.framework.Constants;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -62,13 +63,8 @@ public class AnimatedImage extends ImageBase {
     }
 
     @Override
-    public int getWidth() {
-        return images.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-        return images.getHeight();
+    public Dimension getDimension() {
+        return images.getDimension();
     }
 
     /**
@@ -79,7 +75,6 @@ public class AnimatedImage extends ImageBase {
     public ImagePack getImages() {
         return images;
     }
-
 
     /**
      * Returns an animation that contains the images from this animation
