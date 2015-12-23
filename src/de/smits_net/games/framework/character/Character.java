@@ -24,8 +24,7 @@ public class Character extends DirectionAnimatedSprite {
      * Create a new sprite.
      *
      * @param board our board
-     * @param x x position
-     * @param y y position
+     * @param startPoint start position
      * @param speed the speed of the object
      * @param policy policy used when sprite reaches
      * @param noDirection animation for no direction
@@ -38,7 +37,7 @@ public class Character extends DirectionAnimatedSprite {
      * @param noMovementNorth animation for non-moving sprite, facing to the north
      * @param noMovementSouth animation for non-moving sprite, facing to the south
      */
-    public Character(Board board, int x, int y, int speed,
+    public Character(Board board, Point startPoint, int speed,
                                     BoundaryPolicy policy,
                                    AnimatedImage noDirection,
                                    AnimatedImage west,
@@ -50,11 +49,11 @@ public class Character extends DirectionAnimatedSprite {
                                    AnimatedImage noMovementNorth,
                                    AnimatedImage noMovementSouth) {
 
-        super(board, x, y, policy, noDirection, north, null, east, null, south, null, west, null,
+        super(board, startPoint, policy, noDirection, north, null, east, null, south, null, west, null,
                 noMovementNorth, null, noMovementEast, null, noMovementSouth, noMovementWest, null, null);
 
         // start with target = position
-        target = new Point(x, y);
+        target = (Point)startPoint.clone();
 
         this.speed = speed;
     }
@@ -91,8 +90,8 @@ public class Character extends DirectionAnimatedSprite {
     @Override
     public void move() {
 
-        double distanceX = target.x - positionX;
-        double distanceY = target.y - positionY;
+        double distanceX = target.x - position.x;
+        double distanceY = target.y - position.y;
 
         if (Math.abs(distanceX) < 0.1 && Math.abs(distanceY) < 0.1 ) {
             return;
@@ -115,12 +114,12 @@ public class Character extends DirectionAnimatedSprite {
         if (lengthDistance < lengthSpeedVector) {
             deltaX = 0;
             deltaY = 0;
-            positionX = target.x;
-            positionY = target.y;
+            position.x = target.x;
+            position.y = target.y;
         }
         else {
-            positionX += deltaX;
-            positionY += deltaY;
+            position.x += deltaX;
+            position.y += deltaY;
         }
 
         System.out.printf("direction=%s, alpha=%f, distanceX=%f, distanceY=%f, deltaX=%f, deltaY=%f%n", currentDirection, alpha, distanceX, distanceY, deltaX, deltaY);

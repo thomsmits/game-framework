@@ -5,6 +5,7 @@ import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.AnimatedImage;
 import de.smits_net.games.framework.sprite.DirectionAnimatedSprite;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 
 public class Rabbit extends DirectionAnimatedSprite {
@@ -14,12 +15,11 @@ public class Rabbit extends DirectionAnimatedSprite {
     /**
      * Create a new craft at the given position.
      *
-     * @param board tinthe board we are displayed on
-     * @param x x position
-     * @param y y position
+     * @param board the board we are displayed on
+     * @param startPoint start position
      */
-    public Rabbit(Board board, int x, int y) {
-        super(board, x, y, BoundaryPolicy.STOP,
+    public Rabbit(Board board, Point startPoint) {
+        super(board, startPoint, BoundaryPolicy.STOP,
                 new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"),
                 new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"), new AnimatedImage(100, "assets/dodger", "bunny1_walk1_right.png",
                         "bunny1_walk2_right.png"), new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"), new AnimatedImage(100, "assets/dodger", "bunny1_walk1_left.png",

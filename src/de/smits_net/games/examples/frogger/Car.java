@@ -5,13 +5,15 @@ import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.ImagePack;
 import de.smits_net.games.framework.sprite.Sprite;
 
+import java.awt.Point;
+
 public class Car extends Sprite {
 
     int startx;
 
-    public Car(Board board, int x, int y, String name, double speed) {
-        super(board, x, y, BoundaryPolicy.NONE, new ImagePack("assets/frogger", name));
-        startx = x;
+    public Car(Board board, Point startPoint, String name, double speed) {
+        super(board, startPoint, BoundaryPolicy.NONE, new ImagePack("assets/frogger", name));
+        startx = startPoint.x;
         setDeltaX(speed);
     }
 
@@ -19,11 +21,11 @@ public class Car extends Sprite {
     public void move() {
         super.move();
 
-        if ((deltaX < 0) && (positionX + image.getDimension().width < 0)) {
-            positionX = 2*board.getWidth();
+        if ((deltaX < 0) && (position.x + image.getDimension().width < 0)) {
+            position.x = 2*board.getWidth();
         }
-        else if ((deltaX > 0) && (positionX > board.getWidth())) {
-            positionX = -2*image.getDimension().width;
+        else if ((deltaX > 0) && (position.x > board.getWidth())) {
+            position.x = -2*image.getDimension().width;
         }
     }
 }

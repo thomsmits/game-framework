@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import java.io.BufferedReader;
 import java.io.File;
@@ -49,12 +50,9 @@ public class Sprite implements KeyListener, MouseListener {
 
     /** Border of the sprite (for collision detection) */
     private Polygon border = new Polygon();
-    
-    /** position in X direction*/
-    protected double positionX;
 
-    /** position in y direction*/
-    protected double positionY;
+    /** Position of the sprite */
+    protected Point2D.Double position;
 
     /** dimensions */
     protected Dimension dimension;
@@ -94,8 +92,7 @@ public class Sprite implements KeyListener, MouseListener {
      */
     public Sprite(Board board, Point position, BoundaryPolicy policy, ImagePack image) {
         this.board = board;
-        this.positionX = position.x;
-        this.positionY = position.y;
+        this.position = new Point2D.Double(position.x, position.y);
         this.visible = true;
         this.image = image;
         dimension = new Dimension(image.getDimension());
@@ -107,32 +104,6 @@ public class Sprite implements KeyListener, MouseListener {
         border.addPoint(image.getDimension().width, 0);
         border.addPoint(image.getDimension().width, image.getDimension().height);
         border.addPoint(0, image.getDimension().height);
-    }
-
-    /**
-     * Create a new sprite.
-     *
-     * @param board the board
-     * @param x x position of the sprite
-     * @param y y position of the sprite
-     * @param image the sprite's image
-     */
-    public Sprite(Board board, int x, int y, ImagePack image) {
-        this(board, new Point(x, y), BoundaryPolicy.STOP, image);
-    }
-
-    /**
-     * Create a new sprite.
-     *
-     * @param board the board
-     * @param x x position of the sprite
-     * @param y y position of the sprite
-     * @param policy the policy when the sprite reaches the boundaries
-     *      of the board
-     * @param image the sprite's image
-     */
-    public Sprite(Board board, int x, int y, BoundaryPolicy policy, ImagePack image) {
-        this(board, new Point(x, y), policy, image);
     }
 
     /**
@@ -203,7 +174,7 @@ public class Sprite implements KeyListener, MouseListener {
      */
     protected Polygon absoluteBorder() {
         Polygon p = new Polygon(border.xpoints, border.ypoints, border.npoints);
-        p.translate((int)positionX, (int)positionY);
+        p.translate((int)position.x, (int)position.y);
         return p;
     }
 
@@ -219,7 +190,7 @@ public class Sprite implements KeyListener, MouseListener {
             return;
         }
 
-        image.draw(g, new Point((int)positionX, (int)positionY), observer);
+        image.draw(g, new Point((int)position.x, (int)position.y), observer);
 
         if (Constants.DEBUG_SPRITE_OUTLINE) {
             g.setColor(isActive() ? Color.RED : Color.GREEN);
@@ -300,7 +271,7 @@ public class Sprite implements KeyListener, MouseListener {
      * @return the current position.
      */
     public Point getPosition() {
-        return new Point((int)positionX, (int)positionY);
+        return new Point((int)position.x, (int)position.y);
     }
 
     /**
@@ -340,24 +311,6 @@ public class Sprite implements KeyListener, MouseListener {
     }
 
     /**
-     * Get the x position.
-     *
-     * @return x position
-     */
-    public int getX() {
-        return (int)positionX;
-    }
-
-    /**
-     * Get the y position.
-     *
-     * @return y position
-     */
-    public int getY() {
-        return (int)positionY;
-    }
-
-    /**
      * Moves the sprite.
      *
      * @param dx delta in x direction
@@ -365,8 +318,8 @@ public class Sprite implements KeyListener, MouseListener {
      */
     public void move(double dx, double dy) {
 
-        positionX = positionX + dx;
-        positionY = positionY + dy;
+        position.x = position.x + dx;
+        position.y = position.y + dy;
 
         ensureBoundaryPolicy();
     }
@@ -377,53 +330,53 @@ public class Sprite implements KeyListener, MouseListener {
     protected void ensureBoundaryPolicy() {
 
         if (policy == BoundaryPolicy.STOP) {
-            if (positionX < bounds.x) {
-                positionX = bounds.x;
+            if (position.x < bounds.x) {
+                position.x = bounds.x;
             }
 
-            if (positionY < bounds.y) {
-                positionY = bounds.y;
+            if (position.y < bounds.y) {
+                position.y = bounds.y;
             }
 
-            if (positionX > bounds.x + bounds.width - dimension.width) {
-                positionX = bounds.x + bounds.width - dimension.width;
+            if (position.x > bounds.x + bounds.width - dimension.width) {
+                position.x = bounds.x + bounds.width - dimension.width;
             }
 
-            if (positionY > bounds.y + bounds.height - dimension.height) {
-                positionY = bounds.y + bounds.height - dimension.height;
+            if (position.y > bounds.y + bounds.height - dimension.height) {
+                position.y = bounds.y + bounds.height - dimension.height;
             }
         }
         else if (policy == BoundaryPolicy.JUMP_BACK) {
-            if (positionX < bounds.x) {
-                positionX = bounds.x + bounds.width;
+            if (position.x < bounds.x) {
+                position.x = bounds.x + bounds.width;
             }
 
-            if (positionY < bounds.y) {
-                positionY = bounds.y + bounds.height;
+            if (position.y < bounds.y) {
+                position.y = bounds.y + bounds.height;
             }
 
-            if (positionX > bounds.x + bounds.width) {
-                positionX = bounds.x;
+            if (position.x > bounds.x + bounds.width) {
+                position.x = bounds.x;
             }
 
-            if (positionY > bounds.y + bounds.height) {
-                positionY = bounds.y;
+            if (position.y > bounds.y + bounds.height) {
+                position.y = bounds.y;
             }
         }
         else if (policy == BoundaryPolicy.INVISIBLE) {
-            if (positionX + image.getDimension().width < bounds.x) {
+            if (position.x + image.getDimension().width < bounds.x) {
                 visible = false;
             }
 
-            if (positionY + image.getDimension().height < bounds.y) {
+            if (position.y + image.getDimension().height < bounds.y) {
                 visible = false;
             }
 
-            if (positionX > bounds.x + bounds.width) {
+            if (position.x > bounds.x + bounds.width) {
                 visible = false;
             }
 
-            if (positionY > bounds.y + bounds.height) {
+            if (position.y > bounds.y + bounds.height) {
                 visible = false;
             }
         }

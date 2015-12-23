@@ -5,6 +5,8 @@ import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.AnimatedImage;
 import de.smits_net.games.framework.sprite.AnimatedSprite;
 
+import java.awt.Point;
+
 /**
  * Sprite of an alien.
  *
@@ -19,11 +21,10 @@ public class Alien extends AnimatedSprite {
      * Create a new alien.
      *
      * @param board the game board
-     * @param x the x position
-     * @param y the y position
+     * @param startPoint start position
      */
-    public Alien(Board board, int x, int y) {
-        super(board, x, y, BoundaryPolicy.NONE,
+    public Alien(Board board, Point startPoint) {
+        super(board, startPoint, BoundaryPolicy.NONE,
                 new AnimatedImage(50, 5, "assets/spacewar/spike_fist_move_strip5.png"));
         setDeltaX(ALIEN_SPEED);
     }

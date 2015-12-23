@@ -5,6 +5,7 @@ import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.AnimatedImage;
 
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.ImageObserver;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,9 +39,9 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
 
     /**
      * Create a new sprite.
-     *  @param board our board
-     * @param x x position
-     * @param y y position
+     *
+     * @param board our board
+     * @param startPoint position of sprite
      * @param policy policy used when sprite reaches
      * @param noDirection animation for no direction
      * @param north animation for movement north
@@ -60,7 +61,7 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
      * @param noMovementSouthwest animation for non-moving sprite, facing to the southwest
      * @param noMovementNorthwest animation for non-moving sprite, facing to the northwest
      */
-    public DirectionAnimatedSprite(Board board, int x, int y, BoundaryPolicy policy,
+    public DirectionAnimatedSprite(Board board, Point startPoint, BoundaryPolicy policy,
                                    AnimatedImage noDirection,
                                    AnimatedImage north,
                                    AnimatedImage northeast,
@@ -79,7 +80,7 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
                                    AnimatedImage noMovementSouthwest,
                                    AnimatedImage noMovementNorthwest) {
 
-        super(board, x, y, policy, north);
+        super(board, startPoint, policy, north);
 
         setMovementAnimation(NONE, noDirection);
         setMovementAnimation(EAST, east);
@@ -104,9 +105,9 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
 
     /**
      * Create a new sprite.
-     *  @param board our board
-     * @param x x position
-     * @param y y position
+     *
+     * @param board our board
+     * @param startPoint position of sprite
      * @param policy policy used when sprite reaches
      * @param noDirection animation for no direction
      * @param north animation for movement north
@@ -118,7 +119,7 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
      * @param noMovementSouth animation for non-moving sprite, facing to the south
      * @param noMovementWest animation for non-moving sprite, facing to the west
      */
-    public DirectionAnimatedSprite(Board board, int x, int y, BoundaryPolicy policy,
+    public DirectionAnimatedSprite(Board board, Point startPoint, BoundaryPolicy policy,
                                    AnimatedImage noDirection,
                                    AnimatedImage north,
                                    AnimatedImage east,
@@ -129,16 +130,16 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
                                    AnimatedImage noMovementSouth,
                                    AnimatedImage noMovementWest) {
 
-        this(board, x, y, policy, noDirection, north, north, east, south, south, south, west, north,
+        this(board, startPoint, policy, noDirection, north, north, east, south, south, south, west, north,
                 noMovementNorth, noMovementNorth, noMovementEast, noMovementSouth, noMovementSouth, noMovementWest, noMovementSouth, noMovementNorth);
     }
 
     /**
-     * Create a new sprite. The no movment animations are derived from the movement
+     * Create a new sprite. The no movement animations are derived from the movement
      * animations using only the first image in the pack.
-     *  @param board our board
-     * @param x x position
-     * @param y y position
+     *
+     * @param board our board
+     * @param startPoint position of sprite
      * @param policy policy used when sprite reaches
      * @param noDirection animation for no direction
      * @param north animation for movement north
@@ -146,14 +147,14 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
      * @param south animation for movement south
      * @param west animation for movement to the west
      */
-    public DirectionAnimatedSprite(Board board, int x, int y, BoundaryPolicy policy,
+    public DirectionAnimatedSprite(Board board, Point startPoint, BoundaryPolicy policy,
                                    AnimatedImage noDirection,
                                    AnimatedImage north,
                                    AnimatedImage east,
                                    AnimatedImage south,
                                    AnimatedImage west) {
 
-        this(board, x, y, policy,
+        this(board, startPoint, policy,
                 noDirection,
                 north,
                 north,

@@ -7,6 +7,7 @@ import de.smits_net.games.framework.sprite.SpriteCollection;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.List;
 import java.util.Random;
 
@@ -59,7 +60,7 @@ public class SpaceWarBoard extends Board {
      * Initialize the game.
      */
     private void init() {
-        craft = new Craft(this, INITIAL_POS_CRAFT_X, INITIAL_POS_CRAFT_Y);
+        craft = new Craft(this, new Point(INITIAL_POS_CRAFT_X, INITIAL_POS_CRAFT_Y));
         addKeyListener(craft);
         addMouseListener(craft);
         Random rnd = new Random();
@@ -67,7 +68,7 @@ public class SpaceWarBoard extends Board {
         for (int i = 0; i < 30; i++) {
             int x = BOARD_WIDTH + rnd.nextInt(BOARD_WIDTH * 5);
             int y = rnd.nextInt(BOARD_HEIGHT - 40);
-            Alien alien = new Alien(this, x,  y);
+            Alien alien = new Alien(this, new Point(x,  y));
             addMouseListener(alien);
             aliens.add(alien);
         }

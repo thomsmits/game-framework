@@ -6,6 +6,7 @@ import de.smits_net.games.framework.image.AnimatedImage;
 import de.smits_net.games.framework.sprite.DirectionAnimatedSprite;
 import de.smits_net.games.framework.sprite.SpriteCollection;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 
 /**
@@ -28,16 +29,18 @@ public class Craft extends DirectionAnimatedSprite {
      * Create a new craft at the given position.
      *
      * @param board the board we are displayed on
-     * @param x x position
-     * @param y y position
+     * @param startPoint start position
      */
-    public Craft(Board board, int x, int y) {
-        super(board, x, y, BoundaryPolicy.STOP,
+    public Craft(Board board, Point startPoint) {
+        super(board, startPoint, BoundaryPolicy.STOP,
                 new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
-                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"), new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
+                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
+                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
                         "craft_2.png",
                         "craft_3.png",
-                        "craft_4.png"), new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"), new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
+                        "craft_4.png"),
+                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
+                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
                         "craft_5.png")
         );
 
@@ -65,7 +68,7 @@ public class Craft extends DirectionAnimatedSprite {
      * Fire a missile.
      */
     public void fire() {
-        missiles.add(new Missile(board, (int)positionX + dimension.width, (int)positionY + dimension.height / 2));
+        missiles.add(new Missile(board, new Point((int)position.x + dimension.width, (int)position.y + dimension.height / 2)));
     }
 
     /**

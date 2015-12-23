@@ -8,6 +8,7 @@ import de.smits_net.games.framework.sprite.SpriteCollection;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class FroggerBoard extends Board {
 
     private void init() {
         backgroundImage = new BackgroundImage(0, ImageBase.loadImage("assets/frogger/background.png"));
-        frog = new Frog(this, 10, 10);
+        frog = new Frog(this, new Point(10, 10));
         addKeyListener(frog);
 
         for (int i = 0; i < START_POS.length; i++) {
@@ -73,7 +74,7 @@ public class FroggerBoard extends Board {
             for (int k = 0; k < pos.length; k++) {
                 int x = pos[k];
 
-                Car car = new Car(this, x, y, carImage, speed);
+                Car car = new Car(this, new Point(x, y), carImage, speed);
                 collection.add(car);
             }
 

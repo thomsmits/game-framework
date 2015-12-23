@@ -7,6 +7,7 @@ import de.smits_net.games.framework.sprite.Sprite;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class DodgerBoard extends Board {
      * Initialize the game.
      */
     private void init() {
-        rabbit = new Rabbit(this, INITIAL_POS_CRAFT_X, INITIAL_POS_CRAFT_Y);
+        rabbit = new Rabbit(this, new Point(INITIAL_POS_CRAFT_X, INITIAL_POS_CRAFT_Y));
         addKeyListener(rabbit);
         background = ImageBase.loadImage("assets/dodger/background.png");
     }
@@ -70,8 +71,9 @@ public class DodgerBoard extends Board {
 
         if (wingmen.size() < MAX_NUMBER_OF_ENEMIES) {
 
-            Sun newWingman = new Sun(this, rnd.nextInt(BOARD_WIDTH - 70), -1 * rnd.nextInt(BOARD_HEIGHT),
-                    1 + rnd.nextInt(2));
+            Point start = new Point(rnd.nextInt(BOARD_WIDTH - 70), -1 * rnd.nextInt(BOARD_HEIGHT));
+
+            Sun newWingman = new Sun(this, start, 1 + rnd.nextInt(2));
 
             if (!newWingman.intersects(wingmen)) {
                 wingmen.add(newWingman);
@@ -79,7 +81,7 @@ public class DodgerBoard extends Board {
         }
 
         for (Sun w : wingmen) {
-            if (w.getY() > BOARD_HEIGHT) {
+            if (w.getPosition().y > BOARD_HEIGHT) {
                 w.setVisible(false);
                 score++;
             }

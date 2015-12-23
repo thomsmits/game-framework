@@ -28,24 +28,22 @@ public abstract class AnimatedSprite extends Sprite {
      * Create a new sprite.
      *
      * @param board our board
-     * @param x x position
-     * @param y y position
+     * @param startPoint start point of the sprite
      * @param animatedImage the animatedImage
      */
-    public AnimatedSprite(Board board, int x, int y, AnimatedImage animatedImage) {
-        this(board, x, y, BoundaryPolicy.STOP, animatedImage);
+    public AnimatedSprite(Board board, Point startPoint, AnimatedImage animatedImage) {
+        this(board, startPoint, BoundaryPolicy.STOP, animatedImage);
     }
 
     /**
      * Create a new sprite.
      *
      * @param board our board
-     * @param x x position
-     * @param y y position
+     * @param startPoint start point of the sprite
      * @param animatedImage the animatedImage
      */
-    public AnimatedSprite(Board board, int x, int y, BoundaryPolicy policy, AnimatedImage animatedImage) {
-        super(board, x, y, policy, animatedImage.getImages());
+    public AnimatedSprite(Board board, Point startPoint, BoundaryPolicy policy, AnimatedImage animatedImage) {
+        super(board, startPoint, policy, animatedImage.getImages());
         this.animatedImage = animatedImage;
     }
 
@@ -70,8 +68,8 @@ public abstract class AnimatedSprite extends Sprite {
 
         this.animatedImage = animatedImage;
 
-        positionX = positionX + offsetX;
-        positionY = positionY + offsetY;
+        position.x = position.x + offsetX;
+        position.y = position.y + offsetY;
     }
 
     /**
@@ -91,7 +89,7 @@ public abstract class AnimatedSprite extends Sprite {
             setVisible(false);
         }
 
-        animatedImage.draw(g, new Point((int)positionX, (int)positionY), observer);
+        animatedImage.draw(g, getPosition(), observer);
 
         if (Constants.DEBUG_SPRITE_OUTLINE) {
             g.setColor(isActive() ? Color.RED : Color.GREEN);

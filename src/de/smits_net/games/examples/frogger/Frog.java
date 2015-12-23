@@ -21,11 +21,10 @@ public class Frog extends Character {
      * Create a new sprite.
      *
      * @param board      our board
-     * @param x          x position
-     * @param y          y position
+     * @param startPoint start position
      */
-    public Frog(Board board, int x, int y) {
-        super(board, FROG_X, FROG_Y, FROG_SPEED, BoundaryPolicy.STOP,
+    public Frog(Board board, Point startPoint) {
+        super(board, new Point(FROG_X, FROG_Y), FROG_SPEED, BoundaryPolicy.STOP,
                 new AnimatedImage(20, "assets/frogger", "frog_u1"),
                 new AnimatedImage(20, "assets/frogger", "frog_l1", "frog_l2"),
                 new AnimatedImage(20, "assets/frogger", "frog_r1", "frog_r2"),
@@ -56,7 +55,7 @@ public class Frog extends Character {
 
         int key = e.getKeyCode();
 
-        Point target = new Point((int)positionX, (int)positionY);
+        Point target = getPosition();
 
         if (key == KeyEvent.VK_LEFT)  { target.translate(-FROG_JUMP,   0); }
         if (key == KeyEvent.VK_RIGHT) { target.translate( FROG_JUMP,   0); }

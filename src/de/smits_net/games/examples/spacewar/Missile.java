@@ -5,6 +5,8 @@ import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.ImagePack;
 import de.smits_net.games.framework.sprite.Sprite;
 
+import java.awt.Point;
+
 /**
  * Sprite of a missile fired by the space craft.
  *
@@ -19,11 +21,10 @@ public class Missile extends Sprite {
      * Create a new missile.
      *
      * @param board the board
-     * @param x x position
-     * @param y y position
+     * @param startPoint point where sprite starts
      */
-    public Missile(Board board, int x, int y) {
-        super(board, x, y, BoundaryPolicy.INVISIBLE,
+    public Missile(Board board, Point startPoint) {
+        super(board, startPoint, BoundaryPolicy.INVISIBLE,
                 new ImagePack("assets/spacewar", "rocket.png"));
 
         setDeltaX(MISSILE_SPEED);
