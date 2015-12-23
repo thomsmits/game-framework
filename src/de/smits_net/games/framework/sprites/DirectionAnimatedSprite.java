@@ -2,6 +2,7 @@
 package de.smits_net.games.framework.sprites;
 
 import de.smits_net.games.framework.board.Board;
+import de.smits_net.games.framework.images.Animation;
 import de.smits_net.games.framework.images.ImagePack;
 
 import java.awt.Graphics;
@@ -15,20 +16,20 @@ import java.awt.image.ImageObserver;
  */
 public class DirectionAnimatedSprite extends AnimatedSprite {
 
-    /** the image that is displayed when moving left */
-    protected ImagePack left;
+    /** the animation that is displayed when moving left */
+    protected Animation left;
 
-    /** the image that is displayed when moving right */
-    protected ImagePack right;
+    /** the animation that is displayed when moving right */
+    protected Animation right;
 
-    /** the image that is displayed when moving up */
-    protected ImagePack up;
+    /** the animation that is displayed when moving up */
+    protected Animation up;
 
-    /** the image that is displayed when moving down */
-    protected ImagePack down;
+    /** the animation that is displayed when moving down */
+    protected Animation down;
 
-    /** the image that is displayed when not moving at all */
-    protected ImagePack noMovement;
+    /** the animation that is displayed when not moving at all */
+    protected Animation noMovement;
 
     /**
      * Create a new sprite.
@@ -44,20 +45,18 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
      * @param noMovement animation for no movement
      */
     public DirectionAnimatedSprite(Board board, int x, int y, BoundaryPolicy policy,
-                                   ImagePack noMovement,
-                                   ImagePack left,
-                                   ImagePack right,
-                                   ImagePack up,
-                                   ImagePack down,
-                                   int time) {
+                                   Animation noMovement,
+                                   Animation left,
+                                   Animation right,
+                                   Animation up,
+                                   Animation down) {
 
-        super(board, x, y, policy, noMovement, 0);
+        super(board, x, y, policy, noMovement);
         this.left = left;
         this.right = right;
         this.up = up;
         this.down = down;
         this.noMovement = noMovement;
-        this.time = time;
     }
 
     /**
@@ -80,19 +79,19 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
         ImagePack directionImages;
 
         if (deltaX > 0) {
-            images = right;
+            animation = right;
         }
         else if (deltaX < 0) {
-            images = left;
+            animation = left;
         }
         else if (deltaY > 0) {
-            images = down;
+            animation = down;
         }
         else if (deltaY < 0) {
-            images = up;
+            animation = up;
         }
         else {
-            images = noMovement;
+            animation = noMovement;
         }
 
         super.draw(g, observer);

@@ -2,6 +2,7 @@
 package de.smits_net.games.examples.spacewar;
 
 import de.smits_net.games.framework.board.Board;
+import de.smits_net.games.framework.images.Animation;
 import de.smits_net.games.framework.images.ImagePack;
 import de.smits_net.games.framework.sprites.DirectionAnimatedSprite;
 import de.smits_net.games.framework.sprites.SpriteCollection;
@@ -33,16 +34,15 @@ public class Craft extends DirectionAnimatedSprite {
      */
     public Craft(Board board, int x, int y) {
         super(board, x, y, BoundaryPolicy.STOP,
-                new ImagePack("assets/spacewar", "craft_1.png"),
-                new ImagePack("assets/spacewar", "craft_1.png",
-                        "craft_5.png"),
-                new ImagePack("assets/spacewar", "craft_1.png",
+                new Animation(new ImagePack("assets/spacewar", "craft_1.png"), ANIMATION_SPEED),
+                new Animation(new ImagePack("assets/spacewar", "craft_1.png",
+                        "craft_5.png"), ANIMATION_SPEED),
+                new Animation(new ImagePack("assets/spacewar", "craft_1.png",
                         "craft_2.png",
                         "craft_3.png",
-                        "craft_4.png"),
-                new ImagePack("assets/spacewar", "craft_1.png"),
-                new ImagePack("assets/spacewar", "craft_1.png"),
-                ANIMATION_SPEED);
+                        "craft_4.png"), ANIMATION_SPEED),
+                new Animation(new ImagePack("assets/spacewar", "craft_1.png"), ANIMATION_SPEED),
+                new Animation(new ImagePack("assets/spacewar", "craft_1.png"), ANIMATION_SPEED));
 
         setBorder(loadPolygonFromFile("assets/spacewar", "craft.poly"));
     }
@@ -75,7 +75,7 @@ public class Craft extends DirectionAnimatedSprite {
      * Let the spaceship explode.
      */
     public void explode() {
-        Explosion ex = new Explosion();
+        Animation ex = new Animation(new Explosion(), ANIMATION_SPEED);
         this.noMovement = ex;
         this.left = ex;
         this.right = ex;
