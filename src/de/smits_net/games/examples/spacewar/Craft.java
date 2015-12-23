@@ -2,7 +2,7 @@
 package de.smits_net.games.examples.spacewar;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.ImageStack;
+import de.smits_net.games.framework.images.ImagePack;
 import de.smits_net.games.framework.sprites.DirectionAnimatedSprite;
 import de.smits_net.games.framework.sprites.SpriteCollection;
 
@@ -33,15 +33,15 @@ public class Craft extends DirectionAnimatedSprite {
      */
     public Craft(Board board, int x, int y) {
         super(board, x, y, BoundaryPolicy.STOP,
-                new ImageStack("assets/spacewar", "craft_1.png"),
-                new ImageStack("assets/spacewar", "craft_1.png",
+                new ImagePack("assets/spacewar", "craft_1.png"),
+                new ImagePack("assets/spacewar", "craft_1.png",
                         "craft_5.png"),
-                new ImageStack("assets/spacewar", "craft_1.png",
+                new ImagePack("assets/spacewar", "craft_1.png",
                         "craft_2.png",
                         "craft_3.png",
                         "craft_4.png"),
-                new ImageStack("assets/spacewar", "craft_1.png"),
-                new ImageStack("assets/spacewar", "craft_1.png"),
+                new ImagePack("assets/spacewar", "craft_1.png"),
+                new ImagePack("assets/spacewar", "craft_1.png"),
                 ANIMATION_SPEED);
 
         setBorder(loadPolygonFromFile("assets/spacewar", "craft.poly"));

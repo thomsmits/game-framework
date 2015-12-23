@@ -12,16 +12,16 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * A stack of images. This class can be used if more than one image has to be
- * transferred.
+ * A pack (collection) of images. This class can be used if more than one image
+ * has to be transferred.
  *
- * The class has one "current" image, which can be received using the
+ * The class has one "current" image, which can be retrieved using the
  * getImage() method. The user can cycle through the images with the
  * cycle() method.
  *
  * @author Thomas Smits
  */
-public class ImageStack extends ImageBase implements Iterable<BufferedImage> {
+public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
 
     /** THe images */
     protected List<BufferedImage> imageList = new ArrayList<>();
@@ -32,7 +32,7 @@ public class ImageStack extends ImageBase implements Iterable<BufferedImage> {
     /**
      * Constructor for internal use.
      */
-    protected ImageStack() {
+    protected ImagePack() {
         // empty
     }
 
@@ -42,7 +42,7 @@ public class ImageStack extends ImageBase implements Iterable<BufferedImage> {
      * @param path path to the image
      * @param fileNames names of the files to be loaded
      */
-    public ImageStack(String path, String... fileNames) {
+    public ImagePack(String path, String... fileNames) {
 
         File base = new File(path);
 

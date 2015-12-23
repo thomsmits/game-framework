@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Thomas Smits
  */
-public class TiledImage extends ImageStack {
+public class TiledImage extends ImagePack {
 
     /** Width of the image */
     private int width;
@@ -79,7 +79,7 @@ public class TiledImage extends ImageStack {
     }
 
     /**
-     * @see de.smits_net.games.framework.images.ImageStack#getWidth()
+     * @see ImagePack#getWidth()
      */
     @Override
     public int getWidth() {
@@ -87,7 +87,7 @@ public class TiledImage extends ImageStack {
     }
 
     /**
-     * @see de.smits_net.games.framework.images.ImageStack#getHeight()
+     * @see ImagePack#getHeight()
      */
     @Override
     public int getHeight() {

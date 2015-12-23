@@ -2,7 +2,7 @@
 package de.smits_net.games.examples.dodger;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.ImageStack;
+import de.smits_net.games.framework.images.ImagePack;
 import de.smits_net.games.framework.sprites.AnimatedSprite;
 
 public class Sun extends AnimatedSprite {
@@ -16,7 +16,7 @@ public class Sun extends AnimatedSprite {
      */
     public Sun(Board board, int x, int y, int speed) {
         super(board, x, y, BoundaryPolicy.NONE,
-                new ImageStack(
+                new ImagePack(
                         "assets/dodger",
                         "sun1.png",
                         "sun2.png"

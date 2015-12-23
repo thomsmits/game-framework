@@ -3,7 +3,7 @@ package de.smits_net.games.framework.sprites;
 
 import de.smits_net.games.framework.Constants;
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.ImageStack;
+import de.smits_net.games.framework.images.ImagePack;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -19,7 +19,7 @@ import java.awt.image.ImageObserver;
 public abstract class AnimatedSprite extends Sprite {
 
     /** the image that is displayed */
-    protected ImageStack images;
+    protected ImagePack images;
 
     /** Time to sleep between two animations */
     protected int time;
@@ -36,7 +36,7 @@ public abstract class AnimatedSprite extends Sprite {
      * @param images the image
      * @param time time to sleep between two animations
      */
-    public AnimatedSprite(Board board, int x, int y, ImageStack images, int time) {
+    public AnimatedSprite(Board board, int x, int y, ImagePack images, int time) {
         this(board, x, y, BoundaryPolicy.STOP, images, time);
     }
 
@@ -49,7 +49,7 @@ public abstract class AnimatedSprite extends Sprite {
      * @param imgs the image(s)
      * @param time time to sleep between two animations
      */
-    public AnimatedSprite(Board board, int x, int y, BoundaryPolicy policy, ImageStack imgs,
+    public AnimatedSprite(Board board, int x, int y, BoundaryPolicy policy, ImagePack imgs,
                           int time) {
 
         super(board, x, y, policy, imgs);
@@ -72,7 +72,7 @@ public abstract class AnimatedSprite extends Sprite {
      *
      * @param imgs the images
      */
-    public void setImages(ImageStack imgs) {
+    public void setImages(ImagePack imgs) {
         setImages(imgs, this.time);
     }
 
@@ -82,7 +82,7 @@ public abstract class AnimatedSprite extends Sprite {
      * @param imgs the images
      * @param time the time
      */
-    public void setImages(ImageStack imgs, int time) {
+    public void setImages(ImagePack imgs, int time) {
 
         int offsetX = (images.getWidth() - imgs.getWidth()) / 2;
         int offsetY = (images.getHeight() - imgs.getHeight()) / 2;

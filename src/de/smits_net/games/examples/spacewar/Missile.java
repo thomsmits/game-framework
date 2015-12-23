@@ -2,7 +2,7 @@
 package de.smits_net.games.examples.spacewar;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.ImageStack;
+import de.smits_net.games.framework.images.ImagePack;
 import de.smits_net.games.framework.sprites.Sprite;
 
 /**
@@ -24,7 +24,7 @@ public class Missile extends Sprite {
      */
     public Missile(Board board, int x, int y) {
         super(board, x, y, BoundaryPolicy.INVISIBLE,
-                new ImageStack("assets/spacewar", "rocket.png"));
+                new ImagePack("assets/spacewar", "rocket.png"));
 
         setDeltaX(MISSILE_SPEED);
     }

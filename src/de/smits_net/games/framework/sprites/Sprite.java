@@ -4,7 +4,7 @@ package de.smits_net.games.framework.sprites;
 import de.smits_net.games.framework.Constants;
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.images.ImageBase;
-import de.smits_net.games.framework.images.ImageStack;
+import de.smits_net.games.framework.images.ImagePack;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -95,7 +95,7 @@ public class Sprite implements KeyListener, MouseListener {
      *      of the board
      * @param image the images
      */
-    public Sprite(Board board, Point position, BoundaryPolicy policy, ImageStack image) {
+    public Sprite(Board board, Point position, BoundaryPolicy policy, ImagePack image) {
         this.board = board;
         this.positionX = position.x;
         this.positionY = position.y;
@@ -124,7 +124,7 @@ public class Sprite implements KeyListener, MouseListener {
      * @param y y position of the sprite
      * @param image the sprite's image
      */
-    public Sprite(Board board, int x, int y, ImageStack image) {
+    public Sprite(Board board, int x, int y, ImagePack image) {
         this(board, new Point(x, y), BoundaryPolicy.STOP, image);
     }
 
@@ -138,7 +138,7 @@ public class Sprite implements KeyListener, MouseListener {
      *      of the board
      * @param image the sprite's image
      */
-    public Sprite(Board board, int x, int y, BoundaryPolicy policy, ImageStack image) {
+    public Sprite(Board board, int x, int y, BoundaryPolicy policy, ImagePack image) {
         this(board, new Point(x, y), policy, image);
     }
 

@@ -2,7 +2,7 @@
 package de.smits_net.games.framework.sprites;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.ImageStack;
+import de.smits_net.games.framework.images.ImagePack;
 
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
@@ -16,19 +16,19 @@ import java.awt.image.ImageObserver;
 public class DirectionAnimatedSprite extends AnimatedSprite {
 
     /** the image that is displayed when moving left */
-    protected ImageStack left;
+    protected ImagePack left;
 
     /** the image that is displayed when moving right */
-    protected ImageStack right;
+    protected ImagePack right;
 
     /** the image that is displayed when moving up */
-    protected ImageStack up;
+    protected ImagePack up;
 
     /** the image that is displayed when moving down */
-    protected ImageStack down;
+    protected ImagePack down;
 
     /** the image that is displayed when not moving at all */
-    protected ImageStack noMovement;
+    protected ImagePack noMovement;
 
     /**
      * Create a new sprite.
@@ -44,11 +44,11 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
      * @param noMovement animation for no movement
      */
     public DirectionAnimatedSprite(Board board, int x, int y, BoundaryPolicy policy,
-                                   ImageStack noMovement,
-                                   ImageStack left,
-                                   ImageStack right,
-                                   ImageStack up,
-                                   ImageStack down,
+                                   ImagePack noMovement,
+                                   ImagePack left,
+                                   ImagePack right,
+                                   ImagePack up,
+                                   ImagePack down,
                                    int time) {
 
         super(board, x, y, policy, noMovement, 0);
@@ -77,7 +77,7 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
             return;
         }
 
-        ImageStack directionImages;
+        ImagePack directionImages;
 
         if (deltaX > 0) {
             images = right;
