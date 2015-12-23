@@ -1,5 +1,5 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.framework.images;
+package de.smits_net.games.framework.image;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -116,7 +116,7 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
     }
 
     /**
-     * @see de.smits_net.games.framework.images.ImageBase#getWidth()
+     * @see de.smits_net.games.framework.image.ImageBase#getWidth()
      */
     @Override
     public int getWidth() {
@@ -124,7 +124,7 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
     }
 
     /**
-     * @see de.smits_net.games.framework.images.ImageBase#getHeight()
+     * @see de.smits_net.games.framework.image.ImageBase#getHeight()
      */
     @Override
     public int getHeight() {
@@ -132,7 +132,7 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
     }
 
     /**
-     * @see de.smits_net.games.framework.images.ImageBase#draw(java.awt.Graphics, java.awt.Point, java.awt.image.ImageObserver)
+     * @see de.smits_net.games.framework.image.ImageBase#draw(java.awt.Graphics, java.awt.Point, java.awt.image.ImageObserver)
      */
     @Override
     public void draw(Graphics g, Point position, ImageObserver observer) {

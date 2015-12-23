@@ -1,5 +1,5 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.framework.images;
+package de.smits_net.games.framework.image;
 
 import de.smits_net.games.framework.Constants;
 

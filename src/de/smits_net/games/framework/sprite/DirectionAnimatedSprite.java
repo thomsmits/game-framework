@@ -1,9 +1,9 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.framework.sprites;
+package de.smits_net.games.framework.sprite;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.AnimatedImage;
-import de.smits_net.games.framework.images.ImagePack;
+import de.smits_net.games.framework.image.AnimatedImage;
+import de.smits_net.games.framework.image.ImagePack;
 
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;

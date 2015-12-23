@@ -2,8 +2,8 @@
 package de.smits_net.games.examples.spacewar;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.sprites.Sprite;
-import de.smits_net.games.framework.sprites.SpriteCollection;
+import de.smits_net.games.framework.sprite.Sprite;
+import de.smits_net.games.framework.sprite.SpriteCollection;
 
 import java.awt.Color;
 import java.awt.Graphics;

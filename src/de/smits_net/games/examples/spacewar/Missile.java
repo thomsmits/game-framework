@@ -2,8 +2,8 @@
 package de.smits_net.games.examples.spacewar;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.ImagePack;
-import de.smits_net.games.framework.sprites.Sprite;
+import de.smits_net.games.framework.image.ImagePack;
+import de.smits_net.games.framework.sprite.Sprite;
 
 /**
  * Sprite of a missile fired by the space craft.

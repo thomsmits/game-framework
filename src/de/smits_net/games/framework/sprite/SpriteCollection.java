@@ -1,5 +1,5 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.framework.sprites;
+package de.smits_net.games.framework.sprite;
 
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;

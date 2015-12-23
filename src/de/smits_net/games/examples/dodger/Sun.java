@@ -2,8 +2,8 @@
 package de.smits_net.games.examples.dodger;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.AnimatedImage;
-import de.smits_net.games.framework.sprites.AnimatedSprite;
+import de.smits_net.games.framework.image.AnimatedImage;
+import de.smits_net.games.framework.sprite.AnimatedSprite;
 
 public class Sun extends AnimatedSprite {
 

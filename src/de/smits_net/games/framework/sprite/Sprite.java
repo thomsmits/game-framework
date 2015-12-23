@@ -1,10 +1,10 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.framework.sprites;
+package de.smits_net.games.framework.sprite;
 
 import de.smits_net.games.framework.Constants;
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.ImageBase;
-import de.smits_net.games.framework.images.ImagePack;
+import de.smits_net.games.framework.image.ImageBase;
+import de.smits_net.games.framework.image.ImagePack;
 
 import java.awt.Color;
 import java.awt.Dimension;

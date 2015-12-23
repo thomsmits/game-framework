@@ -1,7 +1,7 @@
 /* (c) 2015 Thomas Smits */
 package de.smits_net.games.examples.spacewar;
 
-import de.smits_net.games.framework.images.StripedImage;
+import de.smits_net.games.framework.image.StripedImage;
 
 /**
  * Sprite for an explosion.

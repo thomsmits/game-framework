@@ -2,8 +2,8 @@
 package de.smits_net.games.examples.dodger;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.ImageBase;
-import de.smits_net.games.framework.sprites.Sprite;
+import de.smits_net.games.framework.image.ImageBase;
+import de.smits_net.games.framework.sprite.Sprite;
 
 import java.awt.Color;
 import java.awt.Graphics;

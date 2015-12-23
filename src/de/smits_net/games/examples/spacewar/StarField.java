@@ -1,7 +1,7 @@
 /* (c) 2015 Thomas Smits */
 package de.smits_net.games.examples.spacewar;
 
-import de.smits_net.games.framework.images.BackgroundImage;
+import de.smits_net.games.framework.image.BackgroundImage;
 
 import java.awt.Color;
 import java.awt.Graphics;
