@@ -11,13 +11,28 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import static java.awt.event.KeyEvent.KEY_PRESSED;
+import static java.awt.event.KeyEvent.KEY_RELEASED;
+import static java.awt.event.KeyEvent.KEY_TYPED;
+import static java.awt.event.MouseEvent.MOUSE_CLICKED;
+import static java.awt.event.MouseEvent.MOUSE_ENTERED;
+import static java.awt.event.MouseEvent.MOUSE_EXITED;
+import static java.awt.event.MouseEvent.MOUSE_PRESSED;
+import static java.awt.event.MouseEvent.MOUSE_RELEASED;
 
 /**
  * Base class for the game board. This class starts the game thread.
  *
  * @author Thomas Smits
  */
-public abstract class Board extends JPanel implements Runnable {
+public abstract class Board extends JPanel implements Runnable, KeyListener, MouseListener {
 
     /** Number of updates without sleep before a yield is triggered */
     private static final int NO_DELAYS_PER_YIELD = 16;
@@ -52,6 +67,18 @@ public abstract class Board extends JPanel implements Runnable {
     /** Timestamp of the last update of the debug line */
     private long lastDebugUpdate;
 
+    /** The captured mouse events */
+    private List<MouseEvent> mouseEvents = new CopyOnWriteArrayList<>();
+
+    /** The captured key events for typed keys */
+    private List<KeyEvent> keyEvents = new CopyOnWriteArrayList<>();
+
+    /** All game elements that want to get key events */
+    private List<KeyListener> keyListener = new CopyOnWriteArrayList<>();
+
+    /** All game elements that want to get mouse events */
+    private List<MouseListener> mouseListener = new CopyOnWriteArrayList<>();
+
     /**
      * Create a new board.
      *
@@ -75,6 +102,8 @@ public abstract class Board extends JPanel implements Runnable {
         this.delay = delay * Constants.NANOSECONDS_PER_MILLISECOND;
         this.backgroundColor = color;
         this.dimension = dimension;
+        super.addKeyListener(this);
+        super.addMouseListener(this);
 
         setFocusable(true);
         setBackground(color);
@@ -106,6 +135,7 @@ public abstract class Board extends JPanel implements Runnable {
     public Dimension getDimension() {
         return dimension;
     }
+
     /**
      * Stops the game.
      */
@@ -127,6 +157,16 @@ public abstract class Board extends JPanel implements Runnable {
      * periodically by the framework to draw the game graphics.
      */
     public abstract void drawGame(Graphics g);
+
+    @Override
+    public synchronized void addKeyListener(KeyListener l) {
+        keyListener.add(l);
+    }
+
+    @Override
+    public synchronized void addMouseListener(MouseListener l) {
+        mouseListener.add(l);
+    }
 
     /**
      * Prepare the graphics context and then call the render methods.
@@ -265,6 +305,55 @@ public abstract class Board extends JPanel implements Runnable {
             // correction of sleep time
             long sleepCorrection = 0L;
 
+            // The listeners will be called by the AWT thread with the
+            // consequence that events occur in parallel to the game
+            // loop. This requires some synchronization because otherwise
+            // strange ConcurrentModificationExceptions or other thread
+            // issues will occur. To avoid this, gobble all the events
+            // with this class and then dispatch them synchronously to
+            // the other game elements.
+            KeyEvent keyEvent;
+
+            while ((keyEvent = fetchEvent(keyEvents)) != null) {
+                for (KeyListener l : keyListener)  {
+                    switch (keyEvent.getID()) {
+                        case KEY_PRESSED:
+                            l.keyPressed(keyEvent);
+                            break;
+                        case KEY_RELEASED:
+                            l.keyReleased(keyEvent);
+                            break;
+                        case KEY_TYPED:
+                            l.keyTyped(keyEvent);
+                            break;
+                    }
+                }
+            }
+
+            MouseEvent mouseEvent;
+
+            while ((mouseEvent = fetchEvent(mouseEvents)) != null) {
+                for (MouseListener l : mouseListener)  {
+                    switch (mouseEvent.getID()) {
+                        case MOUSE_PRESSED:
+                            l.mousePressed(mouseEvent);
+                            break;
+                        case MOUSE_RELEASED:
+                            l.mouseReleased(mouseEvent);
+                            break;
+                        case MOUSE_CLICKED:
+                            l.mouseClicked(mouseEvent);
+                            break;
+                        case MOUSE_ENTERED:
+                            l.mouseEntered(mouseEvent);
+                            break;
+                        case MOUSE_EXITED:
+                            l.mouseExited(mouseEvent);
+                            break;
+                    }
+                }
+            }
+
             // execute the game actions
             gameRunning = updateGame();
             triggerRendering();
@@ -322,5 +411,77 @@ public abstract class Board extends JPanel implements Runnable {
         // game over information
         triggerRendering();
         paintScreen();
+    }
+
+    /**
+     * Fetch the pending events.
+     *
+     * @return the event or {@code null} if no events are present
+     */
+    private <T> T fetchEvent(List<T> eventList) {
+
+        if (eventList.size() > 0) {
+            T e = eventList.get(0);
+            eventList.remove(0);
+            return e;
+        }
+
+        return null;
+    }
+
+    /**
+     * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+     */
+    public void keyTyped(KeyEvent e) {
+        keyEvents.add(e);
+    }
+
+    /**
+     * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+     */
+    public void keyPressed(KeyEvent e) {
+        keyEvents.add(e);
+    }
+
+    /**
+     * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+     */
+    public void keyReleased(KeyEvent e) {
+        keyEvents.add(e);
+    }
+
+    /**
+     * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+     */
+    public void mouseClicked(MouseEvent e) {
+        mouseEvents.add(e);
+    }
+
+    /**
+     * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+     */
+    public void mousePressed(MouseEvent e) {
+        mouseEvents.add(e);
+    }
+
+    /**
+     * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+     */
+    public void mouseReleased(MouseEvent e) {
+        mouseEvents.add(e);
+    }
+
+    /**
+     * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+     */
+    public void mouseEntered(MouseEvent e) {
+        mouseEvents.add(e);
+    }
+
+    /**
+     * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+     */
+    public void mouseExited(MouseEvent e) {
+        mouseEvents.add(e);
     }
 }

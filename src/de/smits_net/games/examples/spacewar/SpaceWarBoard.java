@@ -78,7 +78,7 @@ public class SpaceWarBoard extends Board {
      * @see SpaceWarBoard#drawBackground(Graphics)
      */
     @Override
-    protected synchronized void drawBackground(Graphics g) {
+    protected void drawBackground(Graphics g) {
        starField1.draw(g, null);
        starField1.move();
        starField2.draw(g, null);
