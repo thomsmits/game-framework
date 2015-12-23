@@ -31,6 +31,10 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
     /** Image currently displayed, used for cycling through the images */
     protected int currentImage = 0;
 
+    /** If set to true the cycling will go around forever, if set
+     * to false. it stops with the last image */
+    boolean wrapAround = true;
+
     /**
      * Constructor for internal use.
      */
@@ -68,6 +72,15 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
     }
 
     /**
+     * Sets the wrap behavior.
+     *
+     * @param wrapAround if set to {@code true} (default), the images loop
+     *                   forever.
+     */
+    void setWrapAround(boolean wrapAround) {
+        this.wrapAround = wrapAround;
+    }
+    /**
      * Adds an image to the stack.
      *
      * @param img the image.
@@ -85,7 +98,7 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
         currentImage++;
 
         if (currentImage >= imageList.size()) {
-            currentImage = 0;
+            currentImage = wrapAround ? 0 : imageList.size() - 1;
         }
 
         return getImage();

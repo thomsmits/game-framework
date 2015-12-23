@@ -41,11 +41,11 @@ public class FroggerBoard extends Board {
     private String[] cars = { "car_4", "car_2", "car_1", "car_3", "lorry"};
 
     private static final int[][] START_POS = {
-            { 10, 150, 200, 300 },
-            { 10, 150, 200, 300 },
-            { 10, 150, 200, 300 },
-            { 10, 150, 200, 300 },
-            { 30, 180, 230, 380, 500, 550 }
+            { 10, 200, 360, 500, 600 },
+            { 10, 200, 360, 500, 600 },
+            { 110, 300, 460, 600 },
+            { 110, 400, 700 },
+            { 10, 400, 600 }
     };
 
     private static final int[] START_Y = { 385, 356, 327, 298, 269 };
@@ -87,7 +87,15 @@ public class FroggerBoard extends Board {
     public boolean updateGame() {
         frog.move();
         lanes.forEach(SpriteCollection::move);
-        return true;
+
+        // check collisions of the frog
+        for (SpriteCollection<Car> lane : lanes) {
+            if (lane.intersects(frog)) {
+                frog.die();
+            }
+        }
+
+        return frog.isVisible();
     }
 
     @Override
@@ -98,7 +106,7 @@ public class FroggerBoard extends Board {
 
     @Override
     protected void drawGameOver(Graphics g) {
-
+        centerText(g, "Game over");
     }
 
     @Override

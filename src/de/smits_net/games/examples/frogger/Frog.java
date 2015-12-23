@@ -4,6 +4,7 @@ package de.smits_net.games.examples.frogger;
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.character.Character;
 import de.smits_net.games.framework.image.AnimatedImage;
+import de.smits_net.games.framework.image.NonCyclingAnimatedImage;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -38,6 +39,19 @@ public class Frog extends Character {
         bounds = new Rectangle(0, 0, board.getWidth(), FROG_Y + animatedImage.getDimension().height);
     }
 
+    /**
+     * Let the frog die.
+     */
+    public void die() {
+        setInvisibleAfterFrames(300);
+
+        AnimatedImage deadFrog = new NonCyclingAnimatedImage(200, "assets/frogger",
+                "dead_1", "dead_2", "dead_3", "dead_4");
+
+        setAllMovementAnimations(deadFrog);
+        setAllNoMovementAnimations(deadFrog);
+        setActive(false);
+    }
 
     boolean keyDown = false;
 
@@ -49,7 +63,13 @@ public class Frog extends Character {
     @Override
     public void keyPressed(KeyEvent e) {
 
+        if (!isActive()) {
+            // don't move dead frogs
+            return;
+        }
+
         if (keyDown) {
+            // key needs to be released
             return;
         }
 

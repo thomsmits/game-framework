@@ -33,4 +33,22 @@ public class SpriteCollection<T extends Sprite> extends ArrayList<T> {
     public void move() {
         forEach(Sprite::move);
     }
+
+    /**
+     * Checks whether any of the sprites in this collection intersects
+     * with the given sprite.
+     *
+     * @param sp sprite to check
+     * @return {@code true} if intersects, otherwise {@code false}
+     */
+    public boolean intersects(Sprite sp) {
+
+        for (T t : this) {
+            if (t.isActive() && sp.isActive() && t.intersects(sp)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
