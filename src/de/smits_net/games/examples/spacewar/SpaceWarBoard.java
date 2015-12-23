@@ -102,7 +102,7 @@ public class SpaceWarBoard extends Board {
      * @see SpaceWarBoard#drawGameOver(Graphics)
      */
     @Override
-    protected synchronized void drawGameOver(Graphics g) {
+    protected void drawGameOver(Graphics g) {
         centerText(g, "Game Over");
     }
 
@@ -137,7 +137,7 @@ public class SpaceWarBoard extends Board {
     /**
      * Update the missiles.
      */
-    private synchronized void updateMissiles() {
+    private void updateMissiles() {
         SpriteCollection<Missile> ms = craft.getMissiles();
         ms.forEach(Sprite::move);
         ms.removeIfInvisble();
@@ -146,7 +146,7 @@ public class SpaceWarBoard extends Board {
     /**
      * Update the aliens.
      */
-    private synchronized void updateAliens() {
+    private void updateAliens() {
         aliens.forEach(Sprite::move);
         aliens.removeIf(a -> !a.isVisible());
     }
@@ -154,7 +154,7 @@ public class SpaceWarBoard extends Board {
     /**
      * Check for collisions.
      */
-    public synchronized void handleCollisions() {
+    public void handleCollisions() {
 
         for (Alien alien : aliens) {
             if (craft.intersects(alien) && alien.isActive()) {

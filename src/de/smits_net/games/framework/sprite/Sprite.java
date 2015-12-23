@@ -30,9 +30,6 @@ import java.util.List;
  */
 public class Sprite implements KeyListener, MouseListener {
 
-    /** Border of the sprite (for collision detection) */
-    private Polygon border = new Polygon();
-
     /**
      * How to handle sprites that reach the boundaries of the borard.
      */
@@ -49,6 +46,10 @@ public class Sprite implements KeyListener, MouseListener {
         /** Do nothing. */
         NONE;
     }
+
+
+    /** Border of the sprite (for collision detection) */
+    private Polygon border = new Polygon();
 
     /** position in X direction*/
     protected double positionX;
@@ -375,7 +376,13 @@ public class Sprite implements KeyListener, MouseListener {
         positionX = positionX + dx;
         positionY = positionY + dy;
 
-        Point position = new Point((int)positionX, (int)positionY);
+        ensureBoundaryPolicy();
+    }
+
+    /**
+     * Ensure that the boundary policy of the sprite is obeyed.
+     */
+    protected void ensureBoundaryPolicy() {
 
         if (policy == BoundaryPolicy.STOP) {
             if (positionX < lowerBounds.x) {

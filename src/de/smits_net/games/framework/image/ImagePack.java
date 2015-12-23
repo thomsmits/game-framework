@@ -8,12 +8,13 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 /**
  * A pack (collection) of images. This class can be used if more than one image
- * has to be transferred.
+ * has to be transferred. It can also contain only one image.
  *
  * The class has one "current" image, which can be retrieved using the
  * getImage() method. The user can cycle through the images with the
@@ -57,6 +58,15 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
     }
 
     /**
+     * Creates a new set of images.
+     *
+     * @param images to be stored
+     */
+    public ImagePack(BufferedImage... images) {
+        Collections.addAll(imageList, images);
+    }
+
+    /**
      * Adds an image to the stack.
      *
      * @param img the image.
@@ -85,7 +95,7 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
      *
      * @return the current image.
      */
-    public Image getImage() {
+    public BufferedImage getImage() {
         return imageList.get(currentImage);
     }
 
@@ -95,7 +105,7 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
      * @param index position of the image
      * @return the image at the position.
      */
-    public Image getImage(int index) {
+    public BufferedImage getImage(int index) {
         return imageList.get(index);
     }
 

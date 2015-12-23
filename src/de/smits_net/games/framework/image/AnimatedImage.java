@@ -5,6 +5,7 @@ import de.smits_net.games.framework.Constants;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 /**
@@ -77,6 +78,27 @@ public class AnimatedImage extends ImageBase {
      */
     public ImagePack getImages() {
         return images;
+    }
+
+
+    /**
+     * Returns an animation that contains the images from this animation
+     * starting with picture {@code start} (inclusive) up to picture
+     * {@code end} (exclusive).
+     *
+     * @param start index of the first picture of the animation
+     * @param end index of the last picture (exclusive) of the animation
+     * @return a new animation with the selected images
+     */
+    public AnimatedImage getSubAnimation(int start, int end) {
+
+        BufferedImage[] buffer = new BufferedImage[end - start];
+
+        for (int i = start, k = 0; i < end; i++, k++) {
+            buffer[k] = images.getImage(i);
+        }
+
+        return new AnimatedImage(time, new ImagePack(buffer));
     }
 
     /**

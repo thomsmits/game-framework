@@ -34,14 +34,12 @@ public class Craft extends DirectionAnimatedSprite {
     public Craft(Board board, int x, int y) {
         super(board, x, y, BoundaryPolicy.STOP,
                 new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
-                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
-                        "craft_5.png"),
-                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
+                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"), new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
                         "craft_2.png",
                         "craft_3.png",
-                        "craft_4.png"),
-                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
-                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"));
+                        "craft_4.png"), new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"), new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
+                        "craft_5.png")
+        );
 
         setBorder(loadPolygonFromFile("assets/spacewar", "craft.poly"));
     }
@@ -75,11 +73,7 @@ public class Craft extends DirectionAnimatedSprite {
      */
     public void explode() {
         AnimatedImage ex = new AnimatedImage(ANIMATION_SPEED, new Explosion());
-        this.noMovement = ex;
-        this.left = ex;
-        this.right = ex;
-        this.up = ex;
-        this.down = ex;
+        setAllMovementAnimations(ex);
         setInvisibleAfterFrames(30);
         setActive(false);
     }
