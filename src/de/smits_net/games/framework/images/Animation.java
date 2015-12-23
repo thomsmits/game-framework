@@ -28,12 +28,36 @@ public class Animation extends ImageBase {
     /**
      * Creates a new animation object.
      *
-     * @param images the images comprising the animation
      * @param time the time one image is shown in milliseconds
+     * @param images the images comprising the animation
      */
-    public Animation(ImagePack images, int time) {
+    public Animation(int time, ImagePack images) {
         this.images = images;
         this.time = time;
+    }
+
+    /**
+     * Convenience constructor that creates the image pack for the
+     * caller to make usage easier.
+     *
+     * @param time the time one image is shown in milliseconds
+     * @param path path to the image
+     * @param fileNames names of the files to be loaded
+     */
+    public Animation(int time, String path, String... fileNames) {
+        this(time, new ImagePack(path, fileNames));
+    }
+
+    /**
+     * Convenience constructor that creates the striped image for the
+     * caller to make usage easier.
+     *
+     * @param time the time one image is shown in milliseconds
+     * @param number the number of elements
+     * @param imageFilePath the striped image
+     */
+    public Animation(int time, int number, String imageFilePath) {
+        this(time, new StripedImage(imageFilePath, number));
     }
 
     @Override

@@ -3,7 +3,6 @@ package de.smits_net.games.examples.spacewar;
 
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.images.Animation;
-import de.smits_net.games.framework.images.StripedImage;
 import de.smits_net.games.framework.sprites.AnimatedSprite;
 
 /**
@@ -25,8 +24,7 @@ public class Alien extends AnimatedSprite {
      */
     public Alien(Board board, int x, int y) {
         super(board, x, y, BoundaryPolicy.NONE,
-                new Animation(new StripedImage(
-                "assets/spacewar/spike_fist_move_strip5.png", 5), 50));
+                new Animation(50, 5, "assets/spacewar/spike_fist_move_strip5.png"));
         setDeltaX(ALIEN_SPEED);
     }
 
@@ -35,7 +33,7 @@ public class Alien extends AnimatedSprite {
      */
     public void explode() {
         setActive(false);
-        setImages(new Animation(new Explosion(), 20));
+        setImages(new Animation(20, new Explosion()));
         setInvisibleAfterFrames(30);
     }
 
