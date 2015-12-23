@@ -67,6 +67,7 @@ public class Character extends DirectionAnimatedSprite {
 
         Point newTarget = (Point)(target.clone());
 
+        // ensure that we do not move outside the bounds
         if (newTarget.x < bounds.x) {
             newTarget.x = bounds.x;
         }
@@ -83,47 +84,54 @@ public class Character extends DirectionAnimatedSprite {
             newTarget.y = bounds.y + bounds.height;
         }
 
-        System.out.printf("Target: %s%n", newTarget);
         this.target = newTarget;
     }
 
     @Override
     public void move() {
 
+        // distance to the new point
         double distanceX = Math.round(target.x - position.x);
         double distanceY = Math.round(target.y - position.y);
 
         if (Math.abs(distanceX) < 0.1 && Math.abs(distanceY) < 0.1 ) {
+            // are we already there?
             return;
         }
 
+        // angle between the current position and the target
         double alpha = Math.atan(distanceY / distanceX);
 
         if (Math.abs(alpha) < 0.01) {
+            // it is a horizontal movement
             velocity.x = speed * Math.signum(distanceX);
             velocity.y = 0.0;
         }
         else {
+            // some diagonal or vertical movement
             velocity.x = Math.cos(alpha) * speed;
             velocity.y = Math.sin(alpha) * speed;
         }
 
+        // calculate distance (squared)
         double lengthSpeedVector = velocity.x*velocity.x + velocity.y*velocity.y;
         double lengthDistance = distanceX*distanceX + distanceY*distanceY;
 
         if (lengthDistance < lengthSpeedVector) {
+            // we would reach the target with the given speed vector
+            // in one step. To avoid overshooting, jump to the target
             velocity.x = 0;
             velocity.y = 0;
             position.x = target.x;
             position.y = target.y;
         }
         else {
+            // get nearer the target with the given speed vector
             position.x += velocity.x;
             position.y += velocity.y;
         }
 
-        System.out.printf("direction=%s, alpha=%f, distanceX=%f, distanceY=%f, deltaX=%f, deltaY=%f%n", currentDirection, alpha, distanceX, distanceY, velocity.x, velocity.y);
-
+        // ensure that we stay inside our boundaries
         ensureBoundaryPolicy();
     }
 }
