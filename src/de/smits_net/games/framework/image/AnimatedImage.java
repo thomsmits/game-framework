@@ -28,14 +28,29 @@ public class AnimatedImage extends ImageBase {
     protected ImagePack images;
 
     /**
-     * Creates a new animatedImage object.
+     * Creates a new object. The animation will cycle infinitely through
+     * the provided images.
      *
      * @param time the time one image is shown in milliseconds
      * @param images the images comprising the animatedImage
      */
     public AnimatedImage(int time, ImagePack images) {
+        this(time, true, images);
+    }
+
+    /**
+     * Creates a new animatedImage object.
+     *
+     * @param time the time one image is shown in milliseconds
+     * @param wrapAround if set to {@code true} the animation cycles infinitely
+     *                   through the images. If set to {@code false} it stops at
+     *                   the last image.
+     * @param images the images comprising the animatedImage
+     */
+    public AnimatedImage(int time, boolean wrapAround, ImagePack images) {
         this.images = images;
         this.time = time;
+        images.setWrapAround(wrapAround);
     }
 
     /**
@@ -48,6 +63,21 @@ public class AnimatedImage extends ImageBase {
      */
     public AnimatedImage(int time, String path, String... fileNames) {
         this(time, new ImagePack(path, fileNames));
+    }
+
+    /**
+     * Convenience constructor that creates the image pack for the
+     * caller to make usage easier.
+     *
+     * @param time the time one image is shown in milliseconds
+     * @param wrapAround if set to {@code true} the animation cycles infinitely
+     *                   through the images. If set to {@code false} it stops at
+     *                   the last image.
+     * @param path path to the image
+     * @param fileNames names of the files to be loaded
+     */
+    public AnimatedImage(int time, boolean wrapAround, String path, String... fileNames) {
+        this(time, wrapAround, new ImagePack(path, fileNames));
     }
 
     /**

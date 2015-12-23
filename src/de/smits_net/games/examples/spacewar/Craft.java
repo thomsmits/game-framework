@@ -22,6 +22,24 @@ public class Craft extends DirectionAnimatedSprite {
     /** Speed of the animatedImage */
     private static final int ANIMATION_SPEED = 10;
 
+    /** Image for the craft without thrusters.*/
+    private static AnimatedImage CRAFT_NOT_MOVING =
+            new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png");
+
+    /** Image for the craft accelerating forward */
+    private static AnimatedImage CRAFT_ACCELERATING_FORWARD =
+            new AnimatedImage(ANIMATION_SPEED, "assets/spacewar",
+                    "craft_1.png",
+                    "craft_2.png",
+                    "craft_3.png",
+                    "craft_4.png");
+
+    /** Image for the craft accelerating backward */
+    private static AnimatedImage CRAFT_ACCELERATING_BACKWARD =
+            new AnimatedImage(ANIMATION_SPEED, "assets/spacewar",
+                    "craft_1.png",
+                    "craft_5.png");
+
     /** Missiles fired */
     private SpriteCollection<Missile> missiles = new SpriteCollection<>();
 
@@ -33,15 +51,11 @@ public class Craft extends DirectionAnimatedSprite {
      */
     public Craft(Board board, Point startPoint) {
         super(board, startPoint, BoundaryPolicy.STOP,
-                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
-                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
-                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
-                        "craft_2.png",
-                        "craft_3.png",
-                        "craft_4.png"),
-                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
-                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
-                        "craft_5.png")
+                CRAFT_NOT_MOVING,
+                CRAFT_NOT_MOVING,
+                CRAFT_ACCELERATING_FORWARD,
+                CRAFT_NOT_MOVING,
+                CRAFT_ACCELERATING_BACKWARD
         );
 
         setBorder(loadPolygonFromFile("assets/spacewar", "craft.poly"));
@@ -75,20 +89,17 @@ public class Craft extends DirectionAnimatedSprite {
      * Let the spaceship explode.
      */
     public void explode() {
-        AnimatedImage ex = new AnimatedImage(ANIMATION_SPEED, new Explosion());
+        AnimatedImage ex = new AnimatedImage(ANIMATION_SPEED, false, new Explosion());
         setAllMovementAnimations(ex);
         setInvisibleAfterFrames(30);
         setActive(false);
     }
 
-    /**
-     * Intercept key pressing.
-     *
-     * @param e the event.
-     */
     @Override
     public void keyPressed(KeyEvent e) {
 
+        // Accelerate the space ship depending on the
+        // pressed key
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_SPACE) { fire(); }
@@ -98,14 +109,10 @@ public class Craft extends DirectionAnimatedSprite {
         if (key == KeyEvent.VK_DOWN)  { velocity.y = CRAFT_SPEED; }
     }
 
-    /**
-     * Intercept key releasing.
-     *
-     * @param e the event.
-     */
     @Override
     public void keyReleased(KeyEvent e) {
 
+        // If key is released, stop spaceship motor
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT)  { velocity.x = 0; }

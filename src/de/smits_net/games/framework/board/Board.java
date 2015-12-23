@@ -294,6 +294,9 @@ public abstract class Board extends JPanel implements Runnable, KeyListener, Mou
         // Time we slipped over the expected FPS
         long excess = 0L;
 
+        // correction of sleep time
+        long sleepCorrection = 0L;
+
         // The approach used here is taken from the book
         // Killer Game Programming in Java by Andrew Davison
         // O’Reilly Media, 2005
@@ -302,16 +305,13 @@ public abstract class Board extends JPanel implements Runnable, KeyListener, Mou
             // time before game actions
             long beforeTime = System.nanoTime();
 
-            // correction of sleep time
-            long sleepCorrection = 0L;
-
             // The listeners will be called by the AWT thread with the
             // consequence that events occur in parallel to the game
             // loop. This requires some synchronization because otherwise
             // strange ConcurrentModificationExceptions or other thread
-            // issues will occur. To avoid this, gobble all the events
+            // issues will occur. To avoid this, I gobble all the events
             // with this class and then dispatch them synchronously to
-            // the other game elements.
+            // the other game elements here.
             KeyEvent keyEvent;
 
             while ((keyEvent = fetchEvent(keyEvents)) != null) {

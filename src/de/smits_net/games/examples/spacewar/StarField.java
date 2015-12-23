@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import java.util.Random;
 
 /**
- *
+ * Background star field for the space shooter.
  *
  * @author Thomas Smits
  */
