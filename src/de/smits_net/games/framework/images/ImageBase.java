@@ -53,22 +53,24 @@ public abstract class ImageBase {
 
         BufferedImage img = imageCache.get(file.getAbsolutePath());
 
+        File fileToLad = file;
+
         if (img == null) {
             try {
 
-                if (!file.exists()) {
-                    file = new File(file.getPath() + ".png");
+                if (!fileToLad.exists()) {
+                    fileToLad = new File(file.getPath() + ".png");
                 }
 
-                if (!file.exists()) {
-                    file = new File(file.getPath() + ".gif");
+                if (!fileToLad.exists()) {
+                    fileToLad = new File(file.getPath() + ".gif");
                 }
 
-                if (!file.exists()) {
-                    file = new File(file.getPath() + ".jpg");
+                if (!fileToLad.exists()) {
+                    fileToLad = new File(file.getPath() + ".jpg");
                 }
 
-                img = ImageIO.read(file);
+                img = ImageIO.read(fileToLad);
                 int transparency = img.getColorModel().getTransparency();
 
                 // create an image especially suitable for the graphics
