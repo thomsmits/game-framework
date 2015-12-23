@@ -90,8 +90,8 @@ public class Character extends DirectionAnimatedSprite {
     @Override
     public void move() {
 
-        double distanceX = target.x - position.x;
-        double distanceY = target.y - position.y;
+        double distanceX = Math.round(target.x - position.x);
+        double distanceY = Math.round(target.y - position.y);
 
         if (Math.abs(distanceX) < 0.1 && Math.abs(distanceY) < 0.1 ) {
             return;

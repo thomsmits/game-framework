@@ -311,18 +311,22 @@ public class Sprite implements KeyListener, MouseListener {
         if (policy == BoundaryPolicy.STOP) {
             if (position.x < bounds.x) {
                 position.x = bounds.x;
+                velocity.x = 0;
             }
 
             if (position.y < bounds.y) {
                 position.y = bounds.y;
+                velocity.y = 0;
             }
 
             if (position.x > bounds.x + bounds.width - dimension.width) {
                 position.x = bounds.x + bounds.width - dimension.width;
+                velocity.x = 0;
             }
 
             if (position.y > bounds.y + bounds.height - dimension.height) {
                 position.y = bounds.y + bounds.height - dimension.height;
+                velocity.y = 0;
             }
         }
         else if (policy == BoundaryPolicy.JUMP_BACK) {
