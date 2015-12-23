@@ -45,7 +45,7 @@ public class Sprite implements KeyListener, MouseListener {
         JUMP_BACK,
 
         /** Do nothing. */
-        NONE;
+        NONE
     }
 
     /** Border of the sprite (for collision detection) */

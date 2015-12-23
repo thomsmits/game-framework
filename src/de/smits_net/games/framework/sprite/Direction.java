@@ -22,7 +22,7 @@ public enum Direction {
     /** Component in y direction */
     private double y;
 
-    private Direction(double x, double y) {
+    Direction(double x, double y) {
         this.x = x;
         this.y = y;
     }
