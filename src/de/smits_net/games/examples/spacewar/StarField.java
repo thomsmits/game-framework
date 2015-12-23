@@ -1,7 +1,7 @@
 /* (c) 2015 Thomas Smits */
 package de.smits_net.games.examples.spacewar;
 
-import de.smits_net.games.framework.images.Background;
+import de.smits_net.games.framework.images.BackgroundImage;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,7 +12,7 @@ import java.util.Random;
  *
  * @author Thomas Smits
  */
-public class StarField extends Background {
+public class StarField extends BackgroundImage {
 
     private Random rnd = new Random();
 

@@ -2,7 +2,7 @@
 package de.smits_net.games.examples.spacewar;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.Animation;
+import de.smits_net.games.framework.images.AnimatedImage;
 import de.smits_net.games.framework.sprites.DirectionAnimatedSprite;
 import de.smits_net.games.framework.sprites.SpriteCollection;
 
@@ -18,7 +18,7 @@ public class Craft extends DirectionAnimatedSprite {
     /** Speed of the space craft */
     private static final int CRAFT_SPEED = 2;
 
-    /** Speed of the animation */
+    /** Speed of the animatedImage */
     private static final int ANIMATION_SPEED = 10;
 
     /** Missiles fired */
@@ -33,15 +33,15 @@ public class Craft extends DirectionAnimatedSprite {
      */
     public Craft(Board board, int x, int y) {
         super(board, x, y, BoundaryPolicy.STOP,
-                new Animation(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
-                new Animation(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
+                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
+                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
                         "craft_5.png"),
-                new Animation(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
+                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png",
                         "craft_2.png",
                         "craft_3.png",
                         "craft_4.png"),
-                new Animation(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
-                new Animation(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"));
+                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"),
+                new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png"));
 
         setBorder(loadPolygonFromFile("assets/spacewar", "craft.poly"));
     }
@@ -74,7 +74,7 @@ public class Craft extends DirectionAnimatedSprite {
      * Let the spaceship explode.
      */
     public void explode() {
-        Animation ex = new Animation(ANIMATION_SPEED, new Explosion());
+        AnimatedImage ex = new AnimatedImage(ANIMATION_SPEED, new Explosion());
         this.noMovement = ex;
         this.left = ex;
         this.right = ex;

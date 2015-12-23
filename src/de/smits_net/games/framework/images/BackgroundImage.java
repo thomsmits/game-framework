@@ -10,7 +10,7 @@ import java.awt.image.ImageObserver;
  *
  * @author Thomas Smits
  */
-public class Background {
+public class BackgroundImage {
 
     /** Current scroll position */
     private double scroll;
@@ -28,7 +28,7 @@ public class Background {
      * @param width width of the image
      * @param height height of the image
      */
-    public Background(double speed, int width, int height) {
+    public BackgroundImage(double speed, int width, int height) {
         background = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         this.speed = speed;
     }
@@ -38,7 +38,7 @@ public class Background {
      *
      * @param speed speed of the scroll operation
      */
-    public Background(double speed, BufferedImage image) {
+    public BackgroundImage(double speed, BufferedImage image) {
         background = image;
         this.speed = speed;
     }

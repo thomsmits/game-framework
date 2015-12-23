@@ -3,7 +3,7 @@ package de.smits_net.games.framework.sprites;
 
 import de.smits_net.games.framework.Constants;
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.Animation;
+import de.smits_net.games.framework.images.AnimatedImage;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -19,7 +19,7 @@ import java.awt.image.ImageObserver;
 public abstract class AnimatedSprite extends Sprite {
 
     /** the image that is displayed */
-    protected Animation animation;
+    protected AnimatedImage animatedImage;
 
     /** Hide the sprite after the given number of frames */
     protected int invisibleAfterFrames = -1;
@@ -30,10 +30,10 @@ public abstract class AnimatedSprite extends Sprite {
      * @param board our board
      * @param x x position
      * @param y y position
-     * @param animation the animation
+     * @param animatedImage the animatedImage
      */
-    public AnimatedSprite(Board board, int x, int y, Animation animation) {
-        this(board, x, y, BoundaryPolicy.STOP, animation);
+    public AnimatedSprite(Board board, int x, int y, AnimatedImage animatedImage) {
+        this(board, x, y, BoundaryPolicy.STOP, animatedImage);
     }
 
     /**
@@ -42,11 +42,11 @@ public abstract class AnimatedSprite extends Sprite {
      * @param board our board
      * @param x x position
      * @param y y position
-     * @param animation the animation
+     * @param animatedImage the animatedImage
      */
-    public AnimatedSprite(Board board, int x, int y, BoundaryPolicy policy, Animation animation) {
-        super(board, x, y, policy, animation.getImages());
-        this.animation = animation;
+    public AnimatedSprite(Board board, int x, int y, BoundaryPolicy policy, AnimatedImage animatedImage) {
+        super(board, x, y, policy, animatedImage.getImages());
+        this.animatedImage = animatedImage;
     }
 
     /**
@@ -59,16 +59,16 @@ public abstract class AnimatedSprite extends Sprite {
     }
 
     /**
-     * Set the animation.
+     * Set the animatedImage.
      *
-     * @param animation the new animation
+     * @param animatedImage the new animatedImage
      */
-    public void setImages(Animation animation) {
+    public void setImages(AnimatedImage animatedImage) {
 
-        int offsetX = (animation.getWidth() - animation.getWidth()) / 2;
-        int offsetY = (animation.getHeight() - animation.getHeight()) / 2;
+        int offsetX = (animatedImage.getWidth() - animatedImage.getWidth()) / 2;
+        int offsetY = (animatedImage.getHeight() - animatedImage.getHeight()) / 2;
 
-        this.animation = animation;
+        this.animatedImage = animatedImage;
 
         positionX = positionX + offsetX;
         positionY = positionY + offsetY;
@@ -91,7 +91,7 @@ public abstract class AnimatedSprite extends Sprite {
             setVisible(false);
         }
 
-        animation.draw(g, new Point((int)positionX, (int)positionY), observer);
+        animatedImage.draw(g, new Point((int)positionX, (int)positionY), observer);
 
         if (Constants.DEBUG_SPRITE_OUTLINE) {
             g.setColor(isActive() ? Color.RED : Color.GREEN);

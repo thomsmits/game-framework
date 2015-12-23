@@ -8,13 +8,13 @@ import java.awt.Point;
 import java.awt.image.ImageObserver;
 
 /**
- * A set of images that form an animation. The difference
+ * A set of images that form an animatedImage. The difference
  * to the {@see ImagePack} is that the class automatically
  * tracks the time that passed since the last draw call and
- * changes the image automatically if the requested animation
+ * changes the image automatically if the requested animatedImage
  * time has passed.
  */
-public class Animation extends ImageBase {
+public class AnimatedImage extends ImageBase {
 
     /** Last change of the sprite */
     protected long lastRun = System.nanoTime();
@@ -22,16 +22,16 @@ public class Animation extends ImageBase {
     /** Time between two frames in milliseconds */
     protected int time;
 
-    /** The images comprising the animation */
+    /** The images comprising the animatedImage */
     protected ImagePack images;
 
     /**
-     * Creates a new animation object.
+     * Creates a new animatedImage object.
      *
      * @param time the time one image is shown in milliseconds
-     * @param images the images comprising the animation
+     * @param images the images comprising the animatedImage
      */
-    public Animation(int time, ImagePack images) {
+    public AnimatedImage(int time, ImagePack images) {
         this.images = images;
         this.time = time;
     }
@@ -44,7 +44,7 @@ public class Animation extends ImageBase {
      * @param path path to the image
      * @param fileNames names of the files to be loaded
      */
-    public Animation(int time, String path, String... fileNames) {
+    public AnimatedImage(int time, String path, String... fileNames) {
         this(time, new ImagePack(path, fileNames));
     }
 
@@ -56,7 +56,7 @@ public class Animation extends ImageBase {
      * @param number the number of elements
      * @param imageFilePath the striped image
      */
-    public Animation(int time, int number, String imageFilePath) {
+    public AnimatedImage(int time, int number, String imageFilePath) {
         this(time, new StripedImage(imageFilePath, number));
     }
 
@@ -71,7 +71,7 @@ public class Animation extends ImageBase {
     }
 
     /**
-     * Returns the images comprising the animation.
+     * Returns the images comprising the animatedImage.
      *
      * @return the images
      */

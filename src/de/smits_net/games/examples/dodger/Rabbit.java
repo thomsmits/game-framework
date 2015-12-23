@@ -2,7 +2,7 @@
 package de.smits_net.games.examples.dodger;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.Animation;
+import de.smits_net.games.framework.images.AnimatedImage;
 import de.smits_net.games.framework.sprites.DirectionAnimatedSprite;
 
 import java.awt.event.KeyEvent;
@@ -20,17 +20,17 @@ public class Rabbit extends DirectionAnimatedSprite {
      */
     public Rabbit(Board board, int x, int y) {
         super(board, x, y, BoundaryPolicy.STOP,
-                new Animation(100, "assets/dodger", "bunny1_ready.png"),
-                new Animation(100, "assets/dodger", "bunny1_walk1_left.png",
+                new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"),
+                new AnimatedImage(100, "assets/dodger", "bunny1_walk1_left.png",
                         "bunny1_walk2_left.png"),
-                new Animation(100, "assets/dodger", "bunny1_walk1_right.png",
+                new AnimatedImage(100, "assets/dodger", "bunny1_walk1_right.png",
                         "bunny1_walk2_right.png"),
-                new Animation(100, "assets/dodger", "bunny1_ready.png"),
-                new Animation(100, "assets/dodger", "bunny1_ready.png"));
+                new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"),
+                new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"));
     }
 
     public void hit() {
-        Animation brokenRabbit = new Animation(100, "assets/dodger", "bunny1_hurt.png");
+        AnimatedImage brokenRabbit = new AnimatedImage(100, "assets/dodger", "bunny1_hurt.png");
         this.noMovement = brokenRabbit;
         this.left = brokenRabbit;
         this.right = brokenRabbit;

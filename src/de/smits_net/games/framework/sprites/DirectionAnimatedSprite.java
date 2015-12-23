@@ -2,7 +2,7 @@
 package de.smits_net.games.framework.sprites;
 
 import de.smits_net.games.framework.board.Board;
-import de.smits_net.games.framework.images.Animation;
+import de.smits_net.games.framework.images.AnimatedImage;
 import de.smits_net.games.framework.images.ImagePack;
 
 import java.awt.Graphics;
@@ -16,20 +16,20 @@ import java.awt.image.ImageObserver;
  */
 public class DirectionAnimatedSprite extends AnimatedSprite {
 
-    /** the animation that is displayed when moving left */
-    protected Animation left;
+    /** the animatedImage that is displayed when moving left */
+    protected AnimatedImage left;
 
-    /** the animation that is displayed when moving right */
-    protected Animation right;
+    /** the animatedImage that is displayed when moving right */
+    protected AnimatedImage right;
 
-    /** the animation that is displayed when moving up */
-    protected Animation up;
+    /** the animatedImage that is displayed when moving up */
+    protected AnimatedImage up;
 
-    /** the animation that is displayed when moving down */
-    protected Animation down;
+    /** the animatedImage that is displayed when moving down */
+    protected AnimatedImage down;
 
-    /** the animation that is displayed when not moving at all */
-    protected Animation noMovement;
+    /** the animatedImage that is displayed when not moving at all */
+    protected AnimatedImage noMovement;
 
     /**
      * Create a new sprite.
@@ -38,18 +38,18 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
      * @param x x position
      * @param y y position
      * @param policy policy used when sprite reaches
-     * @param left animation for movement to the left
-     * @param right animation for movement to the right
-     * @param up animation for movement up
-     * @param down animation for movement down
-     * @param noMovement animation for no movement
+     * @param left animatedImage for movement to the left
+     * @param right animatedImage for movement to the right
+     * @param up animatedImage for movement up
+     * @param down animatedImage for movement down
+     * @param noMovement animatedImage for no movement
      */
     public DirectionAnimatedSprite(Board board, int x, int y, BoundaryPolicy policy,
-                                   Animation noMovement,
-                                   Animation left,
-                                   Animation right,
-                                   Animation up,
-                                   Animation down) {
+                                   AnimatedImage noMovement,
+                                   AnimatedImage left,
+                                   AnimatedImage right,
+                                   AnimatedImage up,
+                                   AnimatedImage down) {
 
         super(board, x, y, policy, noMovement);
         this.left = left;
@@ -79,19 +79,19 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
         ImagePack directionImages;
 
         if (deltaX > 0) {
-            animation = right;
+            animatedImage = right;
         }
         else if (deltaX < 0) {
-            animation = left;
+            animatedImage = left;
         }
         else if (deltaY > 0) {
-            animation = down;
+            animatedImage = down;
         }
         else if (deltaY < 0) {
-            animation = up;
+            animatedImage = up;
         }
         else {
-            animation = noMovement;
+            animatedImage = noMovement;
         }
 
         super.draw(g, observer);
