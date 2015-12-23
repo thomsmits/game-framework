@@ -241,48 +241,16 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
             return;
         }
 
-        // to avoid rounding errors in the double values, we
-        // are converting them to integers
-        long dX = Math.round(deltaX * 100);
-        long dY = Math.round(deltaY * 100);
+        Map<Direction, AnimatedImage> mapToUse;
 
-        Map<Direction, AnimatedImage> mapToUse = movementAnimations;
+        Direction direction = velocity.direction();
 
-        if (dX > 0) {
-
-            if (dY > 0) {
-                currentDirection = SOUTHEAST;
-            }
-            else if (dY < 0) {
-                currentDirection = NORTHEAST;
-            }
-            else { // dY == 0
-                currentDirection = EAST;
-            }
+        if (direction == NONE) {
+            mapToUse = noMovementAnimations;
         }
-        else if (dX < 0) {
-
-            if (dY > 0) {
-                currentDirection = SOUTHWEST;
-            }
-            else if (dY < 0) {
-                currentDirection = SOUTHEAST;
-            }
-            else { // dY == 0
-                currentDirection = WEST;
-            }
-        }
-        else { // dX == 0
-
-            if (dY > 0) {
-                currentDirection = SOUTH;
-            }
-            else if (dY < 0) {
-                currentDirection = NORTH;
-            }
-            else { // dY == 0
-                mapToUse = noMovementAnimations;
-            }
+        else {
+            mapToUse = movementAnimations;
+            currentDirection = direction;
         }
 
         animatedImage = mapToUse.get(currentDirection);

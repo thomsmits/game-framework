@@ -4,6 +4,7 @@ package de.smits_net.games.examples.dodger;
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.AnimatedImage;
 import de.smits_net.games.framework.sprite.AnimatedSprite;
+import de.smits_net.games.framework.sprite.Direction;
 
 import java.awt.Point;
 
@@ -22,7 +23,7 @@ public class Sun extends AnimatedSprite {
                         "sun2.png"
                 ));
 
-        setDeltaY(speed);
+        velocity.setVelocity(Direction.SOUTH, speed);
     }
 
 }

@@ -100,31 +100,30 @@ public class Character extends DirectionAnimatedSprite {
         double alpha = Math.atan(distanceY / distanceX);
 
         if (Math.abs(alpha) < 0.01) {
-            deltaX = speed * Math.signum(distanceX);
-            deltaY = 0.0;
+            velocity.x = speed * Math.signum(distanceX);
+            velocity.y = 0.0;
         }
         else {
-            deltaX = Math.cos(alpha) * speed;
-            deltaY = Math.sin(alpha) * speed;
+            velocity.x = Math.cos(alpha) * speed;
+            velocity.y = Math.sin(alpha) * speed;
         }
 
-        double lengthSpeedVector = deltaX*deltaX + deltaY*deltaY;
+        double lengthSpeedVector = velocity.x*velocity.x + velocity.y*velocity.y;
         double lengthDistance = distanceX*distanceX + distanceY*distanceY;
 
         if (lengthDistance < lengthSpeedVector) {
-            deltaX = 0;
-            deltaY = 0;
+            velocity.x = 0;
+            velocity.y = 0;
             position.x = target.x;
             position.y = target.y;
         }
         else {
-            position.x += deltaX;
-            position.y += deltaY;
+            position.x += velocity.x;
+            position.y += velocity.y;
         }
 
-        System.out.printf("direction=%s, alpha=%f, distanceX=%f, distanceY=%f, deltaX=%f, deltaY=%f%n", currentDirection, alpha, distanceX, distanceY, deltaX, deltaY);
+        System.out.printf("direction=%s, alpha=%f, distanceX=%f, distanceY=%f, deltaX=%f, deltaY=%f%n", currentDirection, alpha, distanceX, distanceY, velocity.x, velocity.y);
 
         ensureBoundaryPolicy();
-
     }
 }

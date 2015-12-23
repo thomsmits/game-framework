@@ -4,6 +4,7 @@ package de.smits_net.games.examples.spacewar;
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.AnimatedImage;
 import de.smits_net.games.framework.sprite.AnimatedSprite;
+import de.smits_net.games.framework.sprite.Direction;
 
 import java.awt.Point;
 
@@ -15,7 +16,7 @@ import java.awt.Point;
 public class Alien extends AnimatedSprite {
 
     /** speed of the alien in x direction */
-    private static final int ALIEN_SPEED = -1;
+    private static final int ALIEN_SPEED = 1;
 
     /**
      * Create a new alien.
@@ -26,7 +27,7 @@ public class Alien extends AnimatedSprite {
     public Alien(Board board, Point startPoint) {
         super(board, startPoint, BoundaryPolicy.NONE,
                 new AnimatedImage(50, 5, "assets/spacewar/spike_fist_move_strip5.png"));
-        setDeltaX(ALIEN_SPEED);
+        velocity.setVelocity(Direction.WEST, ALIEN_SPEED);
     }
 
     /**

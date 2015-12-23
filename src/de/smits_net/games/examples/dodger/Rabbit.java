@@ -45,8 +45,8 @@ public class Rabbit extends DirectionAnimatedSprite {
         int key = e.getKeyCode();
 
         //if (key == KeyEvent.VK_SPACE) { fire(); }
-        if (key == KeyEvent.VK_LEFT)  { deltaX = -RABBIT_SPEED; }
-        if (key == KeyEvent.VK_RIGHT) { deltaX = RABBIT_SPEED; }
+        if (key == KeyEvent.VK_LEFT)  { velocity.x = -RABBIT_SPEED; }
+        if (key == KeyEvent.VK_RIGHT) { velocity.x = RABBIT_SPEED; }
     }
 
     /**
@@ -59,7 +59,7 @@ public class Rabbit extends DirectionAnimatedSprite {
 
         int key = e.getKeyCode();
 
-        if (key == KeyEvent.VK_LEFT)  { deltaX = 0; }
-        if (key == KeyEvent.VK_RIGHT) { deltaX = 0; }
+        if (key == KeyEvent.VK_LEFT)  { velocity.x = 0; }
+        if (key == KeyEvent.VK_RIGHT) { velocity.x = 0; }
     }
 }

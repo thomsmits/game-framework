@@ -92,10 +92,10 @@ public class Craft extends DirectionAnimatedSprite {
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_SPACE) { fire(); }
-        if (key == KeyEvent.VK_LEFT)  { deltaX = -CRAFT_SPEED; }
-        if (key == KeyEvent.VK_RIGHT) { deltaX = CRAFT_SPEED; }
-        if (key == KeyEvent.VK_UP)    { deltaY = -CRAFT_SPEED; }
-        if (key == KeyEvent.VK_DOWN)  { deltaY = CRAFT_SPEED; }
+        if (key == KeyEvent.VK_LEFT)  { velocity.x = -CRAFT_SPEED; }
+        if (key == KeyEvent.VK_RIGHT) { velocity.x = CRAFT_SPEED; }
+        if (key == KeyEvent.VK_UP)    { velocity.y = -CRAFT_SPEED; }
+        if (key == KeyEvent.VK_DOWN)  { velocity.y = CRAFT_SPEED; }
     }
 
     /**
@@ -108,9 +108,9 @@ public class Craft extends DirectionAnimatedSprite {
 
         int key = e.getKeyCode();
 
-        if (key == KeyEvent.VK_LEFT)  { deltaX = 0; }
-        if (key == KeyEvent.VK_RIGHT) { deltaX = 0; }
-        if (key == KeyEvent.VK_UP)    { deltaY = 0; }
-        if (key == KeyEvent.VK_DOWN)  { deltaY = 0; }
+        if (key == KeyEvent.VK_LEFT)  { velocity.x = 0; }
+        if (key == KeyEvent.VK_RIGHT) { velocity.x = 0; }
+        if (key == KeyEvent.VK_UP)    { velocity.y = 0; }
+        if (key == KeyEvent.VK_DOWN)  { velocity.y = 0; }
     }
 }

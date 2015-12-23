@@ -69,11 +69,8 @@ public class Sprite implements KeyListener, MouseListener {
     /** what happens when the sprite hits the boundaries */
     protected BoundaryPolicy policy;
 
-    /** velocity in x direction */
-    protected double deltaX;
-
-    /** velocity in y direction */
-    protected double deltaY;
+    /** velocity of the sprite */
+    protected Velocity velocity = new Velocity();
 
     /** the game board */
     protected Board board;
@@ -119,51 +116,34 @@ public class Sprite implements KeyListener, MouseListener {
      * Move the sprite according to the defined speed.
      */
     public void move() {
-        move(deltaX, deltaY);
+        move(velocity);
+    }
+
+
+    /**
+     * Set the velocity of the sprite.
+     *
+     * @param velocity velocity
+     */
+    public void setVelocity(Velocity velocity) {
+        this.velocity = velocity;
     }
 
     /**
-     * Set the speed in x direction.
+     * Get the velocity of the sprite.
      *
-     * @param deltaX speed in x direction
+     * @return velocity.
      */
-    public void setDeltaX(double deltaX) {
-        this.deltaX = deltaX;
-    }
-
-    /**
-     * Set the speed in y direction.
-     *
-     * @param deltaY speed in y direction
-     */
-    public void setDeltaY(double deltaY) {
-        this.deltaY = deltaY;
-    }
-
-    /**
-     * Get the speed in y direction.
-     *
-     * @return speed in y direction.
-     */
-    public double getDeltaY() {
-        return deltaY;
-    }
-
-    /**
-     * Get the speed in x direction.
-     *
-     * @return speed in x direction.
-     */
-    public double getDeltaX() {
-        return deltaX;
+    public Velocity getVelocity() {
+        return velocity;
     }
 
     /**
      * Stop the movement of the sprite.
      */
     public void stop() {
-        deltaX = 0.0;
-        deltaY = 0.0;
+        velocity.x = 0.0;
+        velocity.y = 0.0;
     }
 
     /**
@@ -313,13 +293,12 @@ public class Sprite implements KeyListener, MouseListener {
     /**
      * Moves the sprite.
      *
-     * @param dx delta in x direction
-     * @param dy delta in y direction
+     * @param velocity delta
      */
-    public void move(double dx, double dy) {
+    public void move(Velocity velocity) {
 
-        position.x = position.x + dx;
-        position.y = position.y + dy;
+        position.x = position.x + velocity.x;
+        position.y = position.y + velocity.y;
 
         ensureBoundaryPolicy();
     }

@@ -4,6 +4,7 @@ package de.smits_net.games.examples.spacewar;
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.ImagePack;
 import de.smits_net.games.framework.sprite.Sprite;
+import de.smits_net.games.framework.sprite.Velocity;
 
 import java.awt.Point;
 
@@ -27,6 +28,6 @@ public class Missile extends Sprite {
         super(board, startPoint, BoundaryPolicy.INVISIBLE,
                 new ImagePack("assets/spacewar", "rocket.png"));
 
-        setDeltaX(MISSILE_SPEED);
+        setVelocity(new Velocity(MISSILE_SPEED, 0));
     }
 }
