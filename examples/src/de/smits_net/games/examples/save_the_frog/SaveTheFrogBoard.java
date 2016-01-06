@@ -80,13 +80,10 @@ public class SaveTheFrogBoard extends Board {
 
             String carImage = CARS[i];
 
-            for (int k = 0; k < pos.length; k++) {
-                int x = pos[k];
-
+            for (int x : pos) {
                 Car car = new Car(this, new Point(x, y), carImage, speed);
                 collection.add(car);
             }
-
 
             lanes.add(collection);
         }
