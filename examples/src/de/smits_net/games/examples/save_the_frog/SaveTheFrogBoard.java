@@ -1,5 +1,5 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.examples.frogger;
+package de.smits_net.games.examples.save_the_frog;
 
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.BackgroundImage;
@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Board of the frogger game.
+ * Board of the save the frog game.
  */
-public class FroggerBoard extends Board {
+public class SaveTheFrogBoard extends Board {
 
     /** Width of the board. */
     private static final int BOARD_WIDTH = 320;
@@ -57,7 +57,7 @@ public class FroggerBoard extends Board {
     /**
      * Create a new board.
      */
-    public FroggerBoard() {
+    public SaveTheFrogBoard() {
         super(DELAY, BOARD_WIDTH, BOARD_HEIGHT, Color.BLACK);
         init();
     }
@@ -67,7 +67,7 @@ public class FroggerBoard extends Board {
      */
     private void init() {
         backgroundImage = new BackgroundImage(0,
-                ImageBase.loadImage("assets/frogger/background.png"));
+                ImageBase.loadImage("assets/save_the_frog/background.png"));
         frog = new Frog(this, new Point(10, 10));
         addKeyListener(frog);
 

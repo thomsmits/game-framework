@@ -12,7 +12,7 @@ To test and improve the framework, some sample games are also included in this r
 
   * SpaceWars: A side scrolling space shooter
   * Dodger: A rabbit has to avoid the falling suns
-  * Frogger: Safely bring the frog to the other side
+  * Save the frog: Safely bring the frog to the other side
 
 The games are neither complete nor are all elements of the original game included. They are just tests for the framework and examples for the students. The games are improved together with the framework.
 

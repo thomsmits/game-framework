@@ -1,20 +1,20 @@
 /* (c) 2015 Thomas Smits */
-package de.smits_net.games.examples.frogger;
+package de.smits_net.games.examples.save_the_frog;
 
 import de.smits_net.games.framework.board.MainWindow;
 
 import java.awt.EventQueue;
 
 /**
- * Main window of the Frogger game.
+ * Main window of the Save the Frog game.
  */
-public class FroggerMain extends MainWindow {
+public class SaveTheFrogMain extends MainWindow {
 
     /**
      * Create a new window.
      */
-    public FroggerMain() {
-        super("Reach the other side", new FroggerBoard());
+    public SaveTheFrogMain() {
+        super("Reach the other side", new SaveTheFrogBoard());
     }
 
     /**
@@ -23,6 +23,6 @@ public class FroggerMain extends MainWindow {
      * @param args command line arguments.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(FroggerMain::new);
+        EventQueue.invokeLater(SaveTheFrogMain::new);
     }
 }
