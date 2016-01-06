@@ -18,18 +18,22 @@ import java.util.Random;
  */
 public class DodgerBoard extends Board {
 
-    /** Width of the board */
+    /** Width of the board. */
     private static final int BOARD_WIDTH = 1024;
 
-    /** Height of the board */
+    /** Height of the board. */
     private static final int BOARD_HEIGHT = 800;
 
-    /** Delay between frames in milli seconds */
+    /** Delay between frames in milli seconds. */
     private static final int DELAY = 10;
-    private static final int INITIAL_POS_CRAFT_X = BOARD_WIDTH / 2;
 
-    private static final int INITIAL_POS_CRAFT_Y = BOARD_HEIGHT - 200;
+    /** Initial x position of the figure on the board. */
+    private static final int INITIAL_POS_RABBIT_X = BOARD_WIDTH / 2;
 
+    /** Initial x position of the figure on the board. */
+    private static final int INITIAL_POS_RABBIT_Y = BOARD_HEIGHT - 200;
+
+    /** Maximum number of enemies on the board. */
     private static final int MAX_NUMBER_OF_ENEMIES = 10;
 
     private int score;
@@ -54,7 +58,8 @@ public class DodgerBoard extends Board {
      * Initialize the game.
      */
     private void init() {
-        rabbit = new Rabbit(this, new Point(INITIAL_POS_CRAFT_X, INITIAL_POS_CRAFT_Y));
+        rabbit = new Rabbit(this,
+                new Point(INITIAL_POS_RABBIT_X, INITIAL_POS_RABBIT_Y));
         addKeyListener(rabbit);
         background = ImageBase.loadImage("assets/dodger/background.png");
     }
@@ -71,7 +76,8 @@ public class DodgerBoard extends Board {
 
         if (wingmen.size() < MAX_NUMBER_OF_ENEMIES) {
 
-            Point start = new Point(rnd.nextInt(BOARD_WIDTH - 70), -1 * rnd.nextInt(BOARD_HEIGHT));
+            Point start = new Point(rnd.nextInt(BOARD_WIDTH - 70),
+                    -1 * rnd.nextInt(BOARD_HEIGHT));
 
             Sun newWingman = new Sun(this, start, 1 + rnd.nextInt(2));
 

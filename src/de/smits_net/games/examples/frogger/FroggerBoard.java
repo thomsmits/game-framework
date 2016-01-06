@@ -17,48 +17,57 @@ import java.util.List;
  */
 public class FroggerBoard extends Board {
 
-    /** Width of the board */
+    /** Width of the board. */
     private static final int BOARD_WIDTH = 320;
 
-    /** Height of the board */
+    /** Height of the board. */
     private static final int BOARD_HEIGHT = 480;
 
-    /** Delay between frames in milli seconds */
+    /** Delay between frames in milli seconds. */
     private static final int DELAY = 20;
 
-    private static final int LANE1_Y = 385;
-    private static final int LANE2_Y = 356;
-    private static final int LANE3_Y = 327;
-    private static final int LANE4_Y = 298;
-    private static final int LANE5_Y = 269;
-
+    /** Background image. */
     private BackgroundImage backgroundImage;
 
+    /** The frog. */
     private Frog frog;
 
+    /** The cars. */
     private List<SpriteCollection<Car>> lanes = new ArrayList<>();
 
-    private String[] cars = { "car_4", "car_2", "car_1", "car_3", "lorry"};
+    /** The cars. */
+    private static final String[] CARS = {
+            "car_4", "car_2", "car_1", "car_3", "lorry"};
 
+    /** x positions of the cars. */
     private static final int[][] START_POS = {
-            { 10, 200, 360, 500, 600 },
-            { 10, 200, 360, 500, 600 },
-            { 110, 300, 460, 600 },
-            { 110, 400, 700 },
-            { 10, 400, 600 }
+            {10, 200, 360, 500, 600},
+            {10, 200, 360, 500, 600},
+            {110, 300, 460, 600},
+            {110, 400, 700},
+            {10, 400, 600}
     };
 
-    private static final int[] START_Y = { 385, 356, 327, 298, 269 };
+    /** y positions of the cars. */
+    private static final int[] START_Y = {385, 356, 327, 298, 269};
 
-    private static final double[] SPEED = { -1.0, 1.0, -1.5, 1.0, -1.5 };
+    /** Speed of the cars in the different lanes. */
+    private static final double[] SPEED = {-1.0, 1.0, -1.5, 1.0, -1.5};
 
+    /**
+     * Create a new board.
+     */
     public FroggerBoard() {
         super(DELAY, BOARD_WIDTH, BOARD_HEIGHT, Color.BLACK);
         init();
     }
 
+    /**
+     * Initialize the board.
+     */
     private void init() {
-        backgroundImage = new BackgroundImage(0, ImageBase.loadImage("assets/frogger/background.png"));
+        backgroundImage = new BackgroundImage(0,
+                ImageBase.loadImage("assets/frogger/background.png"));
         frog = new Frog(this, new Point(10, 10));
         addKeyListener(frog);
 
@@ -69,7 +78,7 @@ public class FroggerBoard extends Board {
 
             SpriteCollection<Car> collection = new SpriteCollection<>();
 
-            String carImage = cars[i];
+            String carImage = CARS[i];
 
             for (int k = 0; k < pos.length; k++) {
                 int x = pos[k];

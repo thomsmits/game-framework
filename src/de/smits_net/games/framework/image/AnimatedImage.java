@@ -18,13 +18,13 @@ import java.awt.image.ImageObserver;
  */
 public class AnimatedImage extends ImageBase {
 
-    /** Last change of the sprite */
+    /** Last change of the sprite. */
     protected long lastRun = System.nanoTime();
 
-    /** Time between two frames in milliseconds */
+    /** Time between two frames in milliseconds. */
     protected int time;
 
-    /** The images comprising the animatedImage */
+    /** The images comprising the animatedImage. */
     protected ImagePack images;
 
     /**
@@ -76,7 +76,8 @@ public class AnimatedImage extends ImageBase {
      * @param path path to the image
      * @param fileNames names of the files to be loaded
      */
-    public AnimatedImage(int time, boolean wrapAround, String path, String... fileNames) {
+    public AnimatedImage(int time, boolean wrapAround,
+                         String path, String... fileNames) {
         this(time, wrapAround, new ImagePack(path, fileNames));
     }
 
@@ -138,7 +139,8 @@ public class AnimatedImage extends ImageBase {
     @Override
     public void draw(Graphics g, Point position, ImageObserver observer) {
 
-        long timePassed = (System.nanoTime() - lastRun) / Constants.NANOSECONDS_PER_MILLISECOND;
+        long timePassed = (System.nanoTime() - lastRun)
+                / Constants.NANOSECONDS_PER_MILLISECOND;
 
         if (timePassed > time) {
             images.cycle();

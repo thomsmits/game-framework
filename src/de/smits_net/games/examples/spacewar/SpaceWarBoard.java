@@ -18,34 +18,37 @@ import java.util.Random;
  */
 public class SpaceWarBoard extends Board {
 
-    /** Start x position of the craft */
+    /** Start x position of the craft. */
     private static final int INITIAL_POS_CRAFT_X = 40;
 
-    /** Start y position of the craft */
+    /** Start y position of the craft. */
     private static final int INITIAL_POS_CRAFT_Y = 60;
 
-    /** Width of the board */
+    /** Width of the board. */
     private static final int BOARD_WIDTH = 800;
 
-    /** Height of the board */
+    /** Height of the board. */
     private static final int BOARD_HEIGHT = 400;
 
-    /** Delay between frames in milli seconds */
+    /** Delay between frames in milli seconds. */
     private static final int DELAY = 10;
 
-    /** The background */
-    private StarField starField1 = new StarField(-0.5, BOARD_WIDTH, BOARD_HEIGHT, Color.WHITE, 0.001);
+    /** The background. */
+    private StarField starField1 = new StarField(
+            -0.5, BOARD_WIDTH, BOARD_HEIGHT, Color.WHITE, 0.001);
 
-    /** The background */
-    private StarField starField2 = new StarField(-0.5, BOARD_WIDTH, BOARD_HEIGHT, Color.GRAY, 0.001);
+    /** The background. */
+    private StarField starField2 = new StarField(
+            -0.5, BOARD_WIDTH, BOARD_HEIGHT, Color.GRAY, 0.001);
 
-    /** The background */
-    private StarField starField3 = new StarField(-0.3, BOARD_WIDTH, BOARD_HEIGHT, Color.DARK_GRAY, 0.001);
+    /** The background. */
+    private StarField starField3 = new StarField(
+            -0.3, BOARD_WIDTH, BOARD_HEIGHT, Color.DARK_GRAY, 0.001);
 
-    /** Space craft */
+    /** Space craft. */
     private Craft craft;
 
-    /** Enemies */
+    /** Enemies. */
     private SpriteCollection<Alien> aliens = new SpriteCollection<>();
 
     /**
@@ -60,7 +63,8 @@ public class SpaceWarBoard extends Board {
      * Initialize the game.
      */
     private void init() {
-        craft = new Craft(this, new Point(INITIAL_POS_CRAFT_X, INITIAL_POS_CRAFT_Y));
+        craft = new Craft(this, new Point(
+                INITIAL_POS_CRAFT_X, INITIAL_POS_CRAFT_Y));
         addKeyListener(craft);
         addMouseListener(craft);
         Random rnd = new Random();
@@ -79,12 +83,12 @@ public class SpaceWarBoard extends Board {
      */
     @Override
     protected void drawBackground(Graphics g) {
-       starField1.draw(g, null);
-       starField1.move();
-       starField2.draw(g, null);
-       starField2.move();
-       starField3.draw(g, null);
-       starField3.move();
+        starField1.draw(g, null);
+        starField1.move();
+        starField2.draw(g, null);
+        starField2.move();
+        starField3.draw(g, null);
+        starField3.move();
     }
 
     /**

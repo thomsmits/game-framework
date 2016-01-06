@@ -15,7 +15,7 @@ import java.awt.Point;
  */
 public class Alien extends AnimatedSprite {
 
-    /** speed of the alien in x direction */
+    /** speed of the alien in x direction. */
     private static final int ALIEN_SPEED = 1;
 
     /**
@@ -26,7 +26,8 @@ public class Alien extends AnimatedSprite {
      */
     public Alien(Board board, Point startPoint) {
         super(board, startPoint, BoundaryPolicy.NONE,
-                new AnimatedImage(50, 5, "assets/spacewar/spike_fist_move_strip5.png"));
+                new AnimatedImage(50, 5,
+                        "assets/spacewar/spike_fist_move_strip5.png"));
         velocity.setVelocity(Direction.WEST, ALIEN_SPEED);
     }
 

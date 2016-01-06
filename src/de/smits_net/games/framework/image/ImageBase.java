@@ -23,15 +23,16 @@ import java.util.Map;
  */
 public abstract class ImageBase {
 
-    /** Cache for loaded images */
+    /** Cache for loaded images. */
     protected static Map<String, BufferedImage> imageCache = new HashMap<>();
 
-    /** The current graphics configuration of the screen we are using */
+    /** The current graphics configuration of the screen we are using. */
     private static GraphicsConfiguration gc;
 
     static {
         // get the graphics environment
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsEnvironment ge =
+                GraphicsEnvironment.getLocalGraphicsEnvironment();
         gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
     }
 
@@ -42,7 +43,9 @@ public abstract class ImageBase {
      * @param position position to draw image at
      * @param observer image observer
      */
-    public abstract void draw(Graphics g, Point position, ImageObserver observer);
+    public abstract void draw(Graphics g,
+                              Point position,
+                              ImageObserver observer);
 
     /**
      * Load the image.
@@ -84,7 +87,8 @@ public abstract class ImageBase {
                 g.dispose();
             }
             catch (IOException e) {
-                throw new IllegalArgumentException("File '" + file.getPath() + "' not found.");
+                throw new IllegalArgumentException(
+                        "File '" + file.getPath() + "' not found.");
             }
 
             imageCache.put(file.getAbsolutePath(), img);

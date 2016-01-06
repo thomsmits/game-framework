@@ -16,31 +16,32 @@ import java.awt.event.KeyEvent;
  */
 public class Craft extends DirectionAnimatedSprite {
 
-    /** Speed of the space craft */
+    /** Speed of the space craft. */
     private static final int CRAFT_SPEED = 2;
 
-    /** Speed of the animatedImage */
+    /** Speed of the animatedImage. */
     private static final int ANIMATION_SPEED = 10;
 
     /** Image for the craft without thrusters.*/
-    private static AnimatedImage CRAFT_NOT_MOVING =
-            new AnimatedImage(ANIMATION_SPEED, "assets/spacewar", "craft_1.png");
+    private static final AnimatedImage CRAFT_NOT_MOVING =
+            new AnimatedImage(ANIMATION_SPEED,
+                    "assets/spacewar", "craft_1.png");
 
-    /** Image for the craft accelerating forward */
-    private static AnimatedImage CRAFT_ACCELERATING_FORWARD =
+    /** Image for the craft accelerating forward. */
+    private static final AnimatedImage CRAFT_ACCELERATING_FORWARD =
             new AnimatedImage(ANIMATION_SPEED, "assets/spacewar",
                     "craft_1.png",
                     "craft_2.png",
                     "craft_3.png",
                     "craft_4.png");
 
-    /** Image for the craft accelerating backward */
-    private static AnimatedImage CRAFT_ACCELERATING_BACKWARD =
+    /** Image for the craft accelerating backward. */
+    private static final AnimatedImage CRAFT_ACCELERATING_BACKWARD =
             new AnimatedImage(ANIMATION_SPEED, "assets/spacewar",
                     "craft_1.png",
                     "craft_5.png");
 
-    /** Missiles fired */
+    /** Missiles fired. */
     private SpriteCollection<Missile> missiles = new SpriteCollection<>();
 
     /**
@@ -82,14 +83,17 @@ public class Craft extends DirectionAnimatedSprite {
      * Fire a missile.
      */
     public void fire() {
-        missiles.add(new Missile(board, new Point((int)position.x + dimension.width, (int)position.y + dimension.height / 2)));
+        missiles.add(new Missile(board,
+                new Point((int) position.x + dimension.width,
+                        (int) position.y + dimension.height / 2)));
     }
 
     /**
      * Let the spaceship explode.
      */
     public void explode() {
-        AnimatedImage ex = new AnimatedImage(ANIMATION_SPEED, false, new Explosion());
+        AnimatedImage ex = new AnimatedImage(
+                ANIMATION_SPEED, false, new Explosion());
         setAllMovementAnimations(ex);
         setInvisibleAfterFrames(30);
         setActive(false);

@@ -16,7 +16,7 @@ import java.awt.Point;
 public class Missile extends Sprite {
 
     /** Speed of the missile.  */
-    private final int MISSILE_SPEED = 4;
+    private static final int MISSILE_SPEED = 4;
 
     /**
      * Create a new missile.

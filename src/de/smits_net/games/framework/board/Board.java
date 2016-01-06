@@ -32,51 +32,53 @@ import static java.awt.event.MouseEvent.MOUSE_RELEASED;
  *
  * @author Thomas Smits
  */
-public abstract class Board extends JPanel implements Runnable, KeyListener, MouseListener {
+public abstract class Board extends JPanel
+        implements Runnable, KeyListener, MouseListener {
 
-    /** Number of updates without sleep before a yield is triggered */
+    /** Number of updates without sleep before a yield is triggered. */
     private static final int NO_DELAYS_PER_YIELD = 16;
 
-    /** Maximum number of frames skipped in the output */
+    /** Maximum number of frames skipped in the output. */
     private static final int MAX_FRAME_SKIPS = 5;
 
-    /* Time between two debug updates */
-    private static final long DEBUG_FREQUENCY = Constants.NANOSECONDS_PER_SECOND / 4;
+    /* Time between two debug updates. */
+    private static final long DEBUG_FREQUENCY
+            = Constants.NANOSECONDS_PER_SECOND / 4;
 
-    /** Indicator that the game is still running */
+    /** Indicator that the game is still running. */
     protected boolean gameRunning = true;
 
-    /** Dimension of the board */
+    /** Dimension of the board. */
     protected Dimension dimension;
 
-    /** Time for each iteration (frame) in nano seconds */
+    /** Time for each iteration (frame) in nano seconds. */
     protected long delay;
 
-    /** The thread */
+    /** The thread. */
     protected Thread thread;
 
-    /** Canvas the game is drawn on */
+    /** Canvas the game is drawn on. */
     private Image image;
 
-    /** Color of the background of the board */
+    /** Color of the background of the board. */
     private Color backgroundColor;
 
-    /** Frame per second counter (only used if debugging is on) */
+    /** Frame per second counter (only used if debugging is on). */
     private long fps;
 
-    /** Timestamp of the last update of the debug line */
+    /** Timestamp of the last update of the debug line. */
     private long lastDebugUpdate;
 
-    /** The captured mouse events */
+    /** The captured mouse events. */
     private List<MouseEvent> mouseEvents = new CopyOnWriteArrayList<>();
 
-    /** The captured key events for typed keys */
+    /** The captured key events for typed keys. */
     private List<KeyEvent> keyEvents = new CopyOnWriteArrayList<>();
 
-    /** All game elements that want to get key events */
+    /** All game elements that want to get key events. */
     private List<KeyListener> keyListener = new CopyOnWriteArrayList<>();
 
-    /** All game elements that want to get mouse events */
+    /** All game elements that want to get mouse events. */
     private List<MouseListener> mouseListener = new CopyOnWriteArrayList<>();
 
     /**
@@ -155,6 +157,8 @@ public abstract class Board extends JPanel implements Runnable, KeyListener, Mou
     /**
      * The graphics output of the game. This method is called
      * periodically by the framework to draw the game graphics.
+     *
+     * @param g Graphics context.
      */
     public abstract void drawGame(Graphics g);
 
@@ -203,7 +207,8 @@ public abstract class Board extends JPanel implements Runnable, KeyListener, Mou
 
         if (Constants.DEBUG_SHOW_FPS) {
             g.setColor(Color.RED);
-            g.drawString(String.format("FPS: %d", fps), 0, dimension.height - 5);
+            g.drawString(String.format("FPS: %d", fps),
+                    0, dimension.height - 5);
         }
 
         g.dispose();
@@ -326,6 +331,8 @@ public abstract class Board extends JPanel implements Runnable, KeyListener, Mou
                         case KEY_TYPED:
                             l.keyTyped(keyEvent);
                             break;
+                        default:
+                            // do nothing
                     }
                 }
             }
@@ -350,6 +357,8 @@ public abstract class Board extends JPanel implements Runnable, KeyListener, Mou
                         case MOUSE_EXITED:
                             l.mouseExited(mouseEvent);
                             break;
+                        default:
+                            // do nothing
                     }
                 }
             }
@@ -379,8 +388,10 @@ public abstract class Board extends JPanel implements Runnable, KeyListener, Mou
             }
             else {
                 try {
-                    Thread.sleep(sleepDuration / Constants.NANOSECONDS_PER_MILLISECOND);
-                } catch (InterruptedException e) {
+                    Thread.sleep(sleepDuration
+                            / Constants.NANOSECONDS_PER_MILLISECOND);
+                }
+                catch (InterruptedException e) {
                     break;
                 }
 
@@ -401,7 +412,10 @@ public abstract class Board extends JPanel implements Runnable, KeyListener, Mou
 
             if (Constants.DEBUG_SHOW_FPS) {
                 if (System.nanoTime() - lastDebugUpdate > DEBUG_FREQUENCY) {
-                    fps = Constants.NANOSECONDS_PER_SECOND / (System.nanoTime() - beforeTime);
+
+                    fps = Constants.NANOSECONDS_PER_SECOND
+                            / (System.nanoTime() - beforeTime);
+
                     lastDebugUpdate = System.nanoTime();
                 }
             }
@@ -415,6 +429,9 @@ public abstract class Board extends JPanel implements Runnable, KeyListener, Mou
 
     /**
      * Fetch the pending events.
+     *
+     * @param <T> the type of the event
+     * @param eventList the list of events
      *
      * @return the event or {@code null} if no events are present
      */

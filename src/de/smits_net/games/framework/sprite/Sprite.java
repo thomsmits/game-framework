@@ -32,50 +32,50 @@ import java.util.List;
 public class Sprite implements KeyListener, MouseListener {
 
     /**
-     * How to handle sprites that reach the boundaries of the borard.
+     * How to handle sprites that reach the boundaries of the board.
      */
     public enum BoundaryPolicy {
-        /** Stop at the boundary */
+        /** Stop at the boundary. */
         STOP,
 
-        /** Set sprite invisible */
+        /** Set sprite invisible. */
         INVISIBLE,
 
-        /** Jump back to the opposite boundary */
+        /** Jump back to the opposite boundary. */
         JUMP_BACK,
 
         /** Do nothing. */
         NONE
     }
 
-    /** Border of the sprite (for collision detection) */
+    /** Border of the sprite (for collision detection). */
     private Polygon border = new Polygon();
 
-    /** Position of the sprite */
+    /** Position of the sprite. */
     protected Point2D.Double position;
 
-    /** dimensions */
+    /** Dimensions of the sprite. */
     protected Dimension dimension;
 
-    /** indicates whether the sprite is visible */
+    /** indicates whether the sprite is visible. */
     protected boolean visible;
 
-    /** the image that is displayed */
+    /** the image that is displayed. */
     protected ImageBase image;
 
-    /** The bounds of the sprite movement */
+    /** The bounds of the sprite movement. */
     protected Rectangle bounds;
 
-    /** what happens when the sprite hits the boundaries */
-    protected BoundaryPolicy policy;
+    /** what happens when the sprite hits the boundaries. */
+    protected BoundaryPolicy policy = BoundaryPolicy.NONE;
 
-    /** velocity of the sprite */
+    /** velocity of the sprite. */
     protected Velocity velocity = new Velocity();
 
-    /** the game board */
+    /** the game board. */
     protected Board board;
 
-    /** Sprite takes part in collision detection */
+    /** Sprite takes part in collision detection. */
     private boolean active = true;
 
     /**
@@ -87,19 +87,22 @@ public class Sprite implements KeyListener, MouseListener {
      *      of the board
      * @param image the images
      */
-    public Sprite(Board board, Point position, BoundaryPolicy policy, ImagePack image) {
+    public Sprite(Board board, Point position,
+                  BoundaryPolicy policy, ImagePack image) {
         this.board = board;
         this.position = new Point2D.Double(position.x, position.y);
         this.visible = true;
         this.image = image;
         dimension = new Dimension(image.getDimension());
-        this.bounds = new Rectangle(0, 0, board.getDimension().width, board.getDimension().height);
+        this.bounds = new Rectangle(0, 0,
+                board.getDimension().width, board.getDimension().height);
         this.policy = policy;
 
         // assume rectangular border
         border.addPoint(0, 0);
         border.addPoint(image.getDimension().width, 0);
-        border.addPoint(image.getDimension().width, image.getDimension().height);
+        border.addPoint(image.getDimension().width,
+                image.getDimension().height);
         border.addPoint(0, image.getDimension().height);
     }
 
@@ -147,14 +150,14 @@ public class Sprite implements KeyListener, MouseListener {
     }
 
     /**
-     * Calculate the border in relation to the current position. This is required
-     * to detect intersections between sprites.
+     * Calculate the border in relation to the current position.
+     * This is required to detect intersections between sprites.
      *
      * @return the border's absolute position
      */
     protected Polygon absoluteBorder() {
         Polygon p = new Polygon(border.xpoints, border.ypoints, border.npoints);
-        p.translate((int)position.x, (int)position.y);
+        p.translate((int) position.x, (int) position.y);
         return p;
     }
 
@@ -170,7 +173,7 @@ public class Sprite implements KeyListener, MouseListener {
             return;
         }
 
-        image.draw(g, new Point((int)position.x, (int)position.y), observer);
+        image.draw(g, new Point((int) position.x, (int) position.y), observer);
 
         if (Constants.DEBUG_SPRITE_OUTLINE) {
             g.setColor(isActive() ? Color.RED : Color.GREEN);
@@ -194,7 +197,7 @@ public class Sprite implements KeyListener, MouseListener {
             }
         }
 
-        for (int i = 0; i < p2.npoints;i++) {
+        for (int i = 0; i < p2.npoints; i++) {
             if (p1.contains(new Point(p2.xpoints[i], p2.ypoints[i]))) {
                 return true;
             }
@@ -229,7 +232,8 @@ public class Sprite implements KeyListener, MouseListener {
     }
 
     /**
-     * Checks the given other objects regarding an intersection with this object.
+     * Checks the given other objects regarding an intersection
+     * with this object.
      *
      * @param others the others
      * @param <T> Type of the objects
@@ -251,7 +255,7 @@ public class Sprite implements KeyListener, MouseListener {
      * @return the current position.
      */
     public Point getPosition() {
-        return new Point((int)position.x, (int)position.y);
+        return new Point((int) position.x, (int) position.y);
     }
 
     /**
@@ -293,12 +297,12 @@ public class Sprite implements KeyListener, MouseListener {
     /**
      * Moves the sprite.
      *
-     * @param velocity delta
+     * @param deltaV delta
      */
-    public void move(Velocity velocity) {
+    public void move(Velocity deltaV) {
 
-        position.x = position.x + velocity.x;
-        position.y = position.y + velocity.y;
+        position.x = position.x + deltaV.x;
+        position.y = position.y + deltaV.y;
 
         ensureBoundaryPolicy();
     }

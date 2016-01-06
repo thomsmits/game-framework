@@ -15,10 +15,10 @@ import static de.smits_net.games.framework.sprite.Direction.WEST;
  */
 public class Velocity {
 
-    /** velocity in x direction */
+    /** velocity in x direction. */
     public double x;
 
-    /** velocity in y direction */
+    /** velocity in y direction. */
     public double y;
 
     /**

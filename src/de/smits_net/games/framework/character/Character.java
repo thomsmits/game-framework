@@ -14,10 +14,10 @@ import java.awt.Point;
  */
 public class Character extends DirectionAnimatedSprite {
 
-    /** Position where the character should move to */
+    /** Position where the character should move to. */
     protected Point target;
 
-    /** The speed the character moves with */
+    /** The speed the character moves with. */
     protected int speed;
 
     /**
@@ -39,21 +39,22 @@ public class Character extends DirectionAnimatedSprite {
      */
     public Character(Board board, Point startPoint, int speed,
                                     BoundaryPolicy policy,
-                                   AnimatedImage noDirection,
-                                   AnimatedImage west,
-                                   AnimatedImage east,
-                                   AnimatedImage north,
-                                   AnimatedImage south,
-                                   AnimatedImage noMovementWest,
-                                   AnimatedImage noMovementEast,
-                                   AnimatedImage noMovementNorth,
-                                   AnimatedImage noMovementSouth) {
+                                    AnimatedImage noDirection,
+                                    AnimatedImage west,
+                                    AnimatedImage east,
+                                    AnimatedImage north,
+                                    AnimatedImage south,
+                                    AnimatedImage noMovementWest,
+                                    AnimatedImage noMovementEast,
+                                    AnimatedImage noMovementNorth,
+                                    AnimatedImage noMovementSouth) {
 
-        super(board, startPoint, policy, noDirection, north, null, east, null, south, null, west, null,
-                noMovementNorth, null, noMovementEast, null, noMovementSouth, noMovementWest, null, null);
+        super(board, startPoint, policy, noDirection, north, null, east, null,
+                south, null, west, null, noMovementNorth, null, noMovementEast,
+                null, noMovementSouth, noMovementWest, null, null);
 
         // start with target = position
-        target = (Point)startPoint.clone();
+        target = (Point) startPoint.clone();
 
         this.speed = speed;
     }
@@ -65,7 +66,7 @@ public class Character extends DirectionAnimatedSprite {
      */
     public void setTarget(Point target) {
 
-        Point newTarget = (Point)(target.clone());
+        Point newTarget = (Point) (target.clone());
 
         // ensure that we do not move outside the bounds
         if (newTarget.x < bounds.x) {
@@ -94,7 +95,7 @@ public class Character extends DirectionAnimatedSprite {
         double distanceX = Math.round(target.x - position.x);
         double distanceY = Math.round(target.y - position.y);
 
-        if (Math.abs(distanceX) < 0.1 && Math.abs(distanceY) < 0.1 ) {
+        if (Math.abs(distanceX) < 0.1 && Math.abs(distanceY) < 0.1) {
             // are we already there?
             return;
         }
@@ -114,8 +115,11 @@ public class Character extends DirectionAnimatedSprite {
         }
 
         // calculate distance (squared)
-        double lengthSpeedVector = velocity.x*velocity.x + velocity.y*velocity.y;
-        double lengthDistance = distanceX*distanceX + distanceY*distanceY;
+        double lengthSpeedVector =
+                velocity.x * velocity.x + velocity.y * velocity.y;
+
+        double lengthDistance =
+                distanceX * distanceX + distanceY * distanceY;
 
         if (lengthDistance < lengthSpeedVector) {
             // we would reach the target with the given speed vector

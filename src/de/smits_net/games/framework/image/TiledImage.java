@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class TiledImage extends ImagePack {
 
-    /** Dimension of the image */
+    /** Dimension of the image. */
     private Dimension dimension;
 
     /**
@@ -50,7 +50,9 @@ public class TiledImage extends ImagePack {
      * @param boxHeight height of one tile
      * @return the images
      */
-    private static List<BufferedImage> getTiles(BufferedImage img, int boxWidth, int boxHeight) {
+    private static List<BufferedImage> getTiles(BufferedImage img,
+                                                int boxWidth,
+                                                int boxHeight) {
 
         int imageWidth = img.getWidth();
         int imageHeight = img.getHeight();

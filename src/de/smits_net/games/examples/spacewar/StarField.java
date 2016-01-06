@@ -16,11 +16,21 @@ public class StarField extends BackgroundImage {
 
     private Random rnd = new Random();
 
-    public StarField(double speed, int width, int height, Color color, double load) {
+    /**
+     * Creates a new star field.
+     *
+     * @param speed speed of the star field.
+     * @param width width of the star field.
+     * @param height height of the star field.
+     * @param color color of the stars.
+     * @param load density of the stars.
+     */
+    public StarField(double speed, int width, int height,
+                     Color color, double load) {
         super(speed, width, height);
 
         Graphics g = background.getGraphics();
-        int numberOfStars = (int)((width * height) * load);
+        int numberOfStars = (int) ((width * height) * load);
 
         g.setColor(color);
 

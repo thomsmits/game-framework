@@ -18,10 +18,10 @@ import java.awt.image.ImageObserver;
  */
 public abstract class AnimatedSprite extends Sprite {
 
-    /** the image that is displayed */
+    /** the image that is displayed. */
     protected AnimatedImage animatedImage;
 
-    /** Hide the sprite after the given number of frames */
+    /** Hide the sprite after the given number of frames. */
     protected int invisibleAfterFrames = -1;
 
     /**
@@ -31,7 +31,8 @@ public abstract class AnimatedSprite extends Sprite {
      * @param startPoint start point of the sprite
      * @param animatedImage the animatedImage
      */
-    public AnimatedSprite(Board board, Point startPoint, AnimatedImage animatedImage) {
+    public AnimatedSprite(Board board, Point startPoint,
+                          AnimatedImage animatedImage) {
         this(board, startPoint, BoundaryPolicy.STOP, animatedImage);
     }
 
@@ -40,9 +41,11 @@ public abstract class AnimatedSprite extends Sprite {
      *
      * @param board our board
      * @param startPoint start point of the sprite
+     * @param policy the boundary policy for this sprite
      * @param animatedImage the animatedImage
      */
-    public AnimatedSprite(Board board, Point startPoint, BoundaryPolicy policy, AnimatedImage animatedImage) {
+    public AnimatedSprite(Board board, Point startPoint, BoundaryPolicy policy,
+                          AnimatedImage animatedImage) {
         super(board, startPoint, policy, animatedImage.getImages());
         this.animatedImage = animatedImage;
     }
@@ -57,16 +60,18 @@ public abstract class AnimatedSprite extends Sprite {
     }
 
     /**
-     * Set the animatedImage.
+     * Set the animated image.
      *
-     * @param animatedImage the new animatedImage
+     * @param newImages the new animatedImage
      */
-    public void setImages(AnimatedImage animatedImage) {
+    public void setImages(AnimatedImage newImages) {
 
-        int offsetX = (this.animatedImage.getDimension().width - animatedImage.getDimension().width) / 2;
-        int offsetY = (this.animatedImage.getDimension().height - animatedImage.getDimension().height) / 2;
+        int offsetX = (this.animatedImage.getDimension().width
+                - newImages.getDimension().width) / 2;
+        int offsetY = (this.animatedImage.getDimension().height
+                - newImages.getDimension().height) / 2;
 
-        this.animatedImage = animatedImage;
+        this.animatedImage = newImages;
 
         position.x = position.x + offsetX;
         position.y = position.y + offsetY;

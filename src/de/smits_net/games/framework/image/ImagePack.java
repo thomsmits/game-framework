@@ -25,10 +25,10 @@ import java.util.List;
  */
 public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
 
-    /** The images */
+    /** The images. */
     protected List<BufferedImage> imageList = new ArrayList<>();
 
-    /** Image currently displayed, used for cycling through the images */
+    /** Image currently displayed, used for cycling through the images. */
     protected int currentImage = 0;
 
     /** If set to true the cycling will go around forever, if set
@@ -147,6 +147,7 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
 
     @Override
     public void draw(Graphics g, Point position, ImageObserver observer) {
-        g.drawImage(imageList.get(currentImage), position.x, position.y, observer);
+        g.drawImage(imageList.get(currentImage),
+                position.x, position.y, observer);
     }
 }

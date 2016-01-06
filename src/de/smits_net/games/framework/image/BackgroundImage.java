@@ -12,13 +12,13 @@ import java.awt.image.ImageObserver;
  */
 public class BackgroundImage {
 
-    /** Current scroll position */
+    /** Current scroll position. */
     private double scroll;
 
-    /** Scroll speed */
+    /** Scroll speed. */
     private double speed;
 
-    /** The image */
+    /** The image. */
     protected BufferedImage background;
 
     /**
@@ -29,7 +29,8 @@ public class BackgroundImage {
      * @param height height of the image
      */
     public BackgroundImage(double speed, int width, int height) {
-        background = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        background = new BufferedImage(width, height,
+                BufferedImage.TYPE_INT_ARGB);
         this.speed = speed;
     }
 
@@ -37,6 +38,7 @@ public class BackgroundImage {
      * Creates a new background image.
      *
      * @param speed speed of the scroll operation
+     * @param image the image to be used as the background
      */
     public BackgroundImage(double speed, BufferedImage image) {
         background = image;
@@ -79,7 +81,8 @@ public class BackgroundImage {
      * @param observer the image observer
      */
     public void draw(Graphics g, ImageObserver observer) {
-        g.drawImage(background, (int)scroll, 0, observer);
-        g.drawImage(background, background.getWidth() + (int)scroll, 0, observer);
+        g.drawImage(background, (int) scroll, 0, observer);
+        g.drawImage(background, background.getWidth() + (int) scroll,
+                0, observer);
     }
 }

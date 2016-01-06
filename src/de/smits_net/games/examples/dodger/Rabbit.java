@@ -8,8 +8,12 @@ import de.smits_net.games.framework.sprite.DirectionAnimatedSprite;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 
+/**
+ * The Rabbit on the board.
+ */
 public class Rabbit extends DirectionAnimatedSprite {
 
+    /** Speed of the rabbit. */
     private static final int RABBIT_SPEED = 5;
 
     /**
@@ -20,16 +24,35 @@ public class Rabbit extends DirectionAnimatedSprite {
      */
     public Rabbit(Board board, Point startPoint) {
         super(board, startPoint, BoundaryPolicy.STOP,
-                new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"),
-                new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"), new AnimatedImage(100, "assets/dodger", "bunny1_walk1_right.png",
-                        "bunny1_walk2_right.png"), new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"), new AnimatedImage(100, "assets/dodger", "bunny1_walk1_left.png",
+                new AnimatedImage(100, "assets/dodger",
+                        "bunny1_ready.png"),
+                new AnimatedImage(100, "assets/dodger",
+                        "bunny1_ready.png"),
+                new AnimatedImage(100, "assets/dodger",
+                        "bunny1_walk1_right.png",
+                        "bunny1_walk2_right.png"),
+                new AnimatedImage(100, "assets/dodger",
+                        "bunny1_ready.png"),
+                new AnimatedImage(100, "assets/dodger",
+                        "bunny1_walk1_left.png",
                         "bunny1_walk2_left.png"),
-                new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"), new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"), new AnimatedImage(100, "assets/dodger", "bunny1_ready.png"), new AnimatedImage(100, "assets/dodger", "bunny1_ready.png")
+                new AnimatedImage(100, "assets/dodger",
+                        "bunny1_ready.png"),
+                new AnimatedImage(100, "assets/dodger",
+                        "bunny1_ready.png"),
+                new AnimatedImage(100, "assets/dodger",
+                        "bunny1_ready.png"),
+                new AnimatedImage(100, "assets/dodger",
+                        "bunny1_ready.png")
         );
     }
 
+    /**
+     * Rabbit was hit by an enemy.
+     */
     public void hit() {
-        AnimatedImage brokenRabbit = new AnimatedImage(100, "assets/dodger", "bunny1_hurt.png");
+        AnimatedImage brokenRabbit = new AnimatedImage(
+                100, "assets/dodger", "bunny1_hurt.png");
         setAllMovementAnimations(brokenRabbit);
         setInvisibleAfterFrames(30);
         setActive(false);
