@@ -295,6 +295,16 @@ public class Sprite implements KeyListener, MouseListener {
     }
 
     /**
+     * Overwrite the bounds automatically determined from the
+     * board.
+     *
+     * @param bounds the new bounds
+     */
+    public void setBounds(Rectangle bounds) {
+        this.bounds = bounds;
+    }
+
+    /**
      * Moves the sprite.
      *
      * @param deltaV delta
@@ -334,11 +344,11 @@ public class Sprite implements KeyListener, MouseListener {
             }
         }
         else if (policy == BoundaryPolicy.JUMP_BACK) {
-            if (position.x < bounds.x) {
+            if (position.x + dimension.width < bounds.x) {
                 position.x = bounds.x + bounds.width;
             }
 
-            if (position.y < bounds.y) {
+            if (position.y + dimension.height < bounds.y) {
                 position.y = bounds.y + bounds.height;
             }
 
