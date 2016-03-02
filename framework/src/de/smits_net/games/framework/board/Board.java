@@ -267,14 +267,20 @@ public abstract class Board extends JPanel
      *
      * @param g the graphics context
      */
-    protected abstract void drawGameOver(Graphics g);
+    protected void drawGameOver(Graphics g) {
+        // do nothing
+    }
 
     /**
-     * Draw the background.
+     * Draw the background. The default implementation clears the
+     * background with the current background color.
      *
      * @param g the graphics context
      */
-    protected abstract void drawBackground(Graphics g);
+    protected void drawBackground(Graphics g) {
+        g.setColor(getBackground());
+        g.fillRect(0, 0, dimension.width, dimension.height);
+    }
 
     /**
      * @see javax.swing.JComponent#addNotify()
