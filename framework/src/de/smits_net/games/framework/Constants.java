@@ -14,10 +14,10 @@ public final class Constants {
             = NANOSECONDS_PER_MILLISECOND * 1000L;
 
     /** Draws the outline of a sprite. */
-    public static final boolean DEBUG_SPRITE_OUTLINE = true;
+    public static final boolean DEBUG_SPRITE_OUTLINE = false;
 
     /** Writes the FPS to the screen. */
-    public static final boolean DEBUG_SHOW_FPS = true;
+    public static final boolean DEBUG_SHOW_FPS = false;
 
     /**
      * Constructor.
