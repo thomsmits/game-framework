@@ -8,6 +8,9 @@ import de.smits_net.games.framework.sprite.Direction;
 
 import java.awt.Point;
 
+/**
+ * A sun falling from the sky.
+ */
 public class Sun extends AnimatedSprite {
 
     /**
@@ -15,6 +18,7 @@ public class Sun extends AnimatedSprite {
      *
      * @param board the game board
      * @param startPoint point to start sprite
+     * @param speed speed of the animation
      */
     public Sun(Board board, Point startPoint, int speed) {
         super(board, startPoint, BoundaryPolicy.NONE,
