@@ -11,7 +11,7 @@ import java.awt.image.ImageObserver;
 
 /**
  * A set of images that form an animatedImage. The difference
- * to the {@see ImagePack} is that the class automatically
+ * to the @see ImagePack is that the class automatically
  * tracks the time that passed since the last draw call and
  * changes the image automatically if the requested animatedImage
  * time has passed.
