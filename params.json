@@ -1,0 +1,6 @@
+{
+  "name": "Game Framework",
+  "tagline": "Simple game framework (including examples) for educational purposes",
+  "body": "This project provides a very simple game framework which is used in lectures on Java programming. It is not intended for real-world game projects.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
