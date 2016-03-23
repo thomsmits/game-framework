@@ -51,6 +51,17 @@ public class Velocity {
     }
 
     /**
+     * Sets the velocity in the given direction.
+     *
+     * @param direction the direction
+     * @param speed the absolute value of the velocity
+     */
+    public void setVelocity(Direction direction, double speed) {
+        x = direction.getX() * speed;
+        y = direction.getY() * speed;
+    }
+
+    /**
      * Determines the direction of the current velocity vector.
      *
      * @return the direction.
