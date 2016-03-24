@@ -182,6 +182,16 @@ public class Sprite implements KeyListener, MouseListener {
     }
 
     /**
+     * Draw the sprite using the given graphics context. This method does not use an
+     * ImageObserver and just sets it to {@code null}.
+     *
+     * @param g graphics context
+     */
+    public void draw(Graphics g) {
+        draw(g, null);
+    }
+
+    /**
      * Checks whether this sprite intersects with the given polygon.
      *
      * @param p2 the polygon.
