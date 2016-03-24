@@ -296,7 +296,11 @@ public class Sprite implements KeyListener, MouseListener {
     }
 
     /**
-     * Sets activity state of the sprite.
+     * Sets activity state of the sprite, i.e. if the sprite should take
+     * part in collision detection.
+     * This method does not turn off the collision detected of the
+     * {@code intersects} methods but is just there to provide a flag
+     * for the user of the sprite to tag it as active/inactive.
      *
      * @param active state to be set
      */
@@ -317,7 +321,8 @@ public class Sprite implements KeyListener, MouseListener {
     /**
      * Moves the sprite.
      *
-     * @param deltaV delta
+     * @param deltaV delta velocity to add to the current velocity of the
+     *               sprite
      */
     public void move(Velocity deltaV) {
 
