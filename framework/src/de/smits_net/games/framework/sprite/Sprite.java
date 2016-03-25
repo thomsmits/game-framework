@@ -260,6 +260,35 @@ public class Sprite implements KeyListener, MouseListener {
     }
 
     /**
+     * Width of the sprite. Convenience method for
+     * {@code getDimension().getWidth()}.
+     *
+     * @return the width in pixel
+     */
+    public int getWidth() {
+        return dimension.width;
+    }
+
+    /**
+     * Width of the sprite. Convenience method for
+     * {@code getDimension().getHeight()}.
+     *
+     * @return the width in pixel
+     */
+    public int getHeight() {
+        return dimension.height;
+    }
+
+    /**
+     * Get the dimension (width, height) of the sprite.
+     *
+     * @return the dimension
+     */
+    public Dimension getDimension() {
+        return dimension;
+    }
+
+    /**
      * Get the current position.
      *
      * @return the current position.
