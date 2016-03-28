@@ -10,11 +10,13 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 /**
- * A set of images that form an animatedImage. The difference
- * to the @see ImagePack is that the class automatically
+ * A set of images that form an animated image. The difference
+ * to the {@link ImagePack} is that the class automatically
  * tracks the time that passed since the last draw call and
  * changes the image automatically if the requested animatedImage
  * time has passed.
+ *
+ * @author Thomas Smits
  */
 public class AnimatedImage extends ImageBase {
 

@@ -12,6 +12,8 @@ import static de.smits_net.games.framework.sprite.Direction.WEST;
 
 /**
  * Class to encapsulate the velocity of a sprite.
+ *
+ * @author Thomas Smits
  */
 public class Velocity {
 

@@ -3,6 +3,8 @@ package de.smits_net.games.framework.sprite;
 
 /**
  * Enumeration to indicate the direction of an object.
+ *
+ * @author Thomas Smits
  */
 public enum Direction {
 

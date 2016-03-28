@@ -9,6 +9,8 @@ import java.util.ArrayList;
  * Enhanced collection class for sprites.
  *
  * @param <T> type of the sprite managed by this class.
+ *
+ * @author Thomas Smits
  */
 public class SpriteCollection<T extends Sprite> extends ArrayList<T> {
 

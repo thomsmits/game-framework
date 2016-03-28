@@ -111,7 +111,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @param border the border to set
      */
-    public void setBorder(Polygon border) {
+    public final void setBorder(Polygon border) {
         this.border = border;
     }
 
@@ -128,7 +128,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @param velocity velocity
      */
-    public void setVelocity(Velocity velocity) {
+    public final void setVelocity(Velocity velocity) {
         this.velocity = velocity;
     }
 
@@ -137,7 +137,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @return velocity.
      */
-    public Velocity getVelocity() {
+    public final Velocity getVelocity() {
         return velocity;
     }
 
@@ -265,7 +265,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @return the width in pixel
      */
-    public int getWidth() {
+    public final int getWidth() {
         return dimension.width;
     }
 
@@ -275,7 +275,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @return the width in pixel
      */
-    public int getHeight() {
+    public final int getHeight() {
         return dimension.height;
     }
 
@@ -284,8 +284,8 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @return the dimension
      */
-    public Dimension getDimension() {
-        return dimension;
+    public final Dimension getDimension() {
+        return (Dimension) dimension.clone();
     }
 
     /**
@@ -302,7 +302,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @return true if visible
      */
-    public boolean isVisible() {
+    public final boolean isVisible() {
         return visible;
     }
 
@@ -311,7 +311,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @param visible visibility state
      */
-    public void setVisible(Boolean visible) {
+    public final void setVisible(Boolean visible) {
         this.visible = visible;
     }
 
@@ -320,7 +320,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @return true if active
      */
-    public boolean isActive() {
+    public final boolean isActive() {
         return active;
     }
 
@@ -333,7 +333,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @param active state to be set
      */
-    public void setActive(boolean active) {
+    public final void setActive(boolean active) {
         this.active = active;
     }
 

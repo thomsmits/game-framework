@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 
 /**
  * An image with all sub images in one row.
+ *
+ * @author Thomas Smits
  */
 public class StripedImage extends TiledImage {
 

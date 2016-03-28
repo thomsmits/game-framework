@@ -18,8 +18,8 @@ import java.util.List;
  * has to be transferred. It can also contain only one image.
  *
  * The class has one "current" image, which can be retrieved using the
- * getImage() method. The user can cycle through the images with the
- * cycle() method.
+ * {@link ImagePack#getImage()} method. The user can cycle through the images with the
+ * {@link ImagePack#cycle()} method.
  *
  * @author Thomas Smits
  */
@@ -80,6 +80,7 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
     void setWrapAround(boolean wrapAround) {
         this.wrapAround = wrapAround;
     }
+
     /**
      * Adds an image to the stack.
      *

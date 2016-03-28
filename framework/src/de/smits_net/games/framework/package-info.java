@@ -1,5 +1,5 @@
 /**
- * Main package of the game Framework. It contains four subpackages.
+ * Main package of the game Framework. It contains the following subpackages.
  *
  * <ul>
  *     <li>board: Base classes for the game board, i.e. the main
@@ -8,5 +8,9 @@
  *     <li>image: Image handling</li>
  *     <li>sprite: Sprites, i.e. objects that move themselves</li>
  * </ul>
+ * <p>
+ * To start working with this framework, have a look at the package
+ * {@link de.smits_net.games.framework.board}.
+ *
  */
 package de.smits_net.games.framework;

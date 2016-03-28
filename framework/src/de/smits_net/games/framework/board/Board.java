@@ -28,7 +28,39 @@ import static java.awt.event.MouseEvent.MOUSE_PRESSED;
 import static java.awt.event.MouseEvent.MOUSE_RELEASED;
 
 /**
- * Base class for the game board. This class starts the game thread.
+ * Base class for the game board. Games typically subclass this class
+ * and overwrite its methods to control the behavior of the game. The
+ * instances of the subclasses are embedded into a window which is
+ * provided by the class {@link MainWindow}.
+ * <p>
+ * This class creates the game thread, consumes the mouse and keyboard
+ * events and contains the game loop. The game loop periodically calls
+ * the {@link Board#updateGame()}, {@link Board#drawBackground(Graphics)}
+ * and {@link Board#drawGame(Graphics)} methods.
+ * <p>
+ * A minimal game has to overwrite at least two methods:
+ * <ul>
+ *     <li>{@link Board#updateGame()} to periodically update the state of
+ *     all game objects.</li>
+ *     <li>{@link Board#drawGame(Graphics)} to draw the game objects.</li>
+ * </ul>
+ * <p>
+ * When the game is over, the framework calls the
+ * {@link Board#drawGameOver(Graphics)} to display a game over message.
+ * You have to overwrite this method to control this message.
+ * <p>
+ * By default, the game background is monochrome and in the color provided
+ * in the constructor. If you want to change this, overwrite the
+ * {@link Board#drawBackground(Graphics)} method.
+ * <p>
+ * To ensure the desired performance of the game, the game loop measures the
+ * frames per second and skips the drawing if necessary to avoid a drop in
+ * the game performance. Nevertheless, the game update method is called.
+ * <p>
+ * If your game should use mouse or keyboard for interaction, you have to
+ * register a mouse or keyboard listener using the
+ * {@link Board#addMouseListener(MouseListener)} or the
+ * {@link Board#addKeyListener(KeyListener)} methods.
  *
  * @author Thomas Smits
  */
@@ -46,13 +78,13 @@ public abstract class Board extends JPanel
             = Constants.NANOSECONDS_PER_SECOND / 4;
 
     /** Indicator that the game is still running. */
-    protected boolean gameRunning = true;
+    protected volatile boolean gameRunning = true;
 
     /** Dimension of the board. */
-    protected Dimension dimension;
+    protected final Dimension dimension;
 
     /** Time for each iteration (frame) in nano seconds. */
-    protected long delay;
+    protected final long delay;
 
     /** The thread. */
     protected Thread thread;
@@ -117,7 +149,7 @@ public abstract class Board extends JPanel
      * @see javax.swing.JComponent#getWidth()
      */
     @Override
-    public int getWidth() {
+    public final int getWidth() {
         return dimension.width;
     }
 
@@ -125,7 +157,7 @@ public abstract class Board extends JPanel
      * @see javax.swing.JComponent#getHeight()
      */
     @Override
-    public int getHeight() {
+    public final int getHeight() {
         return dimension.height;
     }
 
@@ -134,8 +166,8 @@ public abstract class Board extends JPanel
      *
      * @return the dimension
      */
-    public Dimension getDimension() {
-        return dimension;
+    public final Dimension getDimension() {
+        return (Dimension) dimension.clone();
     }
 
     /**
@@ -163,12 +195,12 @@ public abstract class Board extends JPanel
     public abstract void drawGame(Graphics g);
 
     @Override
-    public synchronized void addKeyListener(KeyListener l) {
+    public final synchronized void addKeyListener(KeyListener l) {
         keyListener.add(l);
     }
 
     @Override
-    public synchronized void addMouseListener(MouseListener l) {
+    public final synchronized void addMouseListener(MouseListener l) {
         mouseListener.add(l);
     }
 
@@ -239,7 +271,7 @@ public abstract class Board extends JPanel
      * @param g the graphics context
      * @param msg the message to be shown
      */
-    protected void centerText(Graphics g, String msg) {
+    protected final void centerText(Graphics g, String msg) {
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics fm = getFontMetrics(small);
 
@@ -257,7 +289,7 @@ public abstract class Board extends JPanel
      * @param y y position of the text
      * @param msg the message to be drawn
      */
-    protected void writeText(Graphics g, int x, int y, String msg) {
+    protected final void writeText(Graphics g, int x, int y, String msg) {
         g.setColor(Color.WHITE);
         g.drawString(msg, x, y);
     }
@@ -296,7 +328,7 @@ public abstract class Board extends JPanel
     /**
      * @see java.lang.Runnable#run()
      */
-    public void run() {
+    public final void run() {
 
         // Updates that were not fast enough and therefore caused a
         // missed sleep

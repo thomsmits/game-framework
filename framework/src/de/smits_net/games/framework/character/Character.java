@@ -11,6 +11,8 @@ import java.awt.Point;
  * Base class for moveable characters in the game. Characters are similar
  * to sprites with the difference that they have a target location and move
  * to this location with a given speed and then stop there.
+ *
+ * @author Thomas Smits
  */
 public class Character extends DirectionAnimatedSprite {
 

@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 /**
- * Auto scrolling background image for a game. The image
+ * Auto scrolling background image for a game.
  *
  * @author Thomas Smits
  */

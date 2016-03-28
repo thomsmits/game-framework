@@ -5,8 +5,34 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 /**
- * Main Window of the game. The concrete games will subclass it to produce
- * the ain window.
+ * Main Window of the game. The games will subclass it to produce
+ * the main window. They pass their specialized {@link Board} and
+ * the title of the main window using the constructor to this class.
+ * <p>
+ * Additionally the subclasses of this class contain the main method
+ * and they start the game thread. A typical example of a subclass of
+ * this class may look like this (assuming that the specialized board
+ * is called {@code MyBoard}.
+ *
+ * <pre>
+ * import java.awt.EventQueue;
+ * import de.smits_net.games.framework.board.MainWindow;
+ *
+ * public class GameMain extends MainWindow {
+ *
+ *     public GameMain() {
+ *         // pass data to parent constructor and create out board
+ *         super("Title of a cool game", new MyBoard());
+ *     }
+ *
+ *     public static void main(String[] args) {
+ *         // start the game thread
+ *         EventQueue.invokeLater(GameMain::new);
+ *     }
+ * }
+ * </pre>
+ *
+ * @author Thomas Smits
  */
 public class MainWindow {
 
