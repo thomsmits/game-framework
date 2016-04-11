@@ -5,6 +5,7 @@ import de.smits_net.games.framework.Constants;
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.ImageBase;
 import de.smits_net.games.framework.image.ImagePack;
+import de.smits_net.games.framework.image.SimpleImage;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -107,6 +108,20 @@ public class Sprite implements KeyListener, MouseListener {
     }
 
     /**
+     * Creates a new sprite.
+     *
+     * @param board the board the sprite is displayed on
+     * @param position position of the upper left corner of the sprite
+     * @param policy the policy when the sprite reaches the boundaries
+     *      of the board
+     * @param image the single image
+     */
+    public Sprite(Board board, Point position,
+                  BoundaryPolicy policy, SimpleImage image) {
+        this(board, position, policy, new ImagePack(image.getBufferedImage()));
+    }
+
+    /**
      * Sets the border of the sprite (for collision detection).
      *
      * @param border the border to set
@@ -195,7 +210,7 @@ public class Sprite implements KeyListener, MouseListener {
      * Checks whether this sprite intersects with the given polygon.
      *
      * @param p2 the polygon.
-     * @return true if there is an intersection,
+     * @return {@code true} if there is an intersection, otherwise {@code false}
      */
     public boolean intersects(Polygon p2) {
 
@@ -220,17 +235,28 @@ public class Sprite implements KeyListener, MouseListener {
      * Checks whether this sprite intersects with the given sprite.
      *
      * @param other the other sprite.
-     * @return true if there is an intersection,
+     * @return {@code true} if there is an intersection, otherwise {@code false}
      */
     public boolean intersects(Sprite other) {
         return intersects(other.absoluteBorder());
     }
 
     /**
+     * Checks whether the given point is inside the sprite or not.
+     *
+     * @param p the point to test for intersection with the sprite
+     * @return {@code true} if there is an intersection, otherwise {@code false}
+     */
+    public boolean intersects(Point p) {
+        return ((p.x >= position.x) && (p.x <= position.x + dimension.width))
+                && ((p.y >= position.y) && (p.y <= position.y + dimension.height));
+    }
+
+    /**
      * Checks whether this sprite intersects with the given rectangle.
      *
      * @param other the rectangle.
-     * @return true if there is an intersection,
+     * @return {@code true} if there is an intersection, otherwise {@code false}
      */
     public boolean intersects(Rectangle other) {
         Polygon p = new Polygon();
@@ -247,7 +273,7 @@ public class Sprite implements KeyListener, MouseListener {
      *
      * @param others the others
      * @param <T> Type of the objects
-     * @return true if there is an intersection,
+     * @return {@code true} if there is an intersection, otherwise {@code false}
      */
     public <T extends Sprite> boolean intersects(List<T> others) {
         for (T other : others) {
@@ -295,6 +321,15 @@ public class Sprite implements KeyListener, MouseListener {
      */
     public Point getPosition() {
         return new Point((int) position.x, (int) position.y);
+    }
+
+    /**
+     * Sets the position.
+     *
+     * @param position The new Position to be set.
+     */
+    public void setPosition(Point position) {
+        this.position = new Point2D.Double(position.x, position.y);
     }
 
     /**
