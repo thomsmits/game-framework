@@ -12,7 +12,8 @@ import java.awt.image.ImageObserver;
  */
 public class SimpleImage extends ImageBase {
 
-    private final BufferedImage image;
+    /** The Image encapsulated in this object. */
+    protected final BufferedImage image;
 
     /**
      * Create a new simple image.

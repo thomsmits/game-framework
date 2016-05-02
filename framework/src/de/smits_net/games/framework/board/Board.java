@@ -78,16 +78,16 @@ public abstract class Board extends JPanel
             = Constants.NANOSECONDS_PER_SECOND / 4;
 
     /** Indicator that the game is still running. */
-    protected volatile boolean gameRunning = true;
+    private volatile boolean gameRunning = true;
 
     /** Dimension of the board. */
-    protected final Dimension dimension;
+    private final Dimension dimension;
 
     /** Time for each iteration (frame) in nano seconds. */
-    protected final long delay;
+    private final long delay;
 
     /** The thread. */
-    protected Thread thread;
+    private Thread thread;
 
     /** Canvas the game is drawn on. */
     private Image image;

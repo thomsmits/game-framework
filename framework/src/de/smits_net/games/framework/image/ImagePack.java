@@ -77,7 +77,7 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
      * @param wrapAround if set to {@code true} (default), the images loop
      *                   forever.
      */
-    void setWrapAround(boolean wrapAround) {
+    public void setWrapAround(boolean wrapAround) {
         this.wrapAround = wrapAround;
     }
 
@@ -138,6 +138,15 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
      */
     public Iterator<BufferedImage> iterator() {
         return imageList.iterator();
+    }
+
+    /**
+     * Indicates, whether the images wrap around at the end.
+     *
+     * @return {@code true} if wrap around happens, otherwise {@code false}.
+     */
+    public boolean getWrapAround() {
+        return wrapAround;
     }
 
     @Override
