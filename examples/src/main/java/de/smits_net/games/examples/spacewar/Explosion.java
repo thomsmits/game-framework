@@ -14,6 +14,6 @@ public class Explosion extends StripedImage {
      * Create a new sprite.
      */
     public Explosion() {
-        super("assets/spacewar/explosion_1.png", 43);
+        super(ClassLoader.getSystemResource("spacewar/explosion_1.png"), 43);
     }
 }

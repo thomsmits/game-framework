@@ -67,7 +67,7 @@ public class SaveTheFrogBoard extends Board {
      */
     private void init() {
         backgroundImage = new BackgroundImage(0,
-                ImageBase.loadImage("assets/save_the_frog/background.png"));
+                ImageBase.loadImage(ClassLoader.getSystemResource("save_the_frog/background.png")));
         frog = new Frog(this, new Point(10, 10));
         addKeyListener(frog);
 

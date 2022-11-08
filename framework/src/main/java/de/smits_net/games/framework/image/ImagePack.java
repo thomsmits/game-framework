@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -40,6 +41,21 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
      */
     protected ImagePack() {
         // empty
+    }
+
+    /**
+     * Creates a new set of images.
+     *
+     * @param urls URLs of the files to be loaded
+     */
+    public ImagePack(URL... urls) {
+        if (urls.length == 0) {
+            throw new IllegalArgumentException("At least one image required");
+        }
+
+        for (URL url : urls) {
+            imageList.add(loadImage(url));
+        }
     }
 
     /**

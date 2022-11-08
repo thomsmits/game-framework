@@ -26,7 +26,7 @@ public class Missile extends Sprite {
      */
     public Missile(Board board, Point startPoint) {
         super(board, startPoint, BoundaryPolicy.INVISIBLE,
-                new ImagePack("assets/spacewar", "rocket.png"));
+                new ImagePack(ClassLoader.getSystemResource("spacewar/rocket.png")));
 
         setVelocity(new Velocity(MISSILE_SPEED, 0));
     }

@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.net.URL;
 
 /**
  * A set of images that form an animated image. The difference
@@ -72,6 +73,31 @@ public class AnimatedImage extends ImageBase {
      * caller to make usage easier.
      *
      * @param time the time one image is shown in milliseconds
+     * @param urlsToImage URL to the image to be loaded
+     */
+    public AnimatedImage(int time, URL... urlsToImage) {
+        this(time, new ImagePack(urlsToImage));
+    }
+
+    /**
+     * Convenience constructor that creates the image pack for the
+     * caller to make usage easier.
+     *
+     * @param time the time one image is shown in milliseconds
+     * @param wrapAround if set to {@code true} the animation cycles infinitely
+     *                   through the images. If set to {@code false} it stops at
+     *                   the last image.
+     * @param urlsToImage URL to the image to be loaded
+     */
+    public AnimatedImage(int time, boolean wrapAround, URL... urlsToImage) {
+        this(time, wrapAround, new ImagePack(urlsToImage));
+    }
+
+    /**
+     * Convenience constructor that creates the image pack for the
+     * caller to make usage easier.
+     *
+     * @param time the time one image is shown in milliseconds
      * @param wrapAround if set to {@code true} the animation cycles infinitely
      *                   through the images. If set to {@code false} it stops at
      *                   the last image.
@@ -94,6 +120,19 @@ public class AnimatedImage extends ImageBase {
     public AnimatedImage(int time, int number, String imageFilePath) {
         this(time, new StripedImage(imageFilePath, number));
     }
+
+    /**
+     * Convenience constructor that creates the striped image for the
+     * caller to make usage easier.
+     *
+     * @param time the time one image is shown in milliseconds
+     * @param number the number of elements
+     * @param imageFileURL URL of the striped image
+     */
+    public AnimatedImage(int time, int number, URL imageFileURL) {
+        this(time, new StripedImage(imageFileURL, number));
+    }
+
 
     @Override
     public Dimension getDimension() {

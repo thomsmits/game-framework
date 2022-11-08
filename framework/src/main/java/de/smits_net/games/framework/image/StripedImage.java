@@ -2,6 +2,7 @@
 package de.smits_net.games.framework.image;
 
 import java.awt.image.BufferedImage;
+import java.net.URL;
 
 /**
  * An image with all sub images in one row.
@@ -28,5 +29,15 @@ public class StripedImage extends TiledImage {
      */
     public StripedImage(String path, int number) {
         this(ImageBase.loadImage(path), number);
+    }
+
+    /**
+     * Create a new image.
+     *
+     * @param url path to the image
+     * @param number the number of elements
+     */
+    public StripedImage(URL url, int number) {
+        this(ImageBase.loadImage(url), number);
     }
 }

@@ -61,7 +61,7 @@ public class DodgerBoard extends Board {
         rabbit = new Rabbit(this,
                 new Point(INITIAL_POS_RABBIT_X, INITIAL_POS_RABBIT_Y));
         addKeyListener(rabbit);
-        background = ImageBase.loadImage("assets/dodger/background.png");
+        background = ImageBase.loadImage(ClassLoader.getSystemResource("dodger/background.png"));
     }
 
 

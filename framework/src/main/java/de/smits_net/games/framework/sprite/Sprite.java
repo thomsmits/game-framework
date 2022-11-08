@@ -19,10 +19,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -459,6 +456,17 @@ public class Sprite implements KeyListener, MouseListener {
     }
 
     /**
+     * Load a polygon definition from a stream.
+     *
+     * @param is the stream
+     * @return the loaded polygon
+     */
+    public static Polygon loadPolygonFromStream(InputStream is) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        return getPolygon(br);
+    }
+
+    /**
      * Load a polygon definition from a file.
      *
      * @param path directory
@@ -467,12 +475,23 @@ public class Sprite implements KeyListener, MouseListener {
      */
     public static Polygon loadPolygonFromFile(String path, String fileName) {
 
-        Polygon result = new Polygon();
         File directory = new File(path);
         File filePath = new File(directory, fileName);
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
+            return getPolygon(br);
+        }
+        catch (FileNotFoundException ex) {
+            System.err.println("Error loading polygon: " + ex);
+            return null;
+        }
+    }
+
+    private static Polygon getPolygon(BufferedReader br) {
+        try {
+            Polygon result = new Polygon();
+
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -498,14 +517,16 @@ public class Sprite implements KeyListener, MouseListener {
 
                 result.addPoint(x, y);
             }
+
+            return result;
         }
         catch (IOException | NumberFormatException e) {
             // do nothing. In case of error, we return an empty
             // polygon
             System.err.println("Error loading polygon: " + e);
-        }
 
-        return result;
+            return null;
+        }
     }
 
     /**

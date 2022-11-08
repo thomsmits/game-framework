@@ -28,15 +28,23 @@ public class Frog extends Character {
      */
     public Frog(Board board, Point startPoint) {
         super(board, new Point(FROG_X, FROG_Y), FROG_SPEED, BoundaryPolicy.STOP,
-                new AnimatedImage(20, "assets/save_the_frog", "frog_u1"),
-                new AnimatedImage(20, "assets/save_the_frog", "frog_l1", "frog_l2"),
-                new AnimatedImage(20, "assets/save_the_frog", "frog_r1", "frog_r2"),
-                new AnimatedImage(20, "assets/save_the_frog", "frog_u1", "frog_u2"),
-                new AnimatedImage(20, "assets/save_the_frog", "frog_d1", "frog_d2"),
-                new AnimatedImage(1, "assets/save_the_frog", "frog_l1"),
-                new AnimatedImage(1, "assets/save_the_frog", "frog_r1"),
-                new AnimatedImage(1, "assets/save_the_frog", "frog_u1"),
-                new AnimatedImage(1, "assets/save_the_frog", "frog_d1"));
+                new AnimatedImage(20, ClassLoader.getSystemResource("save_the_frog/frog_u1.png")),
+                new AnimatedImage(20,
+                        ClassLoader.getSystemResource("save_the_frog/frog_l1.png"),
+                        ClassLoader.getSystemResource("save_the_frog/frog_l2.png")),
+                new AnimatedImage(20,
+                        ClassLoader.getSystemResource("save_the_frog/frog_r1.png"),
+                        ClassLoader.getSystemResource("save_the_frog/frog_r2.png")),
+                new AnimatedImage(20,
+                        ClassLoader.getSystemResource("save_the_frog/frog_u1.png"),
+                        ClassLoader.getSystemResource("save_the_frog/frog_u2.png")),
+                new AnimatedImage(20,
+                        ClassLoader.getSystemResource("save_the_frog/frog_d1.png"),
+                        ClassLoader.getSystemResource("save_the_frog/frog_d2.png")),
+                new AnimatedImage(1, ClassLoader.getSystemResource("save_the_frog/frog_l1.png")),
+                new AnimatedImage(1, ClassLoader.getSystemResource("save_the_frog/frog_r1.png")),
+                new AnimatedImage(1, ClassLoader.getSystemResource("save_the_frog/frog_u1.png")),
+                new AnimatedImage(1, ClassLoader.getSystemResource("save_the_frog/frog_d1.png")));
 
         bounds = new Rectangle(0, 0, board.getWidth(), FROG_Y + animatedImage.getDimension().height);
     }
@@ -47,8 +55,11 @@ public class Frog extends Character {
     public void die() {
         setInvisibleAfterFrames(300);
 
-        AnimatedImage deadFrog = new AnimatedImage(200, false, "assets/save_the_frog",
-                "dead_1", "dead_2", "dead_3", "dead_4");
+        AnimatedImage deadFrog = new AnimatedImage(200, false,
+                ClassLoader.getSystemResource("save_the_frog/dead_1.png"),
+                ClassLoader.getSystemResource("save_the_frog/dead_2.png"),
+                ClassLoader.getSystemResource("save_the_frog/dead_3.png"),
+                ClassLoader.getSystemResource("save_the_frog/dead_4.png"));
 
         setAllMovementAnimations(deadFrog);
         setAllNoMovementAnimations(deadFrog);

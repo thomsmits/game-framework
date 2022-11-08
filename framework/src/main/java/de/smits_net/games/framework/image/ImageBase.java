@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +48,21 @@ public abstract class ImageBase {
     public abstract void draw(Graphics g,
                               Point position,
                               ImageObserver observer);
+
+    /**
+     * Load the image.
+     *
+     * @param url pointing to the file
+     * @return The loaded image
+     */
+    public static BufferedImage loadImage(URL url) {
+        try {
+            return loadImage(new File(url.toURI()));
+        }
+        catch (URISyntaxException ex) {
+            throw new IllegalArgumentException("Illegal URI " + url.toString());
+        }
+    }
 
     /**
      * Load the image.

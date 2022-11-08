@@ -27,7 +27,7 @@ public class Alien extends AnimatedSprite {
     public Alien(Board board, Point startPoint) {
         super(board, startPoint, BoundaryPolicy.NONE,
                 new AnimatedImage(50, 5,
-                        "assets/spacewar/spike_fist_move_strip5.png"));
+                        ClassLoader.getSystemResource("spacewar/spike_fist_move_strip5.png")));
         velocity.setVelocity(Direction.WEST, ALIEN_SPEED);
     }
 

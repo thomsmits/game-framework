@@ -24,22 +24,21 @@ public class Craft extends DirectionAnimatedSprite {
 
     /** Image for the craft without thrusters.*/
     private static final AnimatedImage CRAFT_NOT_MOVING =
-            new AnimatedImage(ANIMATION_SPEED,
-                    "assets/spacewar", "craft_1.png");
+            new AnimatedImage(ANIMATION_SPEED, ClassLoader.getSystemResource("spacewar/craft_1.png"));
 
     /** Image for the craft accelerating forward. */
     private static final AnimatedImage CRAFT_ACCELERATING_FORWARD =
-            new AnimatedImage(ANIMATION_SPEED, "assets/spacewar",
-                    "craft_1.png",
-                    "craft_2.png",
-                    "craft_3.png",
-                    "craft_4.png");
+            new AnimatedImage(ANIMATION_SPEED,
+                    ClassLoader.getSystemResource("spacewar/craft_1.png"),
+                    ClassLoader.getSystemResource("spacewar/craft_2.png"),
+                    ClassLoader.getSystemResource("spacewar/craft_3.png"),
+                    ClassLoader.getSystemResource("spacewar/craft_4.png"));
 
     /** Image for the craft accelerating backward. */
     private static final AnimatedImage CRAFT_ACCELERATING_BACKWARD =
-            new AnimatedImage(ANIMATION_SPEED, "assets/spacewar",
-                    "craft_1.png",
-                    "craft_5.png");
+            new AnimatedImage(ANIMATION_SPEED,
+                    ClassLoader.getSystemResource("spacewar/craft_1.png"),
+                    ClassLoader.getSystemResource("spacewar/craft_5.png"));
 
     /** Missiles fired. */
     private SpriteCollection<Missile> missiles = new SpriteCollection<>();
@@ -59,7 +58,7 @@ public class Craft extends DirectionAnimatedSprite {
                 CRAFT_ACCELERATING_BACKWARD
         );
 
-        setBorder(loadPolygonFromFile("assets/spacewar", "craft.poly"));
+        setBorder(loadPolygonFromStream(ClassLoader.getSystemResourceAsStream("spacewar/craft.poly")));
     }
 
     /**

@@ -22,9 +22,9 @@ public class Sun extends AnimatedSprite {
      */
     public Sun(Board board, Point startPoint, int speed) {
         super(board, startPoint, BoundaryPolicy.NONE,
-                new AnimatedImage(50, "assets/dodger",
-                        "sun1.png",
-                        "sun2.png"
+                new AnimatedImage(50,
+                        ClassLoader.getSystemResource("dodger/sun1.png"),
+                        ClassLoader.getSystemResource("dodger/sun2.png")
                 ));
 
         velocity.setVelocity(Direction.SOUTH, speed);
