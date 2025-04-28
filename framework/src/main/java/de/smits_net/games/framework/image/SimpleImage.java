@@ -18,15 +18,15 @@ public class SimpleImage extends ImageBase {
     /**
      * Create a new simple image.
      *
-     * @param path path to the image.
+     * @param image the image.
      */
-    public SimpleImage(String path) {
-        image = ImageBase.loadImage(path);
+    public SimpleImage(BufferedImage image) {
+        this.image = image;
     }
 
-    @Override
-    public void draw(Graphics g, Point position, ImageObserver observer) {
-        g.drawImage(image, position.x, position.y, observer);
+
+    public SimpleImage(String name) {
+        this(ImageBase.load(name));
     }
 
     /**
@@ -41,5 +41,10 @@ public class SimpleImage extends ImageBase {
     @Override
     public Dimension getDimension() {
         return new Dimension(image.getWidth(), image.getHeight());
+    }
+
+    @Override
+    public void draw(Graphics g, Point position, ImageObserver observer) {
+        g.drawImage(image, position.x, position.y, observer);
     }
 }

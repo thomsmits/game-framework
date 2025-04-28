@@ -29,7 +29,7 @@ public abstract class ImageBase {
     protected static Map<String, BufferedImage> imageCache = new HashMap<>();
 
     /** The current graphics configuration of the screen we are using. */
-    private static GraphicsConfiguration gc;
+    private static final GraphicsConfiguration gc;
 
     static {
         // get the graphics environment
@@ -55,9 +55,9 @@ public abstract class ImageBase {
      * @param url pointing to the file
      * @return The loaded image
      */
-    public static BufferedImage loadImage(URL url) {
+    public static BufferedImage load(URL url) {
         try {
-            return loadImage(new File(url.toURI()));
+            return load(new File(url.toURI()));
         }
         catch (URISyntaxException ex) {
             throw new IllegalArgumentException("Illegal URI " + url.toString());
@@ -70,7 +70,7 @@ public abstract class ImageBase {
      * @param file path to the image
      * @return The loaded image
      */
-    public static BufferedImage loadImage(File file) {
+    public static BufferedImage load(File file) {
 
         BufferedImage img = imageCache.get(file.getAbsolutePath());
 
@@ -115,13 +115,17 @@ public abstract class ImageBase {
     }
 
     /**
-     * Load the image.
+     * Load the image from the class path.
      *
-     * @param imagePath path to the image
+     * @param name path to the image
      * @return The loaded image
      */
-    public static BufferedImage loadImage(String imagePath) {
-        return loadImage(new File(imagePath));
+    public static BufferedImage load(String name) {
+        URL url = ImageBase.class.getResource(name);
+        if (url == null) {
+            throw new RuntimeException(name + " not found");
+        }
+        return load(ImageBase.class.getResource(name));
     }
 
     /**

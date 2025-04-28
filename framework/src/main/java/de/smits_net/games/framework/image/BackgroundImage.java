@@ -16,7 +16,7 @@ public class BackgroundImage {
     private double scroll;
 
     /** Scroll speed. */
-    private double speed;
+    private final double speed;
 
     /** The image. */
     protected BufferedImage background;

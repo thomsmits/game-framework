@@ -34,22 +34,22 @@ public class SpaceWarBoard extends Board {
     private static final int DELAY = 10;
 
     /** The background. */
-    private StarField starField1 = new StarField(
+    private final StarField starField1 = new StarField(
             -0.5, BOARD_WIDTH, BOARD_HEIGHT, Color.WHITE, 0.001);
 
     /** The background. */
-    private StarField starField2 = new StarField(
+    private final StarField starField2 = new StarField(
             -0.5, BOARD_WIDTH, BOARD_HEIGHT, Color.GRAY, 0.001);
 
     /** The background. */
-    private StarField starField3 = new StarField(
+    private final StarField starField3 = new StarField(
             -0.3, BOARD_WIDTH, BOARD_HEIGHT, Color.DARK_GRAY, 0.001);
 
-    /** Space craft. */
-    private Craft craft;
+    /** Spacecraft. */
+    private SpaceCraft craft;
 
     /** Enemies. */
-    private SpriteCollection<Alien> aliens = new SpriteCollection<>();
+    private final SpriteCollection<Alien> aliens = new SpriteCollection<>();
 
     /**
      * Initialize the game.
@@ -63,7 +63,7 @@ public class SpaceWarBoard extends Board {
      * Initialize the game.
      */
     private void init() {
-        craft = new Craft(this, new Point(
+        craft = new SpaceCraft(this, new Point(
                 INITIAL_POS_CRAFT_X, INITIAL_POS_CRAFT_Y));
         addKeyListener(craft);
         addMouseListener(craft);

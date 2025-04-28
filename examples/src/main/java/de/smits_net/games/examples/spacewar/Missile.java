@@ -9,7 +9,7 @@ import de.smits_net.games.framework.sprite.Velocity;
 import java.awt.Point;
 
 /**
- * Sprite of a missile fired by the space craft.
+ * Sprite of a missile fired by the spacecraft.
  *
  * @author Thomas Smits
  */
@@ -26,7 +26,7 @@ public class Missile extends Sprite {
      */
     public Missile(Board board, Point startPoint) {
         super(board, startPoint, BoundaryPolicy.INVISIBLE,
-                new ImagePack(ClassLoader.getSystemResource("spacewar/rocket.png")));
+                new ImagePack("/de/smits_net/games/examples/spacewar/rocket.png"));
 
         setVelocity(new Velocity(MISSILE_SPEED, 0));
     }

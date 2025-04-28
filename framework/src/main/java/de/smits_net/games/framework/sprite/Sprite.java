@@ -23,7 +23,7 @@ import java.io.*;
 import java.util.List;
 
 /**
- * Class representing a sprite, i.e. an moveable object in the game.
+ * Class representing a sprite, i.e. a moveable object in the game.
  *
  * @author Thomas Smits
  */
@@ -59,7 +59,7 @@ public class Sprite implements KeyListener, MouseListener {
     protected boolean visible;
 
     /** the image that is displayed. */
-    protected ImageBase image;
+    protected ImagePack image;
 
     /** The bounds of the sprite movement. */
     protected Rectangle bounds;
@@ -105,20 +105,6 @@ public class Sprite implements KeyListener, MouseListener {
     }
 
     /**
-     * Creates a new sprite.
-     *
-     * @param board the board the sprite is displayed on
-     * @param position position of the upper left corner of the sprite
-     * @param policy the policy when the sprite reaches the boundaries
-     *      of the board
-     * @param image the single image
-     */
-    public Sprite(Board board, Point position,
-                  BoundaryPolicy policy, SimpleImage image) {
-        this(board, position, policy, new ImagePack(image.getBufferedImage()));
-    }
-
-    /**
      * Sets the border of the sprite (for collision detection).
      *
      * @param border the border to set
@@ -133,7 +119,6 @@ public class Sprite implements KeyListener, MouseListener {
     public void move() {
         move(velocity);
     }
-
 
     /**
      * Set the velocity of the sprite.
@@ -500,7 +485,7 @@ public class Sprite implements KeyListener, MouseListener {
                 line = line.replaceAll(" ", "");
 
                 // ignore empty lines
-                if (line.length() == 0) {
+                if (line.isEmpty()) {
                     continue;
                 }
 

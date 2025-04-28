@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +16,7 @@ import java.util.List;
 /**
  * A pack (collection) of images. This class can be used if more than one image
  * has to be transferred. It can also contain only one image.
- *
+ * <p>
  * The class has one "current" image, which can be retrieved using the
  * {@link ImagePack#getImage()} method. The user can cycle through the images with the
  * {@link ImagePack#cycle()} method.
@@ -32,7 +31,7 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
     /** Image currently displayed, used for cycling through the images. */
     protected int currentImage = 0;
 
-    /** If set to true the cycling will go around forever, if set
+    /** If set to true, the cycling will go around forever, if set
      * to false. it stops with the last image */
     boolean wrapAround = true;
 
@@ -54,27 +53,18 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
         }
 
         for (URL url : urls) {
-            imageList.add(loadImage(url));
+            imageList.add(load(url));
         }
     }
 
     /**
      * Creates a new set of images.
      *
-     * @param path path to the image
-     * @param fileNames names of the files to be loaded
+     * @param names names of images loaded from classpath
      */
-    public ImagePack(String path, String... fileNames) {
-
-        File base = new File(path);
-
-        if (fileNames.length == 0) {
-            throw new IllegalArgumentException("At least one image required");
-        }
-
-        for (String imageFile : fileNames) {
-            File imagePath = new File(base, imageFile);
-            imageList.add(loadImage(imagePath.getAbsolutePath()));
+    public ImagePack(String... names) {
+        for (String name : names) {
+            imageList.add(load(name));
         }
     }
 
@@ -165,6 +155,100 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
         return wrapAround;
     }
 
+    /**
+     * Load a tiled image.
+     *
+     * @param img the image to be split up
+     * @param boxWidth width of onw tile
+     * @param boxHeight height of one tile
+     * @return the images as a pack
+     */
+    public static ImagePack loadTiledImage(BufferedImage img, int boxWidth, int boxHeight) {
+
+        int imageWidth = img.getWidth();
+        int imageHeight = img.getHeight();
+        int tilesPerRow = imageWidth / boxWidth;
+        int tilesPerColumn = imageHeight / boxHeight;
+
+        List<BufferedImage> images = new ArrayList<>();
+
+        int size = tilesPerColumn * tilesPerRow;
+        int boxPerRow = img.getWidth() / boxWidth;
+
+        for (int index = 0; index < size; index++) {
+            int row = index / boxPerRow;
+            int column = index % boxPerRow;
+
+            int xpos = boxWidth * column;
+            int ypos = boxWidth * row;
+
+            images.add(img.getSubimage(xpos, ypos, boxWidth, boxHeight));
+        }
+
+        return new ImagePack(images.toArray(new BufferedImage[0]));
+    }
+
+    /**
+     * Load a tiled image.
+     *
+     * @param path path to the image to be split up
+     * @param boxWidth width of onw tile
+     * @param boxHeight height of one tile
+     * @return the images as a pack
+     */
+    public static ImagePack loadTiledImage(String path, int boxWidth, int boxHeight) {
+        BufferedImage img = ImageBase.load(path);
+        return loadTiledImage(img, boxWidth, boxHeight);
+    }
+
+    /**
+     * Load a tiled image.
+     *
+     * @param url URL to the image to be split up
+     * @param boxWidth width of onw tile
+     * @param boxHeight height of one tile
+     * @return the images as a pack
+     */
+    public static ImagePack loadTiledImage(URL url, int boxWidth, int boxHeight) {
+        BufferedImage img = ImageBase.load(url);
+        return loadTiledImage(img, boxWidth, boxHeight);
+    }
+
+    /**
+     * Load a striped image.
+     *
+     * @param name path to the image to be split up
+     * @param number number of sub-images
+     * @return the images as a pack
+     */
+    public static ImagePack loadStripedImage(String name, int number) {
+        BufferedImage img = ImageBase.load(name);
+        return loadStripedImage(img, number);
+    }
+
+    /**
+     * Load a striped image.
+     *
+     * @param url URL to the image to be split up
+     * @param number number of sub-images
+     * @return the images as a pack
+     */
+    public static ImagePack loadStripedImage(URL url, int number) {
+        BufferedImage img = ImageBase.load(url);
+        return loadStripedImage(img, number);
+    }
+
+    /**
+     * Load a striped image.
+     *
+     * @param image the image to the image to be split up
+     * @param number number of sub-images
+     * @return the images as a pack
+     */
+    public static ImagePack loadStripedImage(BufferedImage image, int number) {
+        return loadTiledImage(image, image.getWidth() / number, image.getHeight());
+    }
+
     @Override
     public Dimension getDimension() {
         BufferedImage img = getImage();
@@ -176,4 +260,5 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
         g.drawImage(imageList.get(currentImage),
                 position.x, position.y, observer);
     }
+
 }

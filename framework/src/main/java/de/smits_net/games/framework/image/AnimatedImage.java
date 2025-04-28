@@ -13,32 +13,32 @@ import java.net.URL;
 /**
  * A set of images that form an animated image. The difference
  * to the {@link ImagePack} is that the class automatically
- * tracks the time that passed since the last draw call and
+ * tracks the time that'd passed since the last draw call and
  * changes the image automatically if the requested animatedImage
  * time has passed.
  *
  * @author Thomas Smits
  */
-public class AnimatedImage extends ImageBase {
+public class AnimatedImage extends ImagePack {
 
     /** Last change of the sprite. */
     protected long lastRun = System.nanoTime();
 
     /** Time between two frames in milliseconds. */
-    protected int time;
-
-    /** The images comprising the animatedImage. */
-    protected ImagePack images;
+    protected volatile int time;
 
     /**
      * Creates a new object. The animation will cycle infinitely through
      * the provided images.
      *
      * @param time the time one image is shown in milliseconds
-     * @param images the images comprising the animatedImage
+     * @param wrapAround if set to {@code true} the animation cycles infinitely
+     *                   through the images. If set to {@code false} it stops at
+     *                   the last image.
+     * @param names the names of the images comprising the animatedImage
      */
-    public AnimatedImage(int time, ImagePack images) {
-        this(time, true, images);
+    public AnimatedImage(int time, boolean wrapAround, String ...names) {
+        this(time, wrapAround, new ImagePack(names));
     }
 
     /**
@@ -51,101 +51,18 @@ public class AnimatedImage extends ImageBase {
      * @param images the images comprising the animatedImage
      */
     public AnimatedImage(int time, boolean wrapAround, ImagePack images) {
-        this.images = images;
         this.time = time;
         images.setWrapAround(wrapAround);
+        this.imageList = images.imageList;
     }
 
     /**
-     * Convenience constructor that creates the image pack for the
-     * caller to make usage easier.
-     *
-     * @param time the time one image is shown in milliseconds
-     * @param path path to the image
-     * @param fileNames names of the files to be loaded
-     */
-    public AnimatedImage(int time, String path, String... fileNames) {
-        this(time, new ImagePack(path, fileNames));
-    }
-
-    /**
-     * Convenience constructor that creates the image pack for the
-     * caller to make usage easier.
-     *
-     * @param time the time one image is shown in milliseconds
-     * @param urlsToImage URL to the image to be loaded
-     */
-    public AnimatedImage(int time, URL... urlsToImage) {
-        this(time, new ImagePack(urlsToImage));
-    }
-
-    /**
-     * Convenience constructor that creates the image pack for the
-     * caller to make usage easier.
-     *
-     * @param time the time one image is shown in milliseconds
-     * @param wrapAround if set to {@code true} the animation cycles infinitely
-     *                   through the images. If set to {@code false} it stops at
-     *                   the last image.
-     * @param urlsToImage URL to the image to be loaded
-     */
-    public AnimatedImage(int time, boolean wrapAround, URL... urlsToImage) {
-        this(time, wrapAround, new ImagePack(urlsToImage));
-    }
-
-    /**
-     * Convenience constructor that creates the image pack for the
-     * caller to make usage easier.
-     *
-     * @param time the time one image is shown in milliseconds
-     * @param wrapAround if set to {@code true} the animation cycles infinitely
-     *                   through the images. If set to {@code false} it stops at
-     *                   the last image.
-     * @param path path to the image
-     * @param fileNames names of the files to be loaded
-     */
-    public AnimatedImage(int time, boolean wrapAround,
-                         String path, String... fileNames) {
-        this(time, wrapAround, new ImagePack(path, fileNames));
-    }
-
-    /**
-     * Convenience constructor that creates the striped image for the
-     * caller to make usage easier.
-     *
-     * @param time the time one image is shown in milliseconds
-     * @param number the number of elements
-     * @param imageFilePath the striped image
-     */
-    public AnimatedImage(int time, int number, String imageFilePath) {
-        this(time, new StripedImage(imageFilePath, number));
-    }
-
-    /**
-     * Convenience constructor that creates the striped image for the
-     * caller to make usage easier.
-     *
-     * @param time the time one image is shown in milliseconds
-     * @param number the number of elements
-     * @param imageFileURL URL of the striped image
-     */
-    public AnimatedImage(int time, int number, URL imageFileURL) {
-        this(time, new StripedImage(imageFileURL, number));
-    }
-
-
-    @Override
-    public Dimension getDimension() {
-        return images.getDimension();
-    }
-
-    /**
-     * Returns the images comprising the animatedImage.
+     * Return the images comprising the animatedImage.
      *
      * @return the images
      */
     public ImagePack getImages() {
-        return images;
+        return this;
     }
 
     /**
@@ -162,10 +79,10 @@ public class AnimatedImage extends ImageBase {
         BufferedImage[] buffer = new BufferedImage[end - start];
 
         for (int i = start, k = 0; i < end; i++, k++) {
-            buffer[k] = images.getImage(i);
+            buffer[k] = getImage(i);
         }
 
-        return new AnimatedImage(time, new ImagePack(buffer));
+        return new AnimatedImage(time, true, new ImagePack(buffer));
     }
 
     /**
@@ -184,10 +101,10 @@ public class AnimatedImage extends ImageBase {
                 / Constants.NANOSECONDS_PER_MILLISECOND;
 
         if (timePassed > time) {
-            images.cycle();
+            cycle();
             lastRun = System.nanoTime();
         }
 
-        images.draw(g, position, observer);
+        super.draw(g, position, observer);
     }
 }

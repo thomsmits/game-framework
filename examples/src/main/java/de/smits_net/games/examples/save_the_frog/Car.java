@@ -25,7 +25,7 @@ public class Car extends Sprite {
      */
     public Car(Board board, Point startPoint, String name, double speed) {
         super(board, startPoint, BoundaryPolicy.NONE,
-                new ImagePack(ClassLoader.getSystemResource("save_the_frog/" + name + ".png")));
+                new ImagePack("/de/smits_net/games/examples/save_the_frog/" + name + ".png"));
         startx = startPoint.x;
         velocity.x = speed;
     }

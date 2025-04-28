@@ -9,7 +9,7 @@ import javax.swing.WindowConstants;
  * the main window. They pass their specialized {@link Board} and
  * the title of the main window using the constructor to this class.
  * <p>
- * Additionally the subclasses of this class contain the main method
+ * Additionally, the subclasses of this class contain the main method
  * and they start the game thread. A typical example of a subclass of
  * this class may look like this (assuming that the specialized board
  * is called {@code MyBoard}.

@@ -46,7 +46,7 @@ import static java.awt.event.MouseEvent.MOUSE_RELEASED;
  * </ul>
  * <p>
  * When the game is over, the framework calls the
- * {@link Board#drawGameOver(Graphics)} to display a game over message.
+ * {@link Board#drawGameOver(Graphics)} to display a game-over message.
  * You have to overwrite this method to control this message.
  * <p>
  * By default, the game background is monochrome and in the color provided
@@ -89,11 +89,11 @@ public abstract class Board extends JPanel
     /** The thread. */
     private Thread thread;
 
-    /** Canvas the game is drawn on. */
+    /** The Canvas the game is drawn on. */
     private Image image;
 
     /** Color of the background of the board. */
-    private Color backgroundColor;
+    private final Color backgroundColor;
 
     /** Frame per second counter (only used if debugging is on). */
     private long fps;
@@ -102,16 +102,16 @@ public abstract class Board extends JPanel
     private long lastDebugUpdate;
 
     /** The captured mouse events. */
-    private List<MouseEvent> mouseEvents = new CopyOnWriteArrayList<>();
+    private final List<MouseEvent> mouseEvents = new CopyOnWriteArrayList<>();
 
     /** The captured key events for typed keys. */
-    private List<KeyEvent> keyEvents = new CopyOnWriteArrayList<>();
+    private final List<KeyEvent> keyEvents = new CopyOnWriteArrayList<>();
 
     /** All game elements that want to get key events. */
-    private List<KeyListener> keyListener = new CopyOnWriteArrayList<>();
+    private final List<KeyListener> keyListener = new CopyOnWriteArrayList<>();
 
     /** All game elements that want to get mouse events. */
-    private List<MouseListener> mouseListener = new CopyOnWriteArrayList<>();
+    private final List<MouseListener> mouseListener = new CopyOnWriteArrayList<>();
 
     /**
      * Create a new board.
@@ -209,9 +209,9 @@ public abstract class Board extends JPanel
      */
     private void triggerRendering() {
 
-        // we use double buffering. This means that we do not draw on
+        // We use double buffering. This means that we do not draw on
         // the screen directly but into an image that is eventually
-        // blitted to screen in onw step. Therefore, we need an image
+        // blitted to screen in one step. Therefore, we need an image
         // as the target of our drawing operations.
         if (image == null) {
             image = createImage(dimension.width, dimension.height);
@@ -433,13 +433,13 @@ public abstract class Board extends JPanel
                     break;
                 }
 
-                // sleep may be inaccurate, therefore calculate sleep's skew
+                // sleep may be inaccurate, therefore, calculate sleep's skew
                 sleepCorrection = System.nanoTime() - afterTime - sleepDuration;
             }
 
             int skips = 0;
 
-            // Rendering takes too much time, therefore update the game without
+            // Rendering takes too much time, therefore, update the game without
             // rendering the screen. The display will lack FPS but the game
             // logic will proceed with the right speed
             while ((excess > delay) && (skips < MAX_FRAME_SKIPS)) {
@@ -475,7 +475,7 @@ public abstract class Board extends JPanel
      */
     private <T> T fetchEvent(List<T> eventList) {
 
-        if (eventList.size() > 0) {
+        if (!eventList.isEmpty()) {
             T e = eventList.get(0);
             eventList.remove(0);
             return e;

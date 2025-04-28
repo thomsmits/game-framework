@@ -3,6 +3,7 @@ package de.smits_net.games.examples.spacewar;
 
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.AnimatedImage;
+import de.smits_net.games.framework.image.ImagePack;
 import de.smits_net.games.framework.sprite.DirectionAnimatedSprite;
 import de.smits_net.games.framework.sprite.SpriteCollection;
 
@@ -14,9 +15,9 @@ import java.awt.event.KeyEvent;
  *
  * @author Thomas Smits
  */
-public class Craft extends DirectionAnimatedSprite {
+public class SpaceCraft extends DirectionAnimatedSprite {
 
-    /** Speed of the space craft. */
+    /** Speed of the spacecraft. */
     private static final int CRAFT_SPEED = 2;
 
     /** Speed of the animatedImage. */
@@ -24,24 +25,25 @@ public class Craft extends DirectionAnimatedSprite {
 
     /** Image for the craft without thrusters.*/
     private static final AnimatedImage CRAFT_NOT_MOVING =
-            new AnimatedImage(ANIMATION_SPEED, ClassLoader.getSystemResource("spacewar/craft_1.png"));
+            new AnimatedImage(ANIMATION_SPEED, true,
+                    "/de/smits_net/games/examples/spacewar/craft_1.png");
 
     /** Image for the craft accelerating forward. */
     private static final AnimatedImage CRAFT_ACCELERATING_FORWARD =
-            new AnimatedImage(ANIMATION_SPEED,
-                    ClassLoader.getSystemResource("spacewar/craft_1.png"),
-                    ClassLoader.getSystemResource("spacewar/craft_2.png"),
-                    ClassLoader.getSystemResource("spacewar/craft_3.png"),
-                    ClassLoader.getSystemResource("spacewar/craft_4.png"));
+            new AnimatedImage(ANIMATION_SPEED, true,
+                    "/de/smits_net/games/examples/spacewar/craft_1.png",
+                    "/de/smits_net/games/examples/spacewar/craft_2.png",
+                    "/de/smits_net/games/examples/spacewar/craft_3.png",
+                    "/de/smits_net/games/examples/spacewar/craft_4.png");
 
     /** Image for the craft accelerating backward. */
     private static final AnimatedImage CRAFT_ACCELERATING_BACKWARD =
-            new AnimatedImage(ANIMATION_SPEED,
-                    ClassLoader.getSystemResource("spacewar/craft_1.png"),
-                    ClassLoader.getSystemResource("spacewar/craft_5.png"));
+            new AnimatedImage(ANIMATION_SPEED, true,
+                    "/de/smits_net/games/examples/spacewar/craft_1.png",
+                    "/de/smits_net/games/examples/spacewar/craft_5.png");
 
     /** Missiles fired. */
-    private SpriteCollection<Missile> missiles = new SpriteCollection<>();
+    private final SpriteCollection<Missile> missiles = new SpriteCollection<>();
 
     /**
      * Create a new craft at the given position.
@@ -49,7 +51,7 @@ public class Craft extends DirectionAnimatedSprite {
      * @param board the board we are displayed on
      * @param startPoint start position
      */
-    public Craft(Board board, Point startPoint) {
+    public SpaceCraft(Board board, Point startPoint) {
         super(board, startPoint, BoundaryPolicy.STOP,
                 CRAFT_NOT_MOVING,
                 CRAFT_NOT_MOVING,
@@ -58,7 +60,10 @@ public class Craft extends DirectionAnimatedSprite {
                 CRAFT_ACCELERATING_BACKWARD
         );
 
-        setBorder(loadPolygonFromStream(ClassLoader.getSystemResourceAsStream("spacewar/craft.poly")));
+        setBorder(
+                loadPolygonFromStream(
+                        SpaceCraft.class.getResourceAsStream(
+                                "/de/smits_net/games/examples/spacewar/craft.poly")));
     }
 
     /**
@@ -91,8 +96,10 @@ public class Craft extends DirectionAnimatedSprite {
      * Let the spaceship explode.
      */
     public void explode() {
+        final ImagePack explosion = ImagePack.loadStripedImage(
+                ClassLoader.getSystemResource("de/smits_net/games/examples/dodger/spacewar/explosion_1.png"), 43);
         AnimatedImage ex = new AnimatedImage(
-                ANIMATION_SPEED, false, new Explosion());
+                ANIMATION_SPEED, false, explosion);
         setAllMovementAnimations(ex);
         setInvisibleAfterFrames(30);
         setActive(false);
@@ -101,7 +108,7 @@ public class Craft extends DirectionAnimatedSprite {
     @Override
     public void keyPressed(KeyEvent e) {
 
-        // Accelerate the space ship depending on the
+        // Accelerate the spaceship depending on the
         // pressed key
         int key = e.getKeyCode();
 

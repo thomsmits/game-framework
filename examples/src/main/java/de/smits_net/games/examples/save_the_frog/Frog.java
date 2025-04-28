@@ -28,23 +28,24 @@ public class Frog extends Character {
      */
     public Frog(Board board, Point startPoint) {
         super(board, new Point(FROG_X, FROG_Y), FROG_SPEED, BoundaryPolicy.STOP,
-                new AnimatedImage(20, ClassLoader.getSystemResource("save_the_frog/frog_u1.png")),
-                new AnimatedImage(20,
-                        ClassLoader.getSystemResource("save_the_frog/frog_l1.png"),
-                        ClassLoader.getSystemResource("save_the_frog/frog_l2.png")),
-                new AnimatedImage(20,
-                        ClassLoader.getSystemResource("save_the_frog/frog_r1.png"),
-                        ClassLoader.getSystemResource("save_the_frog/frog_r2.png")),
-                new AnimatedImage(20,
-                        ClassLoader.getSystemResource("save_the_frog/frog_u1.png"),
-                        ClassLoader.getSystemResource("save_the_frog/frog_u2.png")),
-                new AnimatedImage(20,
-                        ClassLoader.getSystemResource("save_the_frog/frog_d1.png"),
-                        ClassLoader.getSystemResource("save_the_frog/frog_d2.png")),
-                new AnimatedImage(1, ClassLoader.getSystemResource("save_the_frog/frog_l1.png")),
-                new AnimatedImage(1, ClassLoader.getSystemResource("save_the_frog/frog_r1.png")),
-                new AnimatedImage(1, ClassLoader.getSystemResource("save_the_frog/frog_u1.png")),
-                new AnimatedImage(1, ClassLoader.getSystemResource("save_the_frog/frog_d1.png")));
+                new AnimatedImage(20, true,
+                        "/de/smits_net/games/examples/save_the_frog/frog_u1.png"),
+                new AnimatedImage(20, true,
+                        "/de/smits_net/games/examples/save_the_frog/frog_l1.png",
+                        "/de/smits_net/games/examples/save_the_frog/frog_l2.png"),
+                new AnimatedImage(20,true,
+                        "/de/smits_net/games/examples/save_the_frog/frog_r1.png",
+                        "/de/smits_net/games/examples/save_the_frog/frog_r2.png"),
+                new AnimatedImage(20, true,
+                        "/de/smits_net/games/examples/save_the_frog/frog_u1.png",
+                        "/de/smits_net/games/examples/save_the_frog/frog_u2.png"),
+                new AnimatedImage(20, true,
+                        "/de/smits_net/games/examples/save_the_frog/frog_d1.png",
+                        "/de/smits_net/games/examples/save_the_frog/frog_d2.png"),
+                new AnimatedImage(1, true, "/de/smits_net/games/examples/save_the_frog/frog_l1.png"),
+                new AnimatedImage(1, true, "/de/smits_net/games/examples/save_the_frog/frog_r1.png"),
+                new AnimatedImage(1, true, "/de/smits_net/games/examples/save_the_frog/frog_u1.png"),
+                new AnimatedImage(1, true, "/de/smits_net/games/examples/save_the_frog/frog_d1.png"));
 
         bounds = new Rectangle(0, 0, board.getWidth(), FROG_Y + animatedImage.getDimension().height);
     }
@@ -56,10 +57,10 @@ public class Frog extends Character {
         setInvisibleAfterFrames(300);
 
         AnimatedImage deadFrog = new AnimatedImage(200, false,
-                ClassLoader.getSystemResource("save_the_frog/dead_1.png"),
-                ClassLoader.getSystemResource("save_the_frog/dead_2.png"),
-                ClassLoader.getSystemResource("save_the_frog/dead_3.png"),
-                ClassLoader.getSystemResource("save_the_frog/dead_4.png"));
+                "/de/smits_net/games/examples/save_the_frog/dead_1.png",
+                "/de/smits_net/games/examples/save_the_frog/dead_2.png",
+                "/de/smits_net/games/examples/save_the_frog/dead_3.png",
+                "/de/smits_net/games/examples/save_the_frog/dead_4.png");
 
         setAllMovementAnimations(deadFrog);
         setAllNoMovementAnimations(deadFrog);
