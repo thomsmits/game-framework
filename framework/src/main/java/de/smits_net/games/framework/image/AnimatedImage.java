@@ -42,6 +42,20 @@ public class AnimatedImage extends ImagePack {
     }
 
     /**
+     * Creates a new object. The animation will cycle infinitely through
+     * the provided images.
+     *
+     * @param time the time one image is shown in milliseconds
+     * @param wrapAround if set to {@code true} the animation cycles infinitely
+     *                   through the images. If set to {@code false} it stops at
+     *                   the last image.
+     * @param urls the urls of the images comprising the animatedImage
+     */
+    public AnimatedImage(int time, boolean wrapAround, URL ...urls) {
+        this(time, wrapAround, new ImagePack(urls));
+    }
+
+    /**
      * Creates a new animatedImage object.
      *
      * @param time the time one image is shown in milliseconds

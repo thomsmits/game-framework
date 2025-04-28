@@ -20,6 +20,7 @@ import java.awt.event.MouseListener;
 import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import java.io.*;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -446,9 +447,18 @@ public class Sprite implements KeyListener, MouseListener {
      * @param is the stream
      * @return the loaded polygon
      */
-    public static Polygon loadPolygonFromStream(InputStream is) {
+    public static Polygon loadPolygon(InputStream is) {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         return getPolygon(br);
+    }
+
+    public static Polygon loadPolygon(URL url) {
+        try (InputStream is = url.openStream()) {
+            return loadPolygon(is);
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 
     /**

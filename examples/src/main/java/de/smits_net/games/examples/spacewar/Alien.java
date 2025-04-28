@@ -19,7 +19,6 @@ public class Alien extends AnimatedSprite {
     /** speed of the alien in x direction. */
     private static final int ALIEN_SPEED = 1;
 
-
     /**
      * Create a new alien.
      *
@@ -28,9 +27,7 @@ public class Alien extends AnimatedSprite {
      */
     public Alien(Board board, Point startPoint) {
         super(board, startPoint, BoundaryPolicy.NONE,
-                new AnimatedImage(50, true,
-                        ImagePack.loadStripedImage(
-                                "/de/smits_net/games/examples/spacewar/spike_fist_move_strip5.png", 5)));
+                new AnimatedImage(50, true, Resources.IMAGE_ALIEN));
         velocity.setVelocity(Direction.WEST, ALIEN_SPEED);
     }
 
@@ -38,10 +35,8 @@ public class Alien extends AnimatedSprite {
      * Let the alien explode.
      */
     public void explode() {
-        final ImagePack explosion = ImagePack.loadStripedImage(
-                        "/de/smits_net/games/examples/spacewar/explosion_1.png", 43);
         setActive(false);
-        setImages(new AnimatedImage(20, true, explosion));
+        setImages(new AnimatedImage(20, true, Resources.IMAGE_EXPLOSION));
         setInvisibleAfterFrames(30);
     }
 

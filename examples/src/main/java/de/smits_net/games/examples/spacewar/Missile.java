@@ -25,9 +25,7 @@ public class Missile extends Sprite {
      * @param startPoint point where sprite starts
      */
     public Missile(Board board, Point startPoint) {
-        super(board, startPoint, BoundaryPolicy.INVISIBLE,
-                new ImagePack("/de/smits_net/games/examples/spacewar/rocket.png"));
-
+        super(board, startPoint, BoundaryPolicy.INVISIBLE, Resources.IMAGE_MISSILE);
         setVelocity(new Velocity(MISSILE_SPEED, 0));
     }
 }

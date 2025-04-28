@@ -3,7 +3,6 @@ package de.smits_net.games.examples.spacewar;
 
 import de.smits_net.games.framework.board.Board;
 import de.smits_net.games.framework.image.AnimatedImage;
-import de.smits_net.games.framework.image.ImagePack;
 import de.smits_net.games.framework.sprite.DirectionAnimatedSprite;
 import de.smits_net.games.framework.sprite.SpriteCollection;
 
@@ -26,21 +25,17 @@ public class SpaceCraft extends DirectionAnimatedSprite {
     /** Image for the craft without thrusters.*/
     private static final AnimatedImage CRAFT_NOT_MOVING =
             new AnimatedImage(ANIMATION_SPEED, true,
-                    "/de/smits_net/games/examples/spacewar/craft_1.png");
+                    Resources.IMAGE_SPACECRAFT_SOLO);
 
     /** Image for the craft accelerating forward. */
     private static final AnimatedImage CRAFT_ACCELERATING_FORWARD =
             new AnimatedImage(ANIMATION_SPEED, true,
-                    "/de/smits_net/games/examples/spacewar/craft_1.png",
-                    "/de/smits_net/games/examples/spacewar/craft_2.png",
-                    "/de/smits_net/games/examples/spacewar/craft_3.png",
-                    "/de/smits_net/games/examples/spacewar/craft_4.png");
+                    Resources.IMAGE_SPACECRAFT_FORWARD);
 
     /** Image for the craft accelerating backward. */
     private static final AnimatedImage CRAFT_ACCELERATING_BACKWARD =
             new AnimatedImage(ANIMATION_SPEED, true,
-                    "/de/smits_net/games/examples/spacewar/craft_1.png",
-                    "/de/smits_net/games/examples/spacewar/craft_5.png");
+                    Resources.IMAGE_SPACECRAFT_BACKWARD);
 
     /** Missiles fired. */
     private final SpriteCollection<Missile> missiles = new SpriteCollection<>();
@@ -60,10 +55,7 @@ public class SpaceCraft extends DirectionAnimatedSprite {
                 CRAFT_ACCELERATING_BACKWARD
         );
 
-        setBorder(
-                loadPolygonFromStream(
-                        SpaceCraft.class.getResourceAsStream(
-                                "/de/smits_net/games/examples/spacewar/craft.poly")));
+        setBorder(Resources.POLYGON_SPACECRAFT);
     }
 
     /**
@@ -96,10 +88,9 @@ public class SpaceCraft extends DirectionAnimatedSprite {
      * Let the spaceship explode.
      */
     public void explode() {
-        final ImagePack explosion = ImagePack.loadStripedImage(
-                ClassLoader.getSystemResource("de/smits_net/games/examples/dodger/spacewar/explosion_1.png"), 43);
         AnimatedImage ex = new AnimatedImage(
-                ANIMATION_SPEED, false, explosion);
+                ANIMATION_SPEED, false,
+                Resources.IMAGE_EXPLOSION);
         setAllMovementAnimations(ex);
         setInvisibleAfterFrames(30);
         setActive(false);
