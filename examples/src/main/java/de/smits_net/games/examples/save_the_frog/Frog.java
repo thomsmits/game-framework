@@ -110,9 +110,9 @@ public class Frog extends Character {
     public void keyReleased(KeyEvent e) {
 
         keyDown = false;
-
+        /*
         int key = e.getKeyCode();
-/*
+
         if (key == KeyEvent.VK_LEFT)  { deltaX = 0; }
         if (key == KeyEvent.VK_RIGHT) { deltaX = 0; }
         if (key == KeyEvent.VK_UP)    { deltaY = 0; }

@@ -142,6 +142,7 @@ public class ImagePack extends ImageBase implements Iterable<BufferedImage> {
     /**
      * @see java.lang.Iterable#iterator()
      */
+    @Override
     public Iterator<BufferedImage> iterator() {
         return imageList.iterator();
     }

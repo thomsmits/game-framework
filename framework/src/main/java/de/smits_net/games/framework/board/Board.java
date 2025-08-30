@@ -98,7 +98,7 @@ public abstract class Board extends JPanel
     /** Frame per second counter (only used if debugging is on). */
     private long fps;
 
-    /** Timestamp of the last update of the debug line. */
+    /** Timestamp of the debug line's last update. */
     private long lastDebugUpdate;
 
     /** The captured mouse events. */
@@ -328,6 +328,7 @@ public abstract class Board extends JPanel
     /**
      * @see java.lang.Runnable#run()
      */
+    @Override
     public final void run() {
 
         // Updates that were not fast enough and therefore caused a
@@ -487,6 +488,7 @@ public abstract class Board extends JPanel
     /**
      * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
      */
+    @Override
     public void keyTyped(KeyEvent e) {
         keyEvents.add(e);
     }
@@ -494,6 +496,7 @@ public abstract class Board extends JPanel
     /**
      * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
      */
+    @Override
     public void keyPressed(KeyEvent e) {
         keyEvents.add(e);
     }
@@ -501,6 +504,7 @@ public abstract class Board extends JPanel
     /**
      * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
      */
+    @Override
     public void keyReleased(KeyEvent e) {
         keyEvents.add(e);
     }
@@ -508,6 +512,7 @@ public abstract class Board extends JPanel
     /**
      * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
      */
+    @Override
     public void mouseClicked(MouseEvent e) {
         mouseEvents.add(e);
     }
@@ -515,6 +520,7 @@ public abstract class Board extends JPanel
     /**
      * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
      */
+    @Override
     public void mousePressed(MouseEvent e) {
         mouseEvents.add(e);
     }
@@ -522,6 +528,7 @@ public abstract class Board extends JPanel
     /**
      * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
      */
+    @Override
     public void mouseReleased(MouseEvent e) {
         mouseEvents.add(e);
     }
@@ -529,6 +536,7 @@ public abstract class Board extends JPanel
     /**
      * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
      */
+    @Override
     public void mouseEntered(MouseEvent e) {
         mouseEvents.add(e);
     }
@@ -536,6 +544,7 @@ public abstract class Board extends JPanel
     /**
      * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
      */
+    @Override
     public void mouseExited(MouseEvent e) {
         mouseEvents.add(e);
     }

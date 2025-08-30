@@ -60,7 +60,7 @@ public abstract class ImageBase {
             return load(new File(url.toURI()));
         }
         catch (URISyntaxException ex) {
-            throw new IllegalArgumentException("Illegal URI " + url.toString());
+            throw new IllegalArgumentException("Illegal URI " + url.toString(), ex);
         }
     }
 
@@ -105,7 +105,7 @@ public abstract class ImageBase {
             }
             catch (IOException e) {
                 throw new IllegalArgumentException(
-                        "File '" + file.getPath() + "' not found.");
+                        "File '" + file.getPath() + "' not found.", e);
             }
 
             imageCache.put(file.getAbsolutePath(), img);

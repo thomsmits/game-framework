@@ -7,6 +7,7 @@ import de.smits_net.games.framework.image.AnimatedImage;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.ImageObserver;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,11 +31,11 @@ public class DirectionAnimatedSprite extends AnimatedSprite {
 
     /** Images for the different directions. */
     protected Map<Direction, AnimatedImage> movementAnimations
-            = new HashMap<>();
+            = new EnumMap<>();
 
     /** Images for the different directions. */
     protected Map<Direction, AnimatedImage> noMovementAnimations
-            = new HashMap<>();
+            = new EnumMap<>();
 
     /** Direction the sprite is pointing at. */
     protected Direction currentDirection = NONE;
